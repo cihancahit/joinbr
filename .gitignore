@@ -1,0 +1,10 @@
+venv/
+.idea/
+.vscode/
+*.pyc
+db.sqlite3
+*/__pycache__/
+pgdb/
+media/
+messages.log
+node_modules

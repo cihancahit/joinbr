@@ -1,0 +1,785 @@
+@import "../_utils/colors";
+@import "../_utils/_mixins/tools";
+@import "../_utils/_mixins/button";
+//homepage events
+.card-h-e {
+  font-size: 1em;
+  overflow: hidden;
+  padding: 0;
+  border: none;
+  border-radius: 40px;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  @include transition(all ease-in-out .4s);
+
+
+  &:hover,
+  &:focus {
+    //transform: scale3d(1.0009, 1.0009, 1.0009);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+  }
+
+
+  .card-img-top {
+    display: block;
+    width: 100%;
+    height: 198px;
+  }
+
+  .evd-s-img-top {
+    display: block;
+    width: 100%;
+    height: 145px;
+  }
+
+  .h-v-cb {
+    padding-bottom: 0.4rem !important;
+  }
+
+  .evd-s-cb {
+    padding-bottom: 0.4rem !important;
+
+    .meta {
+      p {
+        line-height: 1.5rem;
+        height: 3rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+      }
+    }
+  }
+
+  .h-v-cf {
+    padding-top: 0 !important;
+  }
+
+  .evd-s-cf {
+    padding-top: 0 !important;
+    justify-content: flex-start !important;
+
+    a {
+      &:not(:first-child) {
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .card-block {
+    font-size: 1em;
+    position: relative;
+    margin: 0;
+    padding: 1em;
+    border: none;
+    border-top: 1px solid $button-color;
+    box-shadow: none;
+
+    .profile {
+      position: absolute;
+      top: -25px;
+      display: inline-block;
+      overflow: hidden;
+      box-sizing: border-box;
+      width: 50px;
+      height: 50px;
+      margin: 0;
+      //border: 1px solid #fff;
+      border-radius: 50%;
+      background-color: $button-color;
+      padding: 2px;
+
+      .profile-avatar {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        font-family: "Lato Black";
+        word-break: break-word;
+        font-size: 15px;
+        text-align: center;
+        text-transform: uppercase;
+        line-height: 0.9;
+        padding: 11px 0px;
+        color: #fff;
+
+
+      }
+    }
+
+    .capacity {
+      margin-bottom: 0.5rem;
+
+      p {
+        font-family: "Lato Heavy";
+        color: $button-color;
+        text-transform: uppercase;
+        margin-bottom: 0;
+        font-size: 13px;
+      }
+    }
+
+    .st-info {
+      display: flex;
+      justify-content: space-between;
+
+      .market {
+        color: #c2c2c2;
+      }
+    }
+
+    .card-title {
+      font-weight: 700;
+      line-height: 1.2857em;
+      font-family: "Lato Heavy";
+      color: #5e5e5e;
+      overflow: hidden;
+    }
+
+    .v-link {
+      text-decoration: none;
+      @include transition(all ease-in-out 300ms);
+
+      &:hover {
+        color: $button-color;
+      }
+    }
+
+    .card-text {
+      clear: both;
+      margin-top: .5em;
+      margin-bottom: .5em;
+      font-family: "Lato Heavy";
+      color: #c2c2c2;
+      text-transform: uppercase;
+      font-size: 13px;
+      min-height: 1rem;
+
+    }
+
+    .meta {
+      p {
+        font-family: "Lato Semibold";
+        color: #aeaeae;
+        font-size: 14px;
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    position: static;
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    padding: .75em 1em;
+    background-color: #fff;
+    border: unset;
+
+    .card-att-event {
+      @include green-button;
+      min-width: 72%;
+      padding: 8px 8px;
+    }
+
+    button {
+      border: none;
+      background-color: transparent;
+    }
+
+    a {
+
+    }
+  }
+}
+
+.h-exp-cont {
+  .e-profile-card {
+    font-size: 1em;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    border-radius: 40px;
+    min-height: 100%;
+
+    .card-body {
+      padding-top: 0em;
+      padding-bottom: 0.5em;
+
+      .profile-picture {
+        border: 1px solid #d1d1d1;
+        width: 128px;
+        height: 128px;
+        margin-bottom: .5rem;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          border-color: $button-color;
+        }
+      }
+
+      .name {
+        font-family: "Lato Black";
+        white-space: nowrap;
+        color: #193e47;
+        text-decoration: none;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          color: #787878;
+        }
+      }
+
+      .b-title {
+        font-family: "Lato Bold";
+        color: #787878;
+        margin-top: .5rem;
+        margin-bottom: 0;
+        line-height: 1.5em;
+        height: 3em;
+        overflow: hidden;
+      }
+
+      .loc {
+        font-family: "Lato Black";
+        color: $button-color;
+        margin-bottom: 0px;
+        margin-top: .5rem;
+      }
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      position: static;
+      bottom: 0;
+      left: 0;
+      max-width: 100%;
+      padding: 0em 1em;
+      background-color: #fff;
+      border: unset;
+
+      .card-att-event {
+        @include green-button;
+        font-size: 13px;
+        min-width: 63%;
+        padding: 8px 8px;
+        @media screen and (max-width: $tablet-l) {
+          min-width: 72%;
+        }
+      }
+
+      button {
+        border: none;
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+//event detail speaker
+.evd-speaker {
+  @media screen and (max-width: $mobile-l) {
+    margin-top: 20px;
+  }
+
+  .card-h-evd {
+    font-size: 1em;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    border-radius: 40px;
+    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+    @include transition(all ease-in-out .4s);
+    @media screen and (max-width: $mobile-l) {
+      display: flex;
+    }
+
+    &:hover,
+    &:focus {
+      //transform: scale3d(1.0009, 1.0009, 1.0009);
+      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+    }
+
+
+    .evd-s-img-top {
+      display: block;
+      width: 100%;
+      height: 145px;
+      @media screen and (max-width: $mobile-l) {
+        width: unset;
+      }
+    }
+
+    .h-v-cb {
+      padding-bottom: 0.4rem !important;
+    }
+
+    .evd-s-cb {
+      padding-bottom: 0.4rem !important;
+
+      .meta {
+        p {
+          line-height: 1.5rem;
+          height: 3rem;
+          text-overflow: ellipsis;
+          overflow: hidden;
+
+        }
+      }
+
+      .evd-speaker-social-mobile {
+        display: none;
+        @media screen and (max-width: $mobile-l) {
+          display: block;
+        }
+
+        button {
+          border: none;
+          background-color: transparent;
+        }
+      }
+    }
+
+    .evd-s-cf {
+      padding-top: 0 !important;
+      justify-content: flex-start !important;
+
+      a {
+        &:not(:first-child) {
+          padding-left: 10px;
+        }
+      }
+    }
+
+    .card-block {
+      font-size: 1em;
+      position: relative;
+      margin: 0;
+      padding: 1em;
+      border: none;
+      border-top: 1px solid $button-color;
+      box-shadow: none;
+      @media screen and (max-width: $mobile-l) {
+        border: unset;
+      }
+
+      .card-title {
+        font-weight: 700;
+        line-height: 1.2857em;
+        font-family: "Lato Heavy";
+        color: #5e5e5e;
+        overflow: hidden;
+      }
+
+      .card-text {
+        clear: both;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        font-family: "Lato Heavy";
+        color: #c2c2c2;
+        text-transform: uppercase;
+        font-size: 13px;
+        min-height: 1rem;
+
+      }
+
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      position: static;
+      bottom: 0;
+      left: 0;
+      max-width: 100%;
+      padding: .75em 1em;
+      background-color: #fff;
+      border: unset;
+      @media screen and (max-width: $mobile-l) {
+        display: none;
+      }
+
+
+      button {
+        border: none;
+        background-color: transparent;
+      }
+
+      a {
+
+      }
+    }
+  }
+}
+
+//category page events
+.card-c-e {
+  font-size: 1em;
+  overflow: hidden;
+  padding: 0;
+  border: none;
+  border-radius: 40px;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  @include transition(all ease-in-out .4s);
+
+
+  &:hover,
+  &:focus {
+    //transform: scale3d(1.0009, 1.0009, 1.0009);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+  }
+
+
+  .card-img-top {
+    display: block;
+    width: 100%;
+    height: 198px;
+  }
+
+  .evd-s-img-top {
+    display: block;
+    width: 100%;
+    height: 145px;
+  }
+
+  .h-v-cb {
+    padding-bottom: 0.4rem !important;
+  }
+
+  .evd-s-cb {
+    padding-bottom: 0.4rem !important;
+
+    .meta {
+      p {
+        line-height: 1.5rem;
+        height: 3rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+      }
+    }
+  }
+
+  .h-v-cf {
+    padding-top: 0 !important;
+  }
+
+  .evd-s-cf {
+    padding-top: 0 !important;
+    justify-content: flex-start !important;
+
+    a {
+      &:not(:first-child) {
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .card-block {
+    font-size: 1em;
+    position: relative;
+    margin: 0;
+    padding: 1em;
+    border: none;
+    border-top: 1px solid $button-color;
+    box-shadow: none;
+
+    .profile {
+      position: absolute;
+      top: -25px;
+      display: inline-block;
+      overflow: hidden;
+      box-sizing: border-box;
+      width: 50px;
+      height: 50px;
+      margin: 0;
+      //border: 1px solid #fff;
+      border-radius: 50%;
+      background-color: $button-color;
+      padding: 2px;
+
+      .profile-avatar {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        font-family: "Lato Black";
+        word-break: break-word;
+        font-size: 15px;
+        text-align: center;
+        text-transform: uppercase;
+        line-height: 0.9;
+        padding: 11px 0px;
+        color: #fff;
+
+
+      }
+    }
+
+    .capacity {
+      margin-bottom: 0.5rem;
+
+      p {
+        font-family: "Lato Heavy";
+        color: $button-color;
+        text-transform: uppercase;
+        margin-bottom: 0;
+        font-size: 13px;
+      }
+    }
+
+    .st-info {
+      display: flex;
+      justify-content: space-between;
+
+      .market {
+        color: #c2c2c2;
+      }
+    }
+
+    .card-title {
+      font-weight: 700;
+      line-height: 1.2857em;
+      font-family: "Lato Heavy";
+      color: #5e5e5e;
+      overflow: hidden;
+    }
+
+    .v-link {
+      text-decoration: none;
+      @include transition(all ease-in-out 300ms);
+
+      &:hover {
+        color: $button-color;
+      }
+    }
+
+    .card-text {
+      clear: both;
+      margin-top: .5em;
+      margin-bottom: .5em;
+      font-family: "Lato Heavy";
+      color: #c2c2c2;
+      text-transform: uppercase;
+      font-size: 13px;
+      min-height: 1rem;
+
+    }
+
+    .meta {
+      p {
+        font-family: "Lato Semibold";
+        color: #aeaeae;
+        font-size: 14px;
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    position: static;
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    padding: .25em 1em;
+    background-color: #fff;
+    border: unset;
+
+    .card-att-event {
+      @include green-button;
+      min-width: 72%;
+      padding: 5px 0px;
+    }
+
+    button {
+      border: none;
+      background-color: transparent;
+
+      i {
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+
+      }
+    }
+  }
+}
+
+//expert profile modal event
+.card-ep-modal {
+  font-size: 1em;
+  overflow: hidden;
+  padding: 0;
+  border: none;
+  border-radius: 40px;
+  @include transition(all ease-in-out .4s);
+
+  .card-img-top {
+    display: block;
+    width: 100%;
+    height: 200px;
+  }
+
+  .ep-m-cat {
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    padding: 5px;
+    background-color: #060806;
+    color: #fff;
+    font-family: "Lato", serif;
+    text-decoration: none;
+    @include border-radius(10px);
+    @include transition(all ease-in-out 300ms);
+
+    &:hover {
+      color: $button-color;
+    }
+  }
+
+
+  .card-block {
+    font-size: 1em;
+    position: relative;
+    margin: 0;
+    padding: 1em;
+    border: none;
+    border-top: 1px solid $button-color;
+    box-shadow: none;
+
+    .profile {
+      position: absolute;
+      top: -25px;
+      display: inline-block;
+      overflow: hidden;
+      box-sizing: border-box;
+      width: 50px;
+      height: 50px;
+      margin: 0;
+      //border: 1px solid #fff;
+      border-radius: 50%;
+      background-color: $button-color;
+      padding: 2px;
+
+      .profile-avatar {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        font-family: "Lato Black";
+        word-break: break-word;
+        font-size: 15px;
+        text-align: center;
+        text-transform: uppercase;
+        line-height: 0.9;
+        padding: 11px 0px;
+        color: #fff;
+
+
+      }
+    }
+
+    .capacity {
+      margin-bottom: 0.5rem;
+
+      p {
+        font-family: "Lato Heavy";
+        color: $button-color;
+        text-transform: uppercase;
+        margin-bottom: 0;
+        font-size: 13px;
+      }
+    }
+
+    .st-info {
+      display: flex;
+      justify-content: space-between;
+
+      .market {
+        color: #c2c2c2;
+      }
+    }
+
+    .card-title {
+      font-weight: 700;
+      line-height: 1.2857em;
+      font-family: "Lato Heavy";
+      color: #5e5e5e;
+      overflow: hidden;
+    }
+
+    .v-link {
+      text-decoration: none;
+      @include transition(all ease-in-out 300ms);
+
+      &:hover {
+        color: $button-color;
+      }
+    }
+
+    .card-text {
+      clear: both;
+      margin-top: .5em;
+      margin-bottom: .5em;
+      font-family: "Lato Heavy";
+      color: #c2c2c2;
+      text-transform: uppercase;
+      font-size: 13px;
+      min-height: 1rem;
+
+    }
+
+    .meta {
+      p {
+        font-family: "Lato Semibold";
+        color: #aeaeae;
+        font-size: 14px;
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  .ep-as-apply {
+    @include green-button;
+    padding: 5px 40px;
+  }
+
+  .ep-as-readmore {
+    font-size: 15px;
+    line-height: 15px;
+    color: #787878;
+    font-family: "Lato", serif;
+    font-weight: 700;
+    text-decoration: none;
+    @include transition(all ease-in-out 300ms);
+    &:hover{
+      color: $button-color;
+    }
+  }
+}
+
+//expert profile event modal close button
+.ep-as-event-modal-close{
+          position: absolute;
+        margin: 0.25rem;
+        top: -10px;
+        right: 0px;
+        height: 1.5rem;
+        width: 1.5rem;
+        border-radius: 1rem;
+        color: #fff;
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        text-align: center;
+        background-color: #bbbbbb;
+        cursor: pointer;
+        z-index: 998;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          background-color: $button-color;
+        }
+}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Add New Expert {% endblock %}
+{% block main %}
+    {#{% include "_partials/header.html" %}#}
+    <header class="masthead" style="background-image: url('{% static 'assets/images/all_companies.png' %}')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="page-heading">
+                        <h1>Add New Expert</h1>
+                        <span class="subheading">Add Yourself</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="add-expert">
+        <div class="container">
+            {#add expert modal started#}
+            <form method="POST" action="/review/submit-report/{{ review_id }}">
+            {% csrf_token %}
+                <div class="form-group row">
+                    <label for="rr-category" class="col-sm-2 col-form-label">Report Type: </label>
+                    <div class="col-sm-10">
+                        <select id="rr-category" name="rr-category" class="form-control">
+                            {% for category in categories %}
+                                <option>{{ category.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="rr-title" class="col-sm-2 col-form-label">Title:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="rr-title" name="rr-title" placeholder="Reporting Title">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="rr-description" class="col-sm-2 col-form-label">Desription:</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" id="rr-description" name="rr-description" rows="5" cols="40"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+            {#add expert modal finished#}
+        </div>
+    </section>
+    </div>
+
+
+
+
+{% endblock %}

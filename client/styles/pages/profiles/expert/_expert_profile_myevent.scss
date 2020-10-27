@@ -1,0 +1,1219 @@
+@import "../../../_utils/colors";
+@import "../../../_utils/_mixins/button";
+@import "../../../_utils/variables";
+@import "../../../_utils/_mixins/tools";
+
+#content {
+  width: 100%;
+
+  .ep-panel-nav-btn {
+    display: none;
+    background: none;
+    border: none;
+
+    span {
+      color: #31313161;
+    }
+
+    @media screen and (max-width: $tablet-l) {
+      display: block;
+    }
+  }
+}
+
+.l-part {
+  .l-up-events {
+    background-color: #fff;
+    border: 1px solid #d6d6d6;
+    @include border-radius(30px);
+    @media screen and (max-width: $mobile-l) {
+      margin: 0;
+      margin-top: -50px;
+    }
+    @media screen and (max-width: $tablet-l) {
+      margin-top: -50px;
+    }
+
+    .expert-fav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      //@media screen and (max-width: $tablet-l) {
+      //  flex-direction: column;
+      //  justify-content: flex-start;
+      //  align-items: flex-start;
+      //}
+    }
+
+    .title {
+      font-family: "Lato Black";
+      color: #232323;
+      margin: unset;
+    }
+
+    .content-title {
+      font-family: "Lato Black";
+      color: #193e47;
+      text-transform: capitalize;
+    }
+
+    .l-ue-search {
+      @include green-button;
+      padding: 5px 25px;
+      @media screen and (max-width: $tablet-l) {
+        display: none;
+      }
+    }
+
+    #edfe-tab {
+      //background-color: #F5F5F5;
+      overflow: hidden;
+      list-style: inline;
+      padding: 0 0 2px;
+      -webkit-margin-before: 0;
+      -webkit-margin-after: 0;
+      border: unset;
+
+      .nav-item {
+        display: inline-block;
+        margin-top: 2px;
+        margin-bottom: -2px;
+        position: relative;
+        z-index: 2;
+
+        &:first-child {
+          a {
+            padding-left: 3px;
+          }
+        }
+
+        &:last-child {
+          a {
+            padding-right: 3px;
+          }
+        }
+
+
+        a {
+          font-family: "Lato Semibold";
+          color: #b3b3b3;
+          text-decoration: none;
+          border: unset;
+          box-sizing: border-box;
+          padding: 2px 10px;
+          display: block;
+          @include transition(all ease-in-out 300ms);
+
+
+          &:after {
+            content: " ";
+            position: absolute;
+            bottom: -2px;
+            right: -1000px;
+            width: 1000px;
+            height: 0;
+            border-bottom: 2px solid #d3d3d3;
+            z-index: 1;
+          }
+
+          &:not(.active) {
+            border-bottom: 3px solid #d3d3d3;
+
+          }
+
+          &.active {
+            border-bottom: 3px solid $button-color;
+            color: $button-color;
+
+            a {
+              font-family: "Lato Bold" !important;
+              color: $button-color;
+            }
+          }
+
+          &:not(:last-of-type) {
+            margin-right: -.275em;
+          }
+
+          &:hover {
+            border-bottom: 3px solid $button-color;
+            color: $button-color;
+          }
+        }
+
+
+      }
+
+    }
+
+    #hostevents {
+      .exd-e-upcoming {
+        padding-top: 20px;
+        background-color: #fff;
+
+        .img-con {
+          position: relative;
+
+          .exd-e-up-event-image {
+            width: 100%;
+            height: 150px;
+            border: 1px solid transparent;
+            @include transition(all ease-in-out 300ms);
+
+            &:hover {
+              border: 1px solid $button-color;
+            }
+          }
+
+          .event-label-speaker {
+            top: 1px;
+            left: 1px;
+            color: #fff;
+            position: absolute;
+            background-color: #6a08c6;
+            padding: 5px 25px !important;
+
+            p {
+              margin-bottom: 0px;
+            }
+          }
+
+          .event-label-organizer {
+            top: 1px;
+            left: 1px;
+            color: #fff;
+            position: absolute;
+            background-color: #ec9000;
+            padding: 5px 25px !important;
+
+            p {
+              margin-bottom: 0px;
+            }
+          }
+
+          .event-label-exhibitor {
+            top: 1px;
+            left: 1px;
+            color: #fff;
+            position: absolute;
+            background-color: #08c4c6;
+            padding: 5px 25px !important;
+
+            p {
+              margin-bottom: 0px;
+            }
+          }
+        }
+
+
+        .exd-e-event-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+
+          .title {
+            font-family: "Lato Black";
+            color: #193e47;
+            text-overflow: ellipsis;
+            display: inherit;
+            overflow: hidden;
+            white-space: nowrap;
+            @include transition(all ease-in-out 300ms);
+
+            &:hover {
+              color: $button-color;
+              text-decoration: none;
+            }
+          }
+
+          .see-detail {
+            font-family: Lato;
+            font-weight: bold;
+            color: $button-color;
+            padding-left: 10px;
+            @include transition(all ease-in-out 300ms);
+
+            &:hover {
+              color: #787878;
+              text-decoration: none;
+            }
+          }
+
+
+        }
+
+        .l-ue-meta {
+          color: #bababa;
+          font-family: Lato Bold;
+        }
+      }
+    }
+  }
+}
+
+.r-part {
+  .r-as-speaker {
+    background-color: #fff;
+    border: 1px solid #d6d6d6;
+    @include border-radius(30px);
+    @media screen and (max-width: $mobile-l) {
+      margin: 0;
+    }
+
+    .expert-fav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      //@media screen and (max-width: $tablet-l) {
+      //  flex-direction: column;
+      //  justify-content: flex-start;
+      //  align-items: flex-start;
+      //}
+    }
+
+    .title {
+      font-family: "Lato Black";
+      color: #232323;
+      margin: unset;
+    }
+
+    .content-title {
+      font-family: "Lato Black";
+      color: #193e47;
+      text-transform: capitalize;
+    }
+
+    .r-as-cont {
+      .ep-ass-app-detail {
+        display: flex;
+        flex-direction: column;
+        @media screen and (max-width: $tablet-l) {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+
+      .r-as-title {
+        font-family: "Lato Black";
+        color: #193e47;
+        text-overflow: ellipsis;
+        display: inherit;
+        overflow: hidden;
+        white-space: nowrap;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          color: $button-color;
+          text-decoration: none;
+        }
+      }
+
+      .r-as-meta {
+        color: #bababa;
+        font-family: Lato Bold;
+      }
+
+      .r-as-cat {
+        font-family: Lato;
+        font-weight: bold;
+        color: $button-color;
+        padding-left: 8px;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          color: #787878;
+          text-decoration: none;
+        }
+      }
+
+      .r-as-apply {
+        @include green-button;
+        padding: 5px 25px;
+      }
+
+      .r-as-details {
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: underline;
+        @include transition(all ease-in-out 300ms);
+        font-family: "Lato Bold";
+        color: #bababa;
+
+        &:hover {
+          color: $button-color;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $tablet-l) {
+    margin-top: 25px;
+  }
+}
+
+
+.ep-create-event {
+  background-color: #fff;
+  border: 1px solid #d6d6d6;
+  @include border-radius(30px);
+  @media screen and (max-width: $mobile-l) {
+    margin: 0;
+  }
+
+  .ep-ce-preview {
+    background-color: #fbfbfb;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+    @media screen and (max-width: $tablet-l) {
+      background-color: unset;
+      padding: 20px 20px 0px 20px !important;
+    }
+
+    .expert-fav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      //@media screen and (max-width: $tablet-l) {
+      //  flex-direction: column;
+      //  justify-content: flex-start;
+      //  align-items: flex-start;
+      //}
+    }
+
+    .title {
+      font-family: "Lato Black";
+      color: #232323;
+      margin: unset;
+    }
+
+    .ep-ce-img-cont {
+      position: relative;
+      border: 2px dashed #bababa;
+
+      input {
+        display: none;
+
+        + label {
+          display: inline-block;
+          color: #fff;
+          width: 34px;
+          height: 34px;
+          margin-bottom: 0;
+          border-radius: 100%;
+          background: $button-color;
+          border: 1px solid transparent;
+          box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+          cursor: pointer;
+          font-weight: normal;
+          @include transition(all ease-in-out 300ms);
+          position: absolute;
+          bottom: 0;
+          right: 5px;
+
+          &:hover {
+            background: #f1f1f1;
+            border-color: #d6d6d6;
+
+            &:after {
+              color: $button-color;
+            }
+          }
+
+          &:after {
+            content: "\f040";
+            font-family: 'FontAwesome';
+            color: #fff;
+            position: absolute;
+            top: 3px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            margin: auto;
+          }
+        }
+      }
+
+      @media screen and (max-width: $tablet-l) {
+        display: none;
+      }
+    }
+
+    .ep-ce-info-cont {
+      @media screen and (max-width: $tablet-l) {
+        display: none;
+      }
+
+      .ep-ce-title {
+        color: $button-color;
+        font-size: 18px;
+        font-family: "Lato";
+        font-weight: 700;
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+          padding: 0px !important;
+        }
+      }
+
+      .ep-ce-meta {
+        font-family: Lato;
+        color: #232323;
+        font-size: 13px;
+
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+      }
+
+      .ep-ce-info {
+        color: #787878;
+        font-family: "Lato";
+        font-weight: 400;
+        text-align: justify;
+        border-bottom: 1px solid #eaeaea;
+
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+      }
+
+      .tagListP {
+        display: block;
+        padding: 0;
+        margin: 0;
+
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+
+        &:after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+
+        li {
+          position: relative;
+          list-style: none;
+          float: left;
+          font-size: 0.835rem;
+          text-transform: capitalize;
+          background-color: #bbbbbb;
+          line-height: 1rem;
+          padding: 0.5rem 2rem 0.5rem 1rem;
+          border-radius: 1rem;
+          margin-right: 0.5rem;
+          margin-bottom: 0.5rem;
+          word-break: break-all;
+          color: #fff;
+          @include transition(all ease-in-out 300ms);
+
+          &:hover {
+            background-color: $button-color;
+          }
+        }
+      }
+
+      .pticket-price {
+
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+
+        .pticket-p-meta {
+          background-color: #fff;
+          @include border-radius(20px);
+          border: 1px solid #d6d6d6;
+
+          .pprice {
+            font-size: 24px;
+            color: #787878;
+            font-family: "Lato";
+            font-weight: 700;
+            margin: unset;
+          }
+
+          .pinfo {
+            font-size: 17px;
+            color: #787878;
+            font-family: "Lato";
+            font-weight: 400;
+            margin: unset;
+          }
+        }
+      }
+
+      .prefund {
+
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+
+        .prefund-title {
+          font-size: 17px;
+          color: #787878;
+          font-family: "Lato";
+          font-weight: 400;
+          margin: unset;
+        }
+
+        .prefund-link {
+
+          @media screen and (max-width: $tablet-l) {
+            display: none;
+          }
+          font-size: 17px;
+          color: #787878;
+          font-family: "Lato";
+          font-weight: 400;
+          @include transition(all ease-in-out 300ms);
+          text-decoration: none;
+
+          &:hover {
+            color: $button-color;
+          }
+        }
+
+        .prefund-email {
+          font-size: 17px;
+          color: #787878;
+          font-family: "Lato";
+          font-weight: 400;
+          @include transition(all ease-in-out 300ms);
+          text-decoration: none;
+
+          &:hover {
+            color: $button-color;
+          }
+        }
+      }
+
+      .p-ssoh {
+
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+
+        .panel {
+          margin-bottom: 20px;
+          border: none;
+          border-radius: 0;
+          -webkit-box-shadow: none;
+          box-shadow: none;
+            .exp-coll-block {
+    background-color: #fff;
+    border: 1px solid #d6d6d6;
+    @include border-radius(15px);
+    @include transition(all ease-in-out 300ms);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .1);
+
+    &:hover {
+      box-shadow: 0 4px 9px 0 rgba(0, 0, 0, .1), 0 3px 6px 0 rgba(0, 0, 0, .15);
+    }
+
+    .exp-coll-img-link {
+
+      img {
+        width: 30px;
+        height: 30px;
+        @include border-radius(50%);
+        border: 1px solid transparent;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          border-color: $button-color;
+        }
+
+      }
+    }
+
+    .exp-coll-name {
+      font-family: "Lato Bold";
+      color: #787878;
+      margin: unset;
+      padding: unset;
+      text-decoration: none;
+      @include transition(all ease-in-out 300ms);
+
+      &:hover {
+        color: $button-color;
+      }
+    }
+
+  }
+        }
+
+        .panel-group .panel {
+          margin-bottom: 0;
+          border-radius: 0;
+        }
+
+        .panel-group .panel + .panel {
+          margin-top: 0;
+        }
+
+        .panel-default {
+          border: none;
+        }
+
+        .panel-default > .panel-heading {
+          color: #333;
+          background: none;
+
+          a {
+            font-size: 17px;
+            color: #787878;
+            font-family: "Lato";
+            font-weight: 700;
+            @include transition(all ease-in-out 300ms);
+
+            &:hover {
+              color: $button-color;
+            }
+          }
+        }
+
+        .panel-default > .panel-heading + .panel-collapse > .panel-body {
+          border: none;
+        }
+
+        .panel-heading .accordion-toggle:after {
+          font-family: 'FontAwesome';
+          content: "\f078";
+          color: #787878;
+        }
+
+        .panel-heading .accordion-toggle.collapsed:after {
+          font-family: 'FontAwesome';
+          content: "\f077";
+          color: #787878;
+        }
+
+
+      }
+    }
+  }
+
+  .ep-ce-form {
+    label {
+      font-family: "Lato Black";
+      color: #b1afaf;
+    }
+
+    .ep-ce-sasdraft {
+      @include green-button;
+      padding: 5px 25px;
+      background-color: #ababab;
+    }
+
+    .ep-ce-next {
+      @include green-button;
+      padding: 5px 25px;
+    }
+
+    .tagListCe {
+      display: block;
+      padding: 0;
+      margin: 0;
+
+      &:after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      li {
+        position: relative;
+        list-style: none;
+        float: left;
+        font-size: 0.835rem;
+        text-transform: capitalize;
+        background-color: #bbbbbb;
+        line-height: 1rem;
+        padding: 0.5rem 2rem 0.5rem 1rem;
+        border-radius: 1rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        word-break: break-all;
+        color: #fff;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          background-color: $button-color;
+        }
+
+        .rmTag {
+          position: absolute;
+          margin: 0.5rem;
+          top: 0;
+          right: 0;
+          height: 1rem;
+          width: 1rem;
+          border-radius: 1rem;
+          color: #bbbbbb;
+          font-size: 0.63rem;
+          line-height: 1rem;
+          text-align: center;
+          background-color: #fff;
+          cursor: pointer;
+          -webkit-transition: 0.3s all;
+          transition: 0.3s all;
+
+          &:hover {
+            background-color: #bbbbbb;
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .ep-ce-add-new-input {
+      border: unset;
+      border-radius: 50%;
+      background-color: #ababab;
+      color: #fff;
+    }
+  }
+
+  .ep-ce-ac-speaker {
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #b1afaf;
+    font-family: "Lato", serif;
+    font-weight: 900;
+  }
+
+  .ep-ce-ac-op {
+    font-size: 17px;
+    color: #787878 !important;
+    font-family: "Lato", serif !important;
+    font-weight: 400;
+  }
+}
+
+.ep-events-stat {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #d6d6d6;
+  @include border-radius(30px);
+
+  .profile-stat-title {
+    font-family: "Lato Black";
+    color: #232323;
+    margin: unset;
+  }
+
+  .profile-stat-filter {
+    label {
+      font-family: "Lato Bold";
+      color: #ababab;
+      font-size: 12px;
+    }
+
+    select {
+      font-family: "Lato Bold";
+      color: #ababab;
+      border: unset;
+      font-size: 12px;
+      padding: 0px;
+      width: 100px;
+      background: transparent;
+    }
+  }
+
+  .profile-stat-subtitle {
+    font-family: "Lato Black";
+    color: #ababab;
+    margin: unset;
+    font-size: 12px;
+  }
+
+  .chartWrapper {
+    position: relative;
+    overflow-x: scroll;
+
+    > canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+    }
+  }
+
+  .chartAreaWrapper {
+    width: 600px;
+
+    &::-webkit-scrollbar {
+      width: 0.5em;
+      height: 0.5em;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #e6e6e6;
+      border-radius: 3px;
+
+      &:hover {
+        background: rgba(156, 24, 0, 0.2);
+      }
+    }
+  }
+
+  .stat-right {
+    .stat-meta {
+      .stat-g-count {
+        margin: unset;
+        font-size: 24px;
+        line-height: 20px;
+        color: #232323;
+        font-family: "Lato";
+        font-weight: 900;
+      }
+
+      .stat-g-text {
+        font-size: 17px;
+        margin: unset;
+        color: #787878;
+        font-family: "Lato";
+        font-weight: 400;
+      }
+    }
+
+    .stat-user {
+      display: flex;
+
+      .stat-g-profile-pic {
+        border: 1px solid transparent;
+        border-radius: 50%;
+        width: 50px;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          border-color: $button-color;
+        }
+      }
+    }
+
+    .stat-other {
+      .stat-t-user {
+        margin: unset;
+        font-size: 13px;
+        line-height: 20px;
+        color: #adadad;
+        font-family: "Lato", serif;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.expert-fav {
+  background-color: #fff;
+  border: 1px solid #d6d6d6;
+  @include border-radius(30px);
+  @media screen and (max-width: $mobile-l) {
+    margin: 0;
+  }
+
+  .expert-fav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    //@media screen and (max-width: $tablet-l) {
+    //  flex-direction: column;
+    //  justify-content: flex-start;
+    //  align-items: flex-start;
+    //}
+  }
+
+  .title {
+    font-family: "Lato Black";
+    color: #232323;
+    margin: unset;
+  }
+
+  .content-title {
+    font-family: "Lato Black";
+    color: #193e47;
+    text-transform: capitalize;
+  }
+
+  #edfe-tab {
+    //background-color: #F5F5F5;
+    overflow: hidden;
+    list-style: inline;
+    padding: 0 0 2px;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    border: unset;
+
+    .nav-item {
+      display: inline-block;
+      margin-top: 2px;
+      margin-bottom: -2px;
+      position: relative;
+      z-index: 2;
+
+      &:first-child {
+        a {
+          padding-left: 3px;
+        }
+      }
+
+      &:last-child {
+        a {
+          padding-right: 3px;
+        }
+      }
+
+
+      a {
+        font-family: "Lato Semibold";
+        color: #b3b3b3;
+        text-decoration: none;
+        border: unset;
+        box-sizing: border-box;
+        padding: 2px 10px;
+        display: block;
+        @include transition(all ease-in-out 300ms);
+
+
+        &:after {
+          content: " ";
+          position: absolute;
+          bottom: -2px;
+          right: -1000px;
+          width: 1000px;
+          height: 0;
+          border-bottom: 2px solid #d3d3d3;
+          z-index: 1;
+        }
+
+        &:not(.active) {
+          border-bottom: 3px solid #d3d3d3;
+
+        }
+
+        &.active {
+          border-bottom: 3px solid $button-color;
+          color: $button-color;
+
+          a {
+            font-family: "Lato Bold" !important;
+            color: $button-color;
+          }
+        }
+
+        &:not(:last-of-type) {
+          margin-right: -.275em;
+        }
+
+        &:hover {
+          border-bottom: 3px solid $button-color;
+          color: $button-color;
+        }
+      }
+
+
+    }
+
+  }
+
+  #favexp {
+    .h-exp-cont {
+      .e-profile-card {
+        font-size: 1em;
+        overflow: hidden;
+        padding: 0;
+        border: none;
+        border-radius: 40px;
+        min-height: 100%;
+
+        .card-body {
+          padding-top: 0em;
+          padding-bottom: 0.5em;
+
+          .profile-picture {
+            border: 1px solid #d1d1d1;
+            width: 90px;
+            height: 90px;
+            margin-bottom: .5rem;
+            @include transition(all ease-in-out 300ms);
+
+            &:hover {
+              border-color: $button-color;
+            }
+          }
+
+          .name {
+            font-family: "Lato Black";
+            white-space: nowrap;
+            color: #193e47;
+            text-decoration: none;
+            @include transition(all ease-in-out 300ms);
+
+            &:hover {
+              color: #787878;
+            }
+          }
+
+          .b-title {
+            font-family: "Lato Bold";
+            color: #787878;
+            margin-top: .5rem;
+            margin-bottom: 0;
+            line-height: 1.5em;
+            height: 3em;
+            overflow: hidden;
+          }
+
+          .loc {
+            font-family: "Lato Black";
+            color: $button-color;
+            margin-bottom: 0px;
+            margin-top: .5rem;
+          }
+        }
+
+        .card-footer {
+          display: flex;
+          justify-content: space-between;
+          position: static;
+          bottom: 0;
+          left: 0;
+          max-width: 100%;
+          padding: 0em 1em;
+          background-color: #fff;
+          border: unset;
+
+          .card-att-event {
+            @include green-button;
+            font-size: 13px;
+            min-width: 63%;
+            padding: 8px 8px;
+            @media screen and (max-width: $tablet-l) {
+              min-width: 72%;
+            }
+          }
+
+          button {
+            border: none;
+            background-color: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  #favcom {
+    .evd-sr-organizer {
+      border-radius: 40px;
+      border: 1px solid #d1d1d140;
+      @include transition(all ease-in-out 300ms);
+
+      &:hover,
+      &:focus {
+        //transform: scale3d(1.0009, 1.0009, 1.0009);
+        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+      }
+
+      .row {
+        padding: 20px;
+      }
+
+      .evd-sr-organizer-logo {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        border: 1px solid transparent;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          border-color: $button-color;
+        }
+      }
+
+      .evd-sr-organizer-title {
+        font-family: "Lato Black";
+        color: #363636;
+        font-size: 15px;
+        line-height: 0.8rem;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          color: $button-color;
+          text-decoration: none;
+        }
+      }
+
+      .evd-sr-organizer-desc {
+        font-family: "Lato Bold";
+        color: #787878;
+        font-size: 14px;
+        //line-height: 0.8rem;
+        margin: unset;
+      }
+    }
+  }
+
+  button {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .slide-arrow {
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+  }
+
+  .prev-arrow {
+    left: 4px;
+    width: 44px;
+    z-index: 5;
+    border-radius: 50%;
+    background-color: #fff;
+    font-size: 38px;
+    line-height: 1;
+    padding: 4px;
+    color: #bababa;
+
+    border: 1px solid #e2e2e2;
+  }
+
+  .next-arrow {
+    right: 4px;
+    width: 44px;
+    z-index: 5;
+    border-radius: 50%;
+    background-color: #fff;
+    font-size: 38px;
+    line-height: 1;
+    padding: 4px;
+    color: #bababa;
+    border: 1px solid #e2e2e2;
+  }
+
+  .slick-list {
+    padding: 20px 10px;
+  }
+
+  .slick-dots {
+    .slick-active {
+      button {
+        &:before {
+          color: $button-color !important;
+
+        }
+      }
+    }
+  }
+}

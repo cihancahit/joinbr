@@ -1,0 +1,100 @@
+{% load static %}
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+{#<script src="{% static "lib/js/jquery..min.js" %}"></script>#}
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>#}
+<script src="{% static 'lib/js/jquery-ui.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="{% static "fec/js/bundle.js" %}"></script>
+<script src="{% static "lib/slick-1.8.1/slick/slick.min.js" %}"></script>
+<script src="{% static 'lib/datepicker/bootstrap-datepicker.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+<!-- AddEvent script -->
+<script src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+<script src="{% static 'lib/star/index.js' %}"></script>
+
+<script src="{% static "lib/b-select/js/bootstrap-select.min.js" %}"></script>
+<script src="{% static "lib/owlcarousel/owl.carousel.min.js" %}"></script>
+{% if '/experts/' in request.build_absolute_uri %}
+{#    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>#}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
+{% endif %}
+<script src="{% static "lib/noty/noty.min.js" %}"></script>
+
+{#<script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"#}
+{#        integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"#}
+{#        crossorigin="anonymous"></script>#}
+{#<script src="{% static "lib/lightbox-master/ekko-lightbox.js" %}"></script>#}
+
+{#<script src="{% static "lib/sh/mkg-share.js" %}"></script>#}
+<script src="{% static "custom/c-vue.js" %}"></script>
+<script src="{% static "custom/errors.js" %}"></script>
+<script src="{% static "lib/noty/noty.min.js" %}"></script>
+
+{% if '/profile/' in request.build_absolute_uri %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.2/js/intlTelInput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <script src="{% static "lib/profiles/main.js" %}"></script>
+    <script src="{% static "custom/profile.js" %}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"
+            integrity="sha256-8zyeSXm+yTvzUN1VgAOinFgaVFEFTyYzWShOy9w7WoQ=" crossorigin="anonymous"></script>
+    {{ myevent_active }}
+    {% if myevent_active == 'active'  %}
+    <script src="{% static "custom/profile_ce.js" %}"></script>
+    <script src="{% static "custom/profile_ce_image_uploader.js" %}"></script>
+    {% endif %}
+{% endif %}
+
+<script src="{% static "lib/js/jquery.cookie.js" %}"></script>
+<script src="{% static "custom/custom.js" %}"></script>
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                {% ifchanged error %}
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        new Noty({
+                            type: 'alert',
+                            layout: 'center',
+                            text: '{{ error|escape}}',
+                            closeWith: ['click', 'button'],
+                            animation: {
+                                open: 'animated fadeInDown', // Animate.css class names
+                                close: 'animated fadeOutUp' // Animate.css class names
+                            }
+                        }).show()
+                    })
+                </script>
+                {% endifchanged %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                {% ifchanged error %}
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        new Noty({
+                            type: 'alert',
+                            layout: 'center',
+                            text: '{{ error|escape}}',
+                            closeWith: ['click', 'button'],
+                            animation: {
+                                open: 'animated fadeInDown', // Animate.css class names
+                                close: 'animated fadeOutUp' // Animate.css class names
+                            }
+                        }).show()
+                    })
+                </script>
+                {% endifchanged %}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}

@@ -1,0 +1,93 @@
+{% load static %}
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-menu" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img style="max-width: 100px;" src="{% static 'assets/images/getet_logo_white_small.png' %}" alt="Revealin.com">
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto d-flex align-items-center">
+                <li class="nav-item {{ event_active }}">
+                    <a class="menu-item mx-1 nav-link " href="{% url 'AllEvents' %}">Events <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item {{ expert_active }}">
+                    <a class="menu-item mx-1 nav-link " href="{% url 'expert' %}">Experts</a>
+                </li>
+                <li class="nav-item {{ company_active }}">
+                    <a class="menu-item mx-1 nav-link " href="{% url 'companies' %}">Companies</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ml-auto d-flex align-items-center">
+                            {% if request.path|slice:8 == "/experts" %}
+                                <li class="nav-item" style="margin-top: 0px !important;">
+                                    <a class="menu-item nav-link m-c-button" href="{% url 'new_expert' %}">Add Expert</a>
+                                </li>
+                           {% elif request.path|slice:7 == "/events" %}
+                               <li class="nav-item" style="margin-top: 0px !important;">
+                                   <a class="menu-item nav-link m-c-button" data-toggle="modal" data-target="#ce-modal">Add Event</a>
+                               </li>
+                           {% elif request.path|slice:10 == "/companies" %}
+                               <li class="nav-item" style="margin-top: 0px !important;">
+                                   <a class="menu-item nav-link m-c-button" href="{% url 'new_company' %}">Add Company</a>
+                               </li>
+                            {% endif %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        {#                        <a class="menu-item mx-1 nav-link" style="color: #fff;" href="{% url 'logout_url' %}">Sign Out</a>#}
+                        {% if user.get_expert_slug %}
+                            <a class="menu-item mx-1 nav-link" style="color: #fff;padding: unset"
+                               href="{% url 'expert_profile' slug=user.get_expert_slug %}">
+                                <div class="menu-profile-cont align-items-center"><img class="menu-profile-pic"
+                                                                    src="{{ user.get_expert_profile_pic }}"
+                                                                    alt="Revealin.com">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <p class="menu-profile-name">{{ user.get_expert_name }}</p>
+                                        <p class="menu-profile-title">Expert</p>
+                                    </div>
+                                </div>
+                            </a>
+                        {% else %}
+                            <li class="nav-item">
+                        <a class="menu-item nav-link sign-up-button" href="{% url 'logout_url' %}">Sign Out</a>
+                    </li>
+                        {% endif %}
+
+                    </li>
+                {% else %}
+
+                    <li class="nav-item">
+                        <a class="menu-item nav-link sign-up-button" href="{% url 'user-login' %}">Sign In</a>
+                    </li>
+{#                    <span class="or">Or</span>#}
+{#                    <li class="nav-item nav-item-social">#}
+{#                        <a class="menu-item nav-link" href="#">#}
+{#                        <span class="fa-stack">#}
+{#                            <i class="fa fa-circle fa-stack-2x" style="color:#09c75b"></i>#}
+{#                            <i style="color:#232323" class="fa fa-facebook fa-stack-1x"></i>#}
+{#                         </span>#}
+{#                            <span class="fa-stack">#}
+{#                            <i class="fa fa-circle fa-stack-2x" style="color:#09c75b"></i>#}
+{#                            <i style="color:#232323" class="fa fa-linkedin fa-stack-1x"></i>#}
+{#                         </span>#}
+{#                            <span class="fa-stack">#}
+{#                            <i class="fa fa-circle fa-stack-2x" style="color:#09c75b"></i>#}
+{#                            <i style="color:#232323" class="fa fa-google fa-stack-1x"></i>#}
+{#                         </span>#}
+{#                        </a>#}
+{#                    </li>#}
+
+                {% endif %}
+            </ul>
+
+
+        </div>
+    </div>
+</nav>

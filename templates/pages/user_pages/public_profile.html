@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="profile-img">
+                        {{ user.get_image_thumbnail }}
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="profile-head">
+                        <h5>
+                            {{ user.user.first_name }} {{ user.user.last_name }}
+                        </h5>
+                        {% if not user.job_title == None %}
+                            <h6>
+                                {{ user.job_title }}
+                            </h6>
+                        {% endif %}
+
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal"
+                                   role="tab" aria-controls="personal" aria-selected="true">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="fcom-tab" data-toggle="tab" href="#fcom" role="tab"
+                                   aria-controls="fcom" aria-selected="false">Followed Companies</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="fe-tab" data-toggle="tab" href="#fe" role="tab"
+                                   aria-controls="fe" aria-selected="false">Followed Experts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="fevents-tab" data-toggle="tab" href="#fevents" role="tab"
+                                   aria-controls="fevents" aria-selected="false">Followed Events</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="lreview-tab" data-toggle="tab" href="#lreview" role="tab"
+                                   aria-controls="lreview" aria-selected="false">Latest Reviews</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {#                    <div class="col-md-2">#}
+                {#                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>#}
+                {#                    </div>#}
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="profile-work">
+                        <p>Contacts</p>
+                        <a href="{{ user.website }}">Website</a><br/>
+                        <a href="{{ user.soc_media_twitter }}">Twitter Profile</a><br/>
+                        <a href="{{ user.soc_media_fb }}">Facebook Profile</a><br/>
+                        <a href="{{ user.soc_media_linkedin }}">Linkedin Profile</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="personal" role="tabpanel"
+                             aria-labelledby="personal-tab">
+                            {% if not user.user.first_name == None and not user.user.last_name == None %}
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ user.user.first_name }} {{ user.user.last_name }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if not user.user.email == None %}
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ user.user.email }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if not user.user.phone == None %}
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Phone</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ user.phone_number }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if not user.address == None %}
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Address</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ user.address }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Last Login</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.user.last_login }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="fcom" role="tabpanel" aria-labelledby="fcom-tab">
+                            {% for company in followed_companies %}
+                                <a href="{% url 'company_detail' slug=company.slug %}">{{ company.name }}</a><br/>
+                            {% endfor %}
+                        </div>
+                        <div class="tab-pane fade" id="fe" role="tabpanel" aria-labelledby="fe-tab">
+                            {% for expert in followed_experts %}
+                                <a href="{% url 'expert_detail' slug=expert.slug %}">{{ expert.name }}</a><br/>
+                            {% endfor %}
+                        </div>
+                        <div class="tab-pane fade" id="fevents" role="tabpanel" aria-labelledby="fevents-tab">
+                            {% for event in followed_events %}
+                                <a href="{% url 'event_detail_url' slug=event.slug %}">{{ event.name }}</a><br/>
+                            {% endfor %}
+                        </div>
+                        <div class="tab-pane fade" id="lreview" role="tabpanel" aria-labelledby="lreview-tab">
+                            {% for review in reviews %}
+                                {% if review.content_type.model.title == 'Company' %}
+{#                                    <h3>Company Reviews</h3>#}
+                                    <div class="profile-activity clearfix">
+                                        left comment on
+                                        <a href="{% url 'company_detail' slug=review.content_object.slug %}#rev{{ review.id }}">{{ review.content_object.name }}</a>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                            {{ review.creation_date }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if review.content_type.model.title == 'Expert' %}
+{#                                    <h3>Expert Reviews</h3>#}
+                                    <div class="profile-activity clearfix">
+                                        left comment on
+                                        <a href="{% url 'expert_detail' slug=review.content_object.slug %}#rev{{ review.id }}">{{ review.content_object.name }}</a>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                            {{ review.creation_date }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if review.content_type.model.title == 'Event' %}
+{#                                    <h3>Event Reviews</h3>#}
+                                    <div class="profile-activity clearfix">
+                                        left comment on
+                                        <a href="{% url 'event_detail_url' slug=review.content_object.slug %}#rev{{ review.id }}">{{ review.content_object.name }}</a>
+
+                                        <div class="time">
+                                            <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                            {{ review.creation_date }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+    </div>
+    </form>
+    </div>
+{% endblock %}

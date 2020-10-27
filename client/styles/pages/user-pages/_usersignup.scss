@@ -1,0 +1,136 @@
+@import "../../_utils/variables";
+@import "../../_utils/_mixins/button";
+@import "../../_utils/_mixins/tools";
+
+#signup-con {
+  padding-bottom: 100px;
+  padding-top: 68px;
+  background-size: cover;
+
+  .logo-text {
+    .logo {
+
+    }
+
+    .text {
+
+      p {
+        margin-bottom: 0;
+        padding-right: 10px;
+        color: #fff;
+        font-family: Lato;
+      }
+
+      a {
+        text-decoration: underline;
+        font-family: Lato;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          color: $button-color;
+        }
+      }
+    }
+  }
+
+  .signup {
+    .card-signup {
+      background-color: #f0f0f0;
+      border-radius: .5rem;
+
+      .card-body {
+        .card-title {
+          font-family: "Lato Bold";
+          color: #656565;
+        }
+
+        .form-signup {
+          label {
+            margin-bottom: 0.3rem;
+            font-family: Lato;
+            color: #656565;
+          }
+
+          input {
+            border-radius: 30px;
+
+            &:focus {
+              border-color: rgba(9,199,9, 0.8);
+              box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(9,199,9, 0.6);
+              outline: 0 none;
+            }
+          }
+
+          button {
+            @include green-button;
+          }
+        }
+      }
+
+    }
+  }
+
+  .or-text {
+    p {
+      font-family: "Lato Bold";
+      color: #656565;
+    }
+  }
+
+  .social-buttons {
+    .buttons {
+      width: 100%;
+
+      button {
+        float: left;
+        width: 30%;
+        margin: 0px 1.5%;
+        color: #fff;
+        border-radius: 30px;
+
+        i {
+          padding-right: 7px;
+        }
+
+        &.facebook {
+          background-color: #4464B2;
+
+          &:hover {
+            background-color: #3B5998;
+            color: #fff
+          }
+        }
+
+        &.linkedin {
+          background-color: #2867B2;
+
+          &:hover {
+            background-color: #04669A;
+            color: #fff;
+          }
+        }
+
+        &.google {
+          background-color: #DA4735;
+
+          &:hover {
+            background-color: #C20806;
+            color: #fff
+          }
+        }
+
+      }
+
+      // button
+
+      &:after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+
+    }
+
+    // .buttons
+  }
+}

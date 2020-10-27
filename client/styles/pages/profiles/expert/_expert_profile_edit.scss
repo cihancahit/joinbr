@@ -1,0 +1,665 @@
+@import "../../../_utils/colors";
+@import "../../../_utils/_mixins/button";
+@import "../../../_utils/variables";
+@import "../../../_utils/_mixins/tools";
+
+/* enable absolute positioning */
+.inner-addon {
+  position: relative;
+
+  .fa {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+  }
+}
+
+.left-addon {
+  .fa {
+    left: 0px;
+    color: #777777;
+  }
+
+  input {
+    padding-left: 40px;
+  }
+
+  img {
+    display: inline-block;
+    left: 0px;
+    border: 1px solid #d6d6d6;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    margin: 0.375rem 0.5rem;
+  }
+}
+
+.right-addon {
+  .fa {
+    right: 0px;
+  }
+
+  input {
+    padding-left: 30px;
+  }
+}
+
+
+.l-info {
+  .profile-cont {
+    background-color: #fff;
+    border: 1px solid #d6d6d6;
+    @include border-radius(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .ex-profile-pic {
+      width: 120px;
+      height: 120px;
+      @include border-radius(50%);
+      border: 1px solid #d6d6d6;
+    }
+
+    .ex-profile-name {
+      font-family: "Lato Black";
+      color: $button-color;
+    }
+
+    .ex-profile-ex {
+      font-family: "Lato Black";
+      color: #232323;
+    }
+
+    .ex-profile-comp {
+      text-decoration: none;
+      @media screen and (max-width: $tablet-l) {
+        display: none;
+      }
+
+      img {
+        width: 35px;
+        height: 35px;
+        @include border-radius(50%);
+        border: 1px solid #d6d6d6;
+      }
+
+      span {
+        font-family: "Lato Bold";
+        color: #787878;
+        font-size: 18px;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          color: $button-color;
+        }
+      }
+    }
+
+    .social {
+      display: flex;
+      justify-content: space-between;
+      @media screen and (max-width: $tablet-l) {
+        display: none;
+      }
+
+      a {
+        i {
+          width: 25px;
+          height: 25px;
+          line-height: 25px;
+          background-color: #ababab;
+          text-align: center;
+          border-radius: 25px;
+          font-size: 12.5px;
+          display: inline-block;
+          color: #fff;
+          transition: all ease-in-out 400ms;
+
+          &:hover {
+            background-color: $button-color;
+          }
+        }
+      }
+    }
+
+    .ex-profile-divider {
+      border-color: #d6d6d6 !important;
+    }
+
+    .ex-profile-loc {
+      color: #787878;
+      font-family: "Lato Bold";
+      @media screen and (max-width: $tablet-l) {
+        display: none;
+      }
+
+      span {
+        font-family: "Lato Bold";
+        color: $button-color;
+      }
+    }
+
+    .ex-profile-lang {
+      color: #787878;
+      font-family: "Lato Bold";
+
+      span {
+        font-family: "Lato Bold";
+        color: $button-color;
+      }
+    }
+
+    .ex-profile-bio {
+      font-family: "Lato";
+      color: #787878;
+      @media screen and (max-width: $tablet-l) {
+        display: none;
+      }
+    }
+
+    .ep-edit-profile-image {
+      position: relative;
+
+      input {
+        display: none;
+
+        + label {
+          display: inline-block;
+          color: #fff;
+          width: 34px;
+          height: 34px;
+          margin-bottom: 0;
+          border-radius: 100%;
+          background: $button-color;
+          border: 1px solid transparent;
+          box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+          cursor: pointer;
+          font-weight: normal;
+          @include transition(all ease-in-out 300ms);
+          position: absolute;
+          bottom: 0;
+          right: 5px;
+
+          &:hover {
+            background: #f1f1f1;
+            border-color: #d6d6d6;
+
+            &:after {
+              color: $button-color;
+            }
+          }
+
+          &:after {
+            content: "\f040";
+            font-family: 'FontAwesome';
+            color: #fff;
+            position: absolute;
+            top: 3px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            margin: auto;
+          }
+        }
+      }
+
+      .expert-badge {
+        position: absolute;
+        left: 5px;
+        bottom: -1px;
+        background-color: #09c75b;
+        color: #fff;
+        padding: 3px 7px;
+        border-radius: 5px;
+        font-family: "Lato Bold", Serif;
+        font-size: 12px;
+      }
+    }
+
+    @media screen and (max-width: $tablet-l) {
+      margin-top: -50px;
+    }
+  }
+}
+
+.c-edit {
+  .profile-edit-cont {
+    background-color: #fff;
+    border: 1px solid #d6d6d6;
+    @include border-radius(8px);
+
+    h4 {
+      font-family: "Lato Black";
+      color: #232323;
+    }
+
+    .ex-profile-sec-header {
+      border-bottom: 1px solid #d1d2d2;
+
+      h5 {
+        font-family: "Lato Bold";
+        color: rgba(35, 35, 35, 0.8);
+      }
+    }
+
+    .ex-profile-basic {
+      label {
+        font-family: "Lato Black";
+        color: #b1afaf;
+      }
+
+      input {
+        font-family: "Lato";
+        color: #787878;
+      }
+    }
+
+    .ex-profile-detail {
+      label {
+        font-family: "Lato Black";
+        color: #b1afaf;
+      }
+
+      input, textarea {
+        font-family: "Lato";
+        color: #787878;
+      }
+
+      .input-group {
+        .input-group-text {
+          background-color: transparent;
+          @include border-radii(30px, 0px, 0px, 30px);
+        }
+
+        .exp-current-comp-logo {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      .tagList {
+        display: block;
+        padding: 0;
+        margin: 0;
+
+        &:after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+
+        li {
+          position: relative;
+          list-style: none;
+          float: left;
+          font-size: 0.835rem;
+          text-transform: capitalize;
+          background-color: #bbbbbb;
+          line-height: 1rem;
+          padding: 0.5rem 2rem 0.5rem 1rem;
+          border-radius: 1rem;
+          margin-right: 0.5rem;
+          margin-bottom: 0.5rem;
+          word-break: break-all;
+          color: #fff;
+          @include transition(all ease-in-out 300ms);
+
+          &:hover {
+            background-color: $button-color;
+          }
+
+          .rmTag {
+            position: absolute;
+            margin: 0.5rem;
+            top: 0;
+            right: 0;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 1rem;
+            color: #bbbbbb;
+            font-size: 0.63rem;
+            line-height: 1rem;
+            text-align: center;
+            background-color: #fff;
+            cursor: pointer;
+            -webkit-transition: 0.3s all;
+            transition: 0.3s all;
+
+            &:hover {
+              background-color: #bbbbbb;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+    .ex-profile-web-links {
+      label {
+        font-family: "Lato Black";
+        color: #b1afaf;
+      }
+
+      input, textarea {
+        font-family: "Lato";
+        color: #787878;
+      }
+    }
+
+    .ex-profile-langs {
+      label {
+        font-family: "Lato Black";
+        color: #b1afaf;
+      }
+
+      input, textarea {
+        font-family: "Lato";
+        color: #787878;
+      }
+
+      select {
+        @include border-radius(8px);
+      }
+
+      .lang-list {
+        .tagList {
+          display: block;
+          padding: 0;
+          margin: 0;
+
+          &:after {
+            content: "";
+            clear: both;
+            display: table;
+          }
+
+          li {
+            position: relative;
+            list-style: none;
+            float: left;
+            font-size: 0.835rem;
+            text-transform: capitalize;
+            background-color: #bbbbbb;
+            line-height: 1rem;
+            padding: 0.5rem 2rem 0.5rem 1rem;
+            border-radius: 1rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            word-break: break-all;
+            color: #fff;
+            @include transition(all ease-in-out 300ms);
+
+            &:hover {
+              background-color: $button-color;
+            }
+
+            .rmTag {
+              position: absolute;
+              margin: 0.5rem;
+              top: 0;
+              right: 0;
+              height: 1rem;
+              width: 1rem;
+              border-radius: 1rem;
+              color: #bbbbbb;
+              font-size: 0.63rem;
+              line-height: 1rem;
+              text-align: center;
+              background-color: #fff;
+              cursor: pointer;
+              -webkit-transition: 0.3s all;
+              transition: 0.3s all;
+
+              &:hover {
+                background-color: #bbbbbb;
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+
+      .ep-lang-add-new-input {
+        border: unset;
+        border-radius: 50%;
+        background-color: #ababab;
+        color: #fff;
+      }
+      .ep-lang-remove-input {
+        border: unset;
+        border-radius: 50%;
+        background-color: #ababab;
+        color: #fff;
+      }
+    }
+
+    .ex-profile-events {
+      label {
+        font-family: "Lato Black";
+        color: #b1afaf;
+      }
+
+      input, textarea {
+        font-family: "Lato";
+        color: #787878;
+
+        &::placeholder {
+          font-family: "Lato Bold";
+          color: #787878;
+        }
+      }
+
+      .exp-ev-x {
+        position: absolute;
+        margin: 0.25rem;
+        top: -10px;
+        right: 10px;
+        height: 1.5rem;
+        width: 1.5rem;
+        border-radius: 1rem;
+        color: #fff;
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        text-align: center;
+        background-color: #bbbbbb;
+        cursor: pointer;
+        z-index: 998;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          background-color: $button-color;
+        }
+      }
+
+
+      .exp-event-block {
+        background-color: #fff;
+        border: 1px solid #d6d6d6;
+        @include border-radius(30px);
+        @include transition(all ease-in-out 300ms);
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .1);
+
+        &:hover {
+          box-shadow: 0 4px 9px 0 rgba(0, 0, 0, .1), 0 3px 6px 0 rgba(0, 0, 0, .15);
+        }
+
+        img {
+          @include border-radii(30px, 0px, 0px, 30px);
+          width: 100%;
+          height: 100%;
+        }
+
+        .exp-event-content {
+          .exp-ec-name {
+            font-family: "Lato Bold";
+            color: #787878;
+            margin: unset;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: inherit;
+            overflow: hidden;
+            text-decoration: none;
+            @include transition(all ease-in-out 300ms);
+
+            &:hover {
+              color: $button-color;
+            }
+          }
+
+          .exp-ec-startdate {
+            margin: unset;
+            font-family: "Lato Bold";
+            color: #bbbbbb;
+            font-size: 14px;
+          }
+
+          .exp-ec-at-bg-speaker {
+            background-color: #6a06c6;
+          }
+
+          .exp-ec-at {
+            border: 0 none;
+            @include border-radius(8px);
+            color: #fff;
+            padding: 2px 10px;
+          }
+
+        }
+
+      }
+
+      .exp-ev-show-less {
+
+        font-family: "Lato Bold";
+        color: $button-color;
+        text-decoration: underline;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          color: #787878;
+        }
+
+      }
+    }
+
+    .ex-profile-coll {
+      label {
+        font-family: "Lato Black";
+        color: #b1afaf;
+      }
+
+      input, textarea {
+        font-family: "Lato";
+        color: #787878;
+
+        &::placeholder {
+          font-family: "Lato Bold";
+          color: #787878;
+        }
+      }
+
+      .exp-col-x {
+        position: absolute;
+        margin: 0.25rem;
+        top: -15px;
+        right: 0px;
+        height: 1.5rem;
+        width: 1.5rem;
+        border-radius: 1rem;
+        color: #fff;
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        text-align: center;
+        background-color: #bbbbbb;
+        cursor: pointer;
+        z-index: 998;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          background-color: $button-color;
+        }
+      }
+
+
+      .exp-coll-block {
+        background-color: #fff;
+        border: 1px solid #d6d6d6;
+        @include border-radius(15px);
+        @include transition(all ease-in-out 300ms);
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .1);
+
+        &:hover {
+          box-shadow: 0 4px 9px 0 rgba(0, 0, 0, .1), 0 3px 6px 0 rgba(0, 0, 0, .15);
+        }
+
+        .exp-coll-img-link {
+
+          img {
+            width: 30px;
+            height: 30px;
+            @include border-radius(50%);
+            border: 1px solid transparent;
+            @include transition(all ease-in-out 300ms);
+
+            &:hover {
+              border-color: $button-color;
+            }
+
+          }
+        }
+
+        .exp-coll-name {
+          font-family: "Lato Bold";
+          color: #787878;
+          margin: unset;
+          padding: unset;
+          text-decoration: none;
+          @include transition(all ease-in-out 300ms);
+
+          &:hover {
+            color: $button-color;
+          }
+        }
+
+      }
+
+      .exp-ev-show-less {
+
+        font-family: "Lato Bold";
+        color: $button-color;
+        text-decoration: underline;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          color: #787878;
+        }
+
+      }
+    }
+
+    .ep-panel-nav-btn {
+      display: none;
+      background: none;
+      border: none;
+
+      span {
+        color: #31313161;
+      }
+
+      @media screen and (max-width: $tablet-l) {
+        display: block;
+      }
+    }
+  }
+
+  @media screen and (max-width: $tablet-l) {
+    margin-top: 25px;
+  }
+}
+
+.ep-edit-submit-btn {
+  @include green-button;
+}

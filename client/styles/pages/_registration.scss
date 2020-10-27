@@ -1,0 +1,182 @@
+@import "../_utils/colors";
+
+$color_white: #fff;
+$color_2: rgb(6, 106, 117);
+$font_family_1: 'FranchiseRegular', 'Arial Narrow', Arial, sans-serif;
+$background_color_1: #f9f8f8;
+$background_color_2: #3D9DB3;
+$background_color_3: #198da8;
+$background_color_4: #17ae47;
+$background_color_5: #1CA347;
+$border_color_1: #ccc;
+$border_color_2: #2d92a9;
+$border_color_3: #53A3CD;
+$border_color_4: #1CB94A;
+$border_color_5: #1CA347;
+
+
+#regContainer {
+  margin-top: 3%;
+}
+
+.panel-login {
+  border-color: $border_color_1;
+  background-color: $background_color_1;
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+
+  > .panel-heading {
+    .reg-title {
+      border-bottom: 1px solid #c8c8c8;
+      background-color: #efefef;
+    }
+
+    text-align: center;
+
+    a {
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 28px;
+      -webkit-transition: all 0.1s linear;
+      -moz-transition: all 0.1s linear;
+      transition: all 0.1s linear;
+    }
+
+    a.active {
+      font-size: 34px;
+    }
+
+    hr {
+      margin-top: 10px;
+      margin-bottom: 0px;
+      clear: both;
+      border: 0;
+      height: 1px;
+      background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+      background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+      background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+      background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+    }
+  }
+
+  input[type="text"] {
+    height: 45px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+  }
+
+  input[type="email"] {
+    height: 45px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+  }
+
+  input[type="password"] {
+    height: 45px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+  }
+
+  input {
+    &:hover {
+      outline: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      border-color: $border_color_1;
+    }
+
+    &:focus {
+      outline: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      border-color: $border_color_1;
+    }
+  }
+}
+
+.btn-login {
+  background-color: $button-color;
+  outline: none;
+  color: $color_white;
+  font-size: 14px;
+  height: auto;
+  font-weight: normal;
+  padding: 14px 14px;
+  text-transform: uppercase;
+  border-color: $border_color_2;
+
+  &:hover {
+    color: $color_white;
+    background-color: $background_color_3;
+    border-color: $border_color_3;
+  }
+
+  &:focus {
+    color: $color_white;
+    background-color: $background_color_3;
+    border-color: $border_color_3;
+  }
+}
+
+.btn-register {
+  background-color: $button-color;
+  outline: none;
+  color: $color_white;
+  font-size: 14px;
+  height: auto;
+  font-weight: normal;
+  padding: 14px 14px;
+  text-transform: uppercase;
+  border-color: $border_color_4;
+
+  &:hover {
+    color: $color_white;
+    background-color: $background_color_5;
+    border-color: $border_color_5;
+  }
+
+  &:focus {
+    color: $color_white;
+    background-color: $background_color_5;
+    border-color: $border_color_5;
+  }
+}
+
+.fullscreen_bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-image: url('https://wallpaperscraft.com/image/apple_brand_imac_desk_keyboard_79998_1680x1050.jpg');
+  background-repeat: repeat;
+}
+
+.panel-heading {
+  a {
+    font-size: 48px;
+    color: $color_2;
+    padding: 2px 0 10px 0;
+    font-family: $font_family_1;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 30px;
+    background: -webkit-repeating-linear-gradient(-45deg, rgb(18, 83, 93), rgb(18, 83, 93) 20px, rgb(64, 111, 118) 20px, rgb(64, 111, 118) 40px, rgb(18, 83, 93) 40px);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+}

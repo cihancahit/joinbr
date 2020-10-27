@@ -1,0 +1,198 @@
+from django.shortcuts import render, redirect
+
+from django.urls import reverse_lazy
+
+from social_django.models import UserSocialAuth
+
+from django.views.generic import FormView, TemplateView, DetailView
+
+from django.contrib.auth import update_session_auth_hash, logout, login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm, AuthenticationForm
+
+from django.utils.decorators import method_decorator
+
+from .forms import UserRegistrationForm, UserForm, ProfileForm
+from .models import UserProfileModel
+from fec_app.views import BaseContext
+from expert.models import Expert
+from companies.models import Company
+from events.models import Event
+from reviews_and_rating.models import ReviewModel
+
+
+class RegisterLoginView(TemplateView):
+    template_name = 'pages/user_pages/user_registration1.html'
+
+    def get(self, request, *args, **kwargs):
+        register_form = UserRegistrationForm(self.request.GET or None)
+        login_form = AuthenticationForm(self.request.GET or None)
+        context = self.get_context_data(**kwargs)
+        context['register_form'] = register_form
+        context['login_form'] = login_form
+        return self.render_to_response(context)
+
+
+class UserRegistrationView(FormView):
+    template_name = 'pages/user_pages/user_registration1.html'
+    form_class = UserRegistrationForm
+    success_url = reverse_lazy('index_url')
+
+    def form_valid(self, form):
+        user = form.save()
+        UserProfileModel.objects.create(user=user)
+        return super().form_valid(form)
+
+
+@method_decorator(login_required, name='dispatch')
+class AccountSettingsView(TemplateView):
+    template_name = 'pages/user_pages/account_settings.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        user = self.request.user
+
+        # check for twitter login
+        try:
+            twitter_login = user.social_auth.get(provider='twitter')
+        except UserSocialAuth.DoesNotExist:
+            twitter_login = None
+
+        can_disconnect = (user.social_auth.count() > 1 or user.has_usable_password())
+
+        context['twitter_login'] = twitter_login
+        context['can_disconnect'] = can_disconnect
+
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class ChangePasswordView(FormView):
+    template_name = 'pages/user_pages/change_password.html'
+
+    def get_form_class(self):
+        if self.request.user.has_usable_password():
+            return PasswordChangeForm
+        else:
+            return AdminPasswordChangeForm
+
+    def form_valid(self, form):
+        form.save()
+        update_session_auth_hash(self.request, form.user)
+        return super ().form_valid (form)
+
+
+def log_out_view(request):
+    logout(request)
+    return redirect('user_registration_url')
+
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.userprofilemodel)
+        print(user_form)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('update_profile')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.userprofilemodel)
+    return render(request, 'pages/user_pages/profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
+
+
+def user_register(request):
+    if request.method == 'POST':
+        login_form = AuthenticationForm(data=request.POST)
+        register_form = UserRegistrationForm(request.POST)
+        # if request.POST.get('login-submit')
+        print(request.POST.get('login-submit'))
+        # username = login_form.cleaned_data.get('username')
+        # password = login_form.cleaned_data.get('password')
+        # user = authenticate(username=username, password=password)
+
+        if register_form.is_valid():
+            user = register_form.save()
+            UserProfileModel.objects.create(user=user)
+            username = register_form.cleaned_data.get('username')
+            password = register_form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('index_url')
+        if login_form.is_valid() and request.POST.get('login-submit'):
+            username = login_form.cleaned_data.get('username')
+            password = login_form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('index_url')
+
+    else:
+        register_form = UserRegistrationForm()
+        login_form = AuthenticationForm()
+
+    return render(request, 'pages/user_pages/user_registration1.html', {
+        'register_form': register_form,
+        'login_form': login_form
+    })
+
+
+def user_login(request):
+    if request.method == 'POST':
+        login_form = AuthenticationForm(data=request.POST)
+        register_form = UserRegistrationForm(request.POST)
+        # if request.POST.get('login-submit')
+        print(request.POST.get('login-submit'))
+        # username = login_form.cleaned_data.get('username')
+        # password = login_form.cleaned_data.get('password')
+        # user = authenticate(username=username, password=password)
+
+        if register_form.is_valid():
+            user = register_form.save()
+            UserProfileModel.objects.create(user=user)
+            username = register_form.cleaned_data.get('username')
+            password = register_form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('index_url')
+        if login_form.is_valid() and request.POST.get('login-submit'):
+            username = login_form.cleaned_data.get('username')
+            password = login_form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('index_url')
+
+    else:
+        register_form = UserRegistrationForm()
+        login_form = AuthenticationForm()
+
+    return render(request, 'pages/user_pages/user_login1.html', {
+        'register_form': register_form,
+        'login_form': login_form
+    })
+
+#
+# def linkedin(request):
+
+
+class UserPublicProfile(BaseContext, DetailView):
+    model = UserProfileModel
+    template_name = 'pages/user_pages/public_profile.html'
+    context_object_name = 'user'
+
+    def get_context_data(self, **kwargs):
+        context = super(UserPublicProfile, self).get_context_data(**kwargs)
+        user1 = UserProfileModel.objects.filter(slug=self.kwargs["slug"]).all()
+        context["user_active"] = "menu-active"
+        context["followed_experts"] = Expert.objects.filter(follower_list__in=user1).all()
+        context["followed_companies"] = Company.objects.filter(follower_list__in=user1).all()
+        context["followed_events"] = Event.objects.filter(follower_list__in=user1).all()
+        context["reviews"] = ReviewModel.objects.filter(user__in=user1, anon=False).all()
+        context["events"] = Event.objects.filter()
+
+        return context

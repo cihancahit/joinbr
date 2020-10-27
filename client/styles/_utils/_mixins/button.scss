@@ -1,0 +1,146 @@
+@import "../colors";
+@import "../variables";
+@mixin green-button {
+  background-color: $button-color;
+  background-image: none;
+  border: 1px solid transparent;
+  color: #fff;
+  padding: 8px 30px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 30px;
+  line-height: 1.25;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+ transition: all ease-in-out 300ms;
+                  &:hover{
+                    background-color: #fff;
+                    border: 1px solid $button-color;
+                    color: $button-color;
+                  }
+}
+
+@mixin green-button-reverse {
+  background-color: #fff;
+  border: 1px solid $button-color;
+  color: $button-color;
+  padding: 8px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 30px;
+  &:hover{
+    background-color: $button-color;
+    color: #fff;
+    border: 1px solid #fff;
+  }
+}
+
+@mixin white-button {
+  background-color: #fff;
+  border: 1px solid $button-color;
+  color: $button-color;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  vertical-align: middle;
+}
+
+////////////// my buttons
+
+// Mixins
+// Bootstrap Button Variant
+@mixin button-variant($color, $background, $border) {
+  color: $color;
+  border-color: $border;
+  background-color: $background;
+  &.focus,
+  &:focus {
+    color: $color;
+    border-color: darken($border, 25%);
+    background-color: darken($background, 10%);
+  }
+  &:hover {
+    color: $color;
+    border-color: darken($border, 12%);
+    background-color: darken($background, 10%);
+  }
+  &.active,
+  &:active,
+  .open > &.dropdown-toggle {
+    color: $color;
+    border-color: darken($border, 12%);
+    background-color: darken($background, 10%);
+    &.focus,
+    &:focus,
+    &:hover {
+      color: $color;
+      border-color: darken($border, 25%);
+      background-color: darken($background, 17%);
+    }
+  }
+  &.active,
+  &:active,
+  .open > &.dropdown-toggle {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &.focus,
+    &:focus,
+    &:hover {
+      border-color: $border;
+      background-color: $background;
+    }
+  }
+  .badge {
+    color: $background;
+    background-color: $color;
+  }
+}
+@mixin transition-all() {
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+}
+@mixin background-cover() {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+@mixin serif-font() {
+  font-family: 'Lora', 'Times New Roman', serif;
+}
+@mixin sans-serif-font() {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
+@mixin grey-button {
+  background-color: #D8D8D8;
+  color: #FFF;
+
+  &:hover {
+    background-color: #e6e6e6;
+    border-color: #adadad;
+  }
+}
+
+
+@mixin star-p-button{
+  @media screen and (max-width: $tablet-l) {
+    font-size: 0.5rem !important;
+  }
+}

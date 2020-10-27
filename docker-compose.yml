@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  postgres:
+    image: postgres:10.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  web:
+    container_name: joinbro
+    build: .
+    restart: "always"
+    env_file: .env
+    environment:
+      - VIRTUAL_HOST=46.101.181.144,167.71.60.48,localhost
+      - VIRTUAL_PORT=8000
+      - TIMEOUT=100
+      - HTTP_PORT=8000
+      - STATS_PORT=8001
+    volumes:
+      - .:/code
+      - ./media:/code/media
+    ports:
+      - "8000:8000"
+    links:
+      - postgres
+    depends_on:
+      - "postgres"
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
+volumes:
+  postgres_data:

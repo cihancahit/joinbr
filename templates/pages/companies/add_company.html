@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Add New Company {% endblock %}
+{% block main %}
+    {#{% include "_partials/header.html" %}#}
+    <header class="masthead" style="background-image: url('{% static 'assets/images/all_companies.png' %}')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="page-heading">
+                        <h1>Add New Company</h1>
+                        <span class="subheading">Add Your Company</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="add-company" style="padding-bottom: 100px;">
+        <div class="container">
+            {#add expert modal started#}
+            <form method="GET">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            {% csrf_token %}
+                            <input type="text" class="form-control" id="ac-name" placeholder="Company Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="input-container row">
+                                <div class="col-md-6"><input type="file" id="ac-logo">
+                                    <button class="ac-logo-btn form-control" name="ac-profile-pic-btn">
+                                        Company Logo
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="ac-file-info btn">File Name</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <input type="text" class="form-control" id="ac-linkedin"
+                                   placeholder="Linkedin profile Url">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" class="form-control" id="ac-twitter"
+                                   placeholder="Twitter profile url">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" class="form-control" id="ac-facebook"
+                                   placeholder="Facebook profile url">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <input type="text" class="form-control" id="ac-website"
+                                   placeholder="Website">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" class="form-control" id="ac-founded"
+                                   placeholder="Founded">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="number" class="form-control" id="ac-size"
+                                   placeholder="Company Size">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <select id="ac-type" class="form-control">
+                                <option selected disabled>Company Type</option>
+                                {% for type in company_types %}
+                                    <option>{{ type.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" id="ac-address" placeholder="Address">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ac-info">About Company:</label>
+                        <textarea class="form-control" id="ac-info" rows="3" name="ac-info"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input required" type="checkbox"
+                                   id="ac-startup" value="startup">
+                            <label class="form-check-label" for="ac-startup">
+                                Are You Startup?
+                            </label>
+                        </div>
+                    </div>
+                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                    <button class="btn btn-submit" id="btnaddcompany" onclick="return false">Add Company</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    </div>
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Add New Expert {% endblock %}
+{% block main %}
+    <header class="masthead" style="background-image: url('{% static 'assets/images/all_companies.png' %}')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="page-heading">
+                        <h1>Add New Expert</h1>
+                        <span class="subheading">Add Yourself</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="add-expert" style="padding-bottom: 100px;">
+        <div class="container">
+            {#add expert modal started#}
+            <form method="GET">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            {% csrf_token %}
+                            <input type="text" class="form-control" id="ae-name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group col-md-3">
+
+                            <input type="text" class="form-control" id="ae-btitle" placeholder="Business Title">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="input-container row">
+                                <div class="col-md-6"><input type="file" id="ae-profile-pic">
+                                    <button class="ae-profile-pic-btn form-control" name="ae-profile-pic-btn">
+                                        Image
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="ae-file-info btn">File Name</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3 col-6">
+                            <input type="text" class="form-control" id="ae-website"
+                                   placeholder="Personal Website">
+                        </div>
+                        <div class="form-group col-md-3 col-6">
+                            <input type="text" class="form-control" id="ae-facebook"
+                                   placeholder="Facebook profile Url">
+                        </div>
+                        <div class="form-group col-md-3 col-6">
+                            <input type="text" class="form-control" id="ae-linkedin"
+                                   placeholder="Linkedin profile Url">
+                        </div>
+                        <div class="form-group col-md-3 col-6">
+                            <input type="text" class="form-control" id="ae-twitter"
+                                   placeholder="Twitter profile url">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <select id="ae-company" class="form-control">
+                                {% for company in companies %}
+                                    <option>{{ company.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" class="form-control" id="ae-country" placeholder="Country">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" class="form-control" id="ae-city" placeholder="City">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <select id="ae-industry" class="form-control">
+                                <option selected disabled>Industry</option>
+                                {% for industry in industries %}
+                                    <option>{{ industry.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" class="form-control" id="ae-contact" placeholder="Contact">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="number" class="form-control" id="ae-age" placeholder="Age">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">About Yourself:</label>
+                        <textarea class="form-control" id="ae-bio" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input required" type="checkbox"
+                                   id="ae-contact">
+                            <label class="form-check-label" for="ae-contact">
+                                Would you like to be contacted by site users?
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input size="100" type="text" id="ae-expertise" placeholder="Enter your Expertises"
+                               data-role="tagsinput" class="form-control"/>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                    <button class="btn btn-submit" id="btnaddexpert" onclick="return false">Apply</button>
+                </div>
+            </form>
+            {#add expert modal finished#}
+        </div>
+    </section>
+    </div>
+{% endblock %}

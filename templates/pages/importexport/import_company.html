@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Upload Excel File {% endblock %}
+{% block main %}
+    <br>
+    <br>
+    <br>
+    <h2>Upload Excel File</h2>
+<form method="POST" action="{% url "import_company" %}" enctype="multipart/form-data">
+    {% csrf_token %}
+  <input type="file" id="myFile" name="file">
+  <input type="submit">
+</form>
+{% endblock %}
+{% block footer %}
+{% endblock footer %}

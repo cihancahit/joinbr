@@ -1,0 +1,136 @@
+@import "../_utils/colors";
+@import "../_utils/_mixins/tools";
+@import "../_utils/_mixins/button";
+
+.open-button {
+  font-family: "Lato Heavy";
+  background-color: $button-color;
+  color: #fff;
+  padding: 10px 20px 5px 20px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  border-color: unset;
+  border-style: unset;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 0px;
+  right: 118px;
+  width: 300px;
+  z-index: 999;
+  @include transition(all ease-in-out 300ms);
+
+  span {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: $tablet-l) {
+    right: 25%;
+    left: 50%;
+    margin-left: -150px;
+  }
+}
+
+/* The popup chat - hidden by default */
+.h-tum-popup {
+  position: fixed;
+  width: 300px;
+  bottom: 0;
+  right: 118px;
+  z-index: 99999;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  @media screen and (max-width: $tablet-l) {
+    right: 25%;
+    left: 50%;
+    margin-left: -150px;
+  }
+
+  .pop-header {
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    background-color: $button-color;
+    padding: 0 10px;
+    margin-bottom: 0;
+
+    .close-button {
+      font-family: "Lato Heavy";
+      background-color: $button-color;
+      color: #fff;
+      padding: 10px 10px;
+      border-top-left-radius: 40px;
+      border-top-right-radius: 40px;
+      border-color: unset;
+      border-style: unset;
+      width: 100%;
+      text-align: left;
+
+      span {
+        font-size: 17px;
+      }
+    }
+  }
+
+  .here-for {
+    background-color: #fff;
+    padding: 10px 20px;
+
+    h5 {
+      margin: unset;
+      color: #bababa;
+
+    }
+  }
+
+  .h-tum-container {
+    width: 300px;
+    padding: 10px;
+    background-color: #f2f2f2;
+
+    .pop-body {
+      .link {
+        padding: 0 10px;
+
+        .pop-link {
+          @include green-button;
+          width: 100%;
+          font-size: 14px;
+        }
+
+        .pop-speaker {
+          background-color: #6908c5;
+
+          &:hover {
+            background-color: #fff;
+            border: 1px solid #6908c5;
+            color: #6908c5;
+          }
+        }
+
+        .pop-seminar {
+          background-color: #eea906;
+          &:hover {
+            background-color: #fff;
+            border: 1px solid #eea906;
+            color: #eea906;
+          }
+        }
+
+        .pop-expert {
+          background-color: #f1673d;
+          &:hover {
+            background-color: #fff;
+            border: 1px solid #f1673d;
+            color: #f1673d;
+          }
+        }
+      }
+    }
+
+
+    .cancel {
+      background-color: red;
+      z-index: 1000;
+    }
+  }
+}

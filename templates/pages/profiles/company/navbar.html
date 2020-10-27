@@ -1,0 +1,45 @@
+<nav id="sidebar" class="profile-sidebar">
+    <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+        </button>
+    </div>
+    <h1>Expert Profile</h1>
+    <ul class="list-unstyled components mb-5">
+        <li class="{{ dashboard_active }}">
+            <a href="#"><span class="fa fa-home mr-3"></span> Dashboard</a>
+        </li>
+{#        <li class="{{ message_active }}">#}
+{#            <a href="#"><span class="fa fa-envelope mr-3"></span> Messages</a>#}
+{#        </li>#}
+{#        <li class="{{ company_active }}">#}
+{#            <a href="#"><span class="fa fa-building mr-3"></span> My Company</a>#}
+{#        </li>#}
+        <li class="{{ myevent_active }}">
+            <a href="#"><span class="fa fa-calendar mr-3"></span> Company Events</a>
+        </li>
+{#        <li class="{{ commmunity_active }}">#}
+{#            <a href="#"><span class="fa fa-users mr-3"></span> Community</a>#}
+{#        </li>#}
+        <li class="{{ ep_review_active }}">
+            <a href="#"><span class="fa fa-comments mr-3"></span> Reviews</a>
+        </li>
+        <li class="{{ edit_active }}">
+            <a href="{% url 'company_profile_edit' slug=company.slug %}"><span class="fa fa-user mr-3"></span> Edit
+                Profile</a>
+        </li>
+{#        <li class="{{ settings_active }}">#}
+{#            <a href="#"><span class="fa fa-cog mr-3"></span> Settings</a>#}
+{#        </li>#}Native
+Professional
+Intermediate
+Beginner
+    </ul>
+    <ul class="list-unstyled components bottom-nav">
+        <li><a href="#">Switch to company profile<span class="fa fa-id-card ml-3 pull-right"></span></a></li>
+        <li><a href="{% url 'index_url' %}">Go to ET Homepage<span class="fa fa-home ml-3 pull-right"></span></a></li>
+        <li><a href="{% url 'logout_url' %}">Logout <span class="fa fa-sign-out ml-3 pull-right"></span></a></li>
+    </ul>
+
+</nav>

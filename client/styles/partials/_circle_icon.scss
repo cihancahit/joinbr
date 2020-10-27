@@ -1,0 +1,24 @@
+@import "../_utils/colors";
+@import "../_utils/_mixins/tools";
+
+.c-icon {
+  i {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    //background-color: #ababab;
+    background-color: #d5d5d5;
+    text-align: center;
+    border-radius: 30px;
+    font-size: 15px;
+    display: inline-block;
+    color: #fff;
+    transition: all ease-in-out 400ms;
+
+    &:hover {
+      background-color: $button-color !important;
+    }
+  }
+
+
+}

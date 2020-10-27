@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+    <br>
+    <br><br><br>
+{#    <form id="ticket-form" action="/buyticket/{{ event.id }}" method="post">#}
+    <form id="ticket-form" action="/buyticket/soon/" method="post">
+        {% csrf_token %}
+        <div class="body-wrapper buy-ticket-1">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Remove</th>
+                            <th scope="col">Event Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="my-1 font-weight-bold" style="border-left: 10px solid #09c75b;">X</td>
+                            <td>{{ ticket.name }}</td>
+                            <td>{% if ticket.ticket_type == "Donation" %}
+                                {{ form.donation_price }}
+                            {% elif ticket.ticket_type == "Free" %}
+                                <p class="font-weight-bold ed-event-info" id="id_donation_price">0</p>
+                            {% else %}
+                                <p class="font-weight-bold ed-event-info" id="id_donation_price"> {{ ticket.price }}</p>
+                            {% endif %}</td>
+                            <td>{{ form.quantiy }}</td>
+                            <td><p class="total" id="total">0</p></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="d-flex flex-row justify-content-end w-100">
+                    <div class="w-75"></div>
+                    <div class="d-flex justify-content-end w-25">
+                        <input name="coupon-code" type="text" placeholder="Discount Code">
+                        <button type="Submit" class="apply-coupon font-weight-bold ml-3">Apply Coupon</button>
+                    </div>
+                </div>
+                <div class="panel-footer d-flex justify-content-between align-items-center my-2">
+                    <div id="total1">Total Prices:{% if ticket.ticket_type == "Donation" %}
+                                {{ form.donation_price }}
+                            {% elif ticket.ticket_type == "Free" %}
+                                0
+                            {% else %}
+                        {{ ticket.price }}${% endif %}</div>
+                    <div>
+                        <button type="Submit" class="checkout font-weight-bold ml-3">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

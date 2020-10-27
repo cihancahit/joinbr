@@ -1,0 +1,326 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.min.css";
+@import "_utils/variables";
+@import "_utils/offsers";
+@import "home1";
+@import "partials/tellusmore";
+@import "partials/socialshare";
+@import "partials/header";
+@import "partials/card";
+@import "partials/circle_icon";
+@import "partials/menu";
+@import "partials/search_bar";
+@import "partials/footer";
+@import "./_utils/_mixins/button";
+@import "pages/createevent";
+@import "partials/slider";
+@import "pages/buyticket";
+@import "pages/modal";
+@import "pages/allnews";
+@import "pages/rating";
+@import "partials/autocomplete";
+@import "partials/pagination";
+@import "pages/allexperts_search";
+@import "pages/user-pages/user_public_profile";
+@import "pages/user-pages/usersignup";
+@import "pages/user-pages/userslogin";
+@import "pages/expertdetail2";
+@import "pages/createexpert";
+@import "pages/allexperts2";
+@import "pages/allevents2.scss";
+@import "pages/eventdetail2.scss";
+@import "pages/categorydetail";
+@import "pages/profiles/profiles";
+@import "pages/profiles/expert/expert_profile";
+@import "pages/profiles/expert/expert_profile_edit";
+@import "pages/profiles/expert/expert_profile_myevent";
+@import "pages/profiles/expert/expert_create_event";
+@import "pages/profiles/expert/expert_create_event1";
+@import "pages/profiles/expert/expert_profile_reviews";
+@import "_utils/circle";
+@import "_utils/forms";
+@import "error/404";
+
+@import "pages/companydetail2";
+@import "pages/allcompanies2";
+
+//@font-face {
+//  font-family: "Segoe UI";
+//  src: url("fonts/segoeui.ttf") format("truetype"),
+//  url("./fonts/segoeuii.ttf") format("truetype"),
+//  url("./fonts/segoeuib.ttf") format("truetype"),
+//  url("./fonts/seguisb.ttf") format("truetype")
+//}
+@font-face {
+  font-family: 'Lato';
+  src: url(/static/fonts/Lato-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato Black';
+  src: url(/static/fonts/Lato-Black.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato Medium';
+  src: url(/static/fonts/Lato-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato Semibold';
+  src: url(/static/fonts/Lato-Semibold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato Heavy';
+  src: url(/static/fonts/Lato-Heavy.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato Bold';
+  src: url(/static/fonts/Lato-Bold.ttf) format('truetype');
+}
+
+body {
+  //font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+
+  /*force number inputs arrows to visible */
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  h7,
+  p,
+  span,
+  a {
+    //font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+  }
+
+
+  /* Mark input boxes that get errors during validation: */
+
+  .btn-group-xs > .btn, .btn-xs {
+    padding: .1rem .2rem;
+    font-size: .75rem;
+    line-height: .5;
+    border-radius: .2rem;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  input.invalid {
+    background-color: #ffdddd;
+  }
+
+  //background: #e9e8e8;
+  background: #fff;
+  overflow-x: hidden;
+  //font-family: "Segoe UI", serif;
+
+  .body-wrapper {
+    padding: 0 4rem;
+  }
+
+  .body-wrapper-big {
+    padding: 0 10rem;
+  }
+
+  .body-wrapper-all {
+    padding: 4rem;
+  }
+
+  .box {
+    position: relative;
+
+    .img-fluid {
+      width: 100%;
+    }
+  }
+
+  .cimi {
+    width: 100%;
+    height: 300px;
+    position: relative;
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+    }
+  }
+
+  .venue-map {
+    width: 100%;
+    height: 300px;
+    position: relative;
+
+    #map-2 {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+    }
+  }
+
+  .a2a_heart {
+    padding: 8px;
+    margin-right: 2px;
+    background-color: #c5c5c5;
+    border-radius: 4px;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  .sticky {
+    z-index: 1111;
+  }
+
+  .sticky-active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 300px;
+  }
+
+  .sticky-active1 {
+    top: 68px;
+  }
+
+  .sssssss {
+    width: 50px;
+    height: auto;
+  }
+
+  //.menu-active {
+  //  //border-bottom: 3px solid $button-color;
+  //  color: #fff;
+  //}
+
+  @keyframes scaling {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.3);
+      color: #e85858;
+    }
+    100% {
+      transform: scale(1);
+      color: #e85858;
+    }
+  }
+
+  .event-follow-animate {
+    -webkit-animation: scaling 1s; /* Safari 4.0 - 8.0 */
+    animation: scaling 1s;
+  }
+
+  .event-follow {
+    cursor: pointer;
+  }
+
+  .h-expert-follow-animate {
+    -webkit-animation: scaling 1s; /* Safari 4.0 - 8.0 */
+    animation: scaling 1s;
+  }
+
+  .h-expert-follow {
+    cursor: pointer;
+  }
+
+  .page-nav {
+    margin-top: 50px;
+  }
+
+  button:focus {
+    outline: 0;
+  }
+
+  #preloader {
+
+    .canvas {
+      .loader-logo {
+        display: block;
+        width: 120px;
+        margin-bottom: 25px;
+      }
+
+      .spinner {
+        animation: spinner 1s linear infinite;
+        border: solid 5px transparent;
+        border-top: solid 5px #09C75B;
+        border-radius: 100%;
+        width: 60px;
+        height: 60px;
+        margin: 0 auto;
+      }
+
+      @keyframes spinner {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+
+  }
+
+}
+
+ul.errorlist {
+  display: none;
+}
+
+.star-r-rating {
+  @media screen and (max-width: $tablet-l) {
+      width: 50%;              
+  }
+  display: flex;
+  justify-content: space-between;
+
+  .btn-star-gray {
+    background-color: #ebebeb;
+    border-radius: 50%;
+  }
+
+  .icon-c-bg {
+    background-color: $button-color;
+    color: #fff;
+    font-size: 14px;
+    @media screen and (max-width: $tablet-l) {
+      font-size: 14px;
+    }
+  }
+
+  .icon-unc-bg {
+    background-color: #bebebe;
+    color: #fff;
+    font-size: 14px;
+    @media screen and (max-width: $tablet-l) {
+      font-size: 14px;
+    }
+  }
+}

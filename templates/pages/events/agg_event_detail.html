@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+<div id="ed-header" style="background-image: url('{% for company in aggevent.company.all|slice:":1" %}{{ company.company_logo.url }}{% endfor %}')">
+ </div>
+    <div class="container ed-header-center">
+        <div class="row ed-header-container">
+            <div class="col-lg-7 ed-header-left">
+                <div class="iconset">
+                    <!-- AddToAny BEGIN -->
+                    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                        <a class="a2a_heart" href="#">
+    <span style="color: #fff;" class="fa fa-heart"
+          aria-hidden="true"></span>
+                        </a>
+                        <a class="a2a_button_facebook"></a>
+                        <a class="a2a_button_twitter"></a>
+                        <a class="a2a_button_linkedin"></a>
+                        <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                    </div>
+                    <script async src="https://static.addtoany.com/menu/page.js"></script>
+                    <!-- AddToAny END -->
+                </div>
+                <img style="width: 100%; height: 373px; background-color: {{ aggevent.bg_color }}" src="{% for company in aggevent.company.all|slice:":1" %}{{ company.company_logo.url }}{% endfor %}" alt="Revealin.com Company">
+            </div>
+            <div class="col-lg-5 ed-header-right">
+                <div class="ed-header-text">
+                    <div class="container">
+                        <div class="row first-line py-3">
+                            <div class="col-lg-4 col-md-5 col-sm-5"><p
+                                    class="event-date">{{ aggevent.startdate|date:"d m" }}</p>
+                            </div>
+                            <div class="col-lg-4 col-md-2 col-sm-2"></div>
+                            <div class="col-lg-4 col-md-5 col-sm-5"><p class="event-price">{{ aggevent.price }}$</p>
+                            </div>
+                        </div>
+                        <div class="row s-line py-3 text-center">
+                            <p class="event-name">{{ aggevent.name }}</p>
+                        </div>
+                        <div class="row s-line py-4 text-center">
+                            <div class="col-lg-8 s-line-child">
+                                <p class="event-organizer text-left">by {{ aggevent.organizer }}</p>
+                            </div>
+                            <div class="col-lg-4 s-line-child">
+                                <div class="follow">follow</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section id="sub-header">
+        <div class="container">
+            <div class="row py-3">
+
+                <div class="col-lg-8">
+                    <!-- AddToAny BEGIN -->
+                    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                        <a class="a2a_heart" href="#">
+    <span style="color: #fff;" class="fa fa-heart"
+          aria-hidden="true"></span>
+                        </a>
+                        <a class="a2a_button_facebook"></a>
+                        <a class="a2a_button_twitter"></a>
+                        <a class="a2a_button_linkedin"></a>
+                        <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                    </div>
+                    <script async src="https://static.addtoany.com/menu/page.js"></script>
+                    <!-- AddToAny END -->
+                </div>
+
+                <div class="col-lg-4 text-right">
+                    <div title="add to calendar" class="addeventatc" data-styling="none">
+                        add to calendar
+                        <span class="fa fa-2x fa-angle-down arrow"
+                              aria-hidden="true"></span>
+                        <span class="start">{{ aggevent.startdate }}</span>
+                        <span class="end">{{ aggevent.enddate }}</span>
+                        <span class="title">{{ aggevent.name }}</span>
+                        <span class="description">{{ aggevent.info }}</span>
+                        <span class="location">{{ aggevent.location }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="content">
+        <div class="info-only-mob">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2"><span style="color: #1D2C2E; font-size: 1.2rem;"
+                                             class="fa fa-map-marker"
+                                             aria-hidden="true"
+                                             data-placement="top" tabindex="0" data-toggle="popover"
+                                             data-content="link copied"
+                    ></span></div>
+                    <div class="col-10">{{ aggevent.location }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><span style="color: #1D2C2E; font-size: 1.2rem;"
+                                             class="fa fa-calendar"
+                                             aria-hidden="true"
+                                             data-placement="top" tabindex="0" data-toggle="popover"
+                                             data-content="link copied"
+                    ></span></div>
+                    <div class="col-10">{{ aggevent.start_event_dt }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><span style="color: #1D2C2E; font-size: 1.2rem;"
+                                             class="fa fa-calendar"
+                                             aria-hidden="true"
+                                             data-placement="top" tabindex="0" data-toggle="popover"
+                                             data-content="link copied"
+                    ></span></div>
+                    <div class="col-10">{{ aggevent.start_event_dt }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-2">
+            <div class="row event-info">
+                <div class="col-lg-8 content-left">
+                    <h4 class="content-title">Description</h4>
+                    {{ aggevent.content|safe }}
+                    <h4>tag</h4>
+                    <span class="badge badge-etag"
+                          style="font-size: 15px; font-weight: normal; font-family: 'segoe ui semibold'">computers</span>
+                    <span class="badge badge-etag"
+                          style="font-size: 15px; font-weight: normal; font-family: 'segoe ui semibold'">consumer electronics</span>
+                    <span class="badge badge-etag"
+                          style="font-size: 15px; font-weight: normal; font-family: 'segoe ui semibold'">hardware-software</span>
+                    <span class="badge badge-etag"
+                          style="font-size: 15px; font-weight: normal; font-family: 'segoe ui semibold'">computers</span>
+                    <hr>
+                </div>
+                <div class="col-lg-4 content-right">
+                    <h5 class="card-title font-weight-bold text-uppercase ed-title mb-3">event detail</h5>
+                    <div class="d-flex justify-content-start">
+                        <div>
+                            <p class="font-weight-bold ed-event-info-l">start date:</p>
+                            <p class="font-weight-bold ed-event-info-l">end date:</p>
+                            <p class="font-weight-bold ed-event-info-l">room:</p>
+                            <p class="font-weight-bold ed-event-info-l">venue:</p>
+                            <p class="font-weight-bold ed-event-info-l">address:</p>
+                            <p class="font-weight-bold ed-event-info-l">organizer:</p>
+                        </div>
+                        <div class="ml-1">
+                            <p class="ed-event-info">&nbsp{{ aggevent.startdate }}</p>
+                            <p class="event-info">&nbsp{{ aggevent.enddate }}</p>
+                            <p class="ed-event-info">&nbsproom 002</p>
+                            <p class="ed-event-info">&nbsp{{ aggevent.location }}</p>
+                            <p class="ed-event-info">&nbsp{{ aggevent.location }}</p>
+                            <p class="ed-event-info">&nbsp{{ aggevent.organizer }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="cimi">
+                <div id='map'></div>
+            </div>
+        </div>
+        <script src='https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js'></script>
+        <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+        <script>
+
+            // Get Location for Event detail
+            mapboxgl.accessToken = 'pk.eyJ1IjoiZmV0ZWxpIiwiYSI6ImNrMWV5NWZuZDBtN3Izbm85MWVwMDQwbjEifQ.5wmg9WGnIFOxvTcfduz1Og';
+            var mapboxClient = mapboxSdk({accessToken: mapboxgl.accessToken});
+            mapboxClient.geocoding.forwardGeocode({
+                query: '{{aggevent.location}}',
+                autocomplete: false,
+                limit: 1
+            })
+                .send()
+                .then(function (response) {
+                    if (response && response.body && response.body.features && response.body.features.length) {
+                        var feature = response.body.features[0];
+
+                        var map = new mapboxgl.Map({
+                            container: 'map',
+                            style: 'mapbox://styles/mapbox/streets-v11',
+                            center: feature.center,
+                            zoom: 11
+                        });
+                        new mapboxgl.Marker()
+                            .setLngLat(feature.center)
+                            .addTo(map);
+                        map.scrollZoom.disable();
+                    }
+                });
+        </script>
+        </div>
+        <div class="ed-events container">
+            <h4 class="content-title text-center">events from this organizer</h4>
+            <ul class="nav nav-tabs" id="edfe-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="liveevents-tab" data-toggle="tab" href="#liveevents" role="tab"
+                       aria-controls="home" aria-selected="true">live</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pastevents-tab" data-toggle="tab" href="#pastevents" role="tab"
+                       aria-controls="profile" aria-selected="false">past</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}

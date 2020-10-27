@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+    <section id="header">
+        <div class="box" style="background-image: url(' {% static 'assets/images/businesse-events2.jpg' %}')">
+            <img class="img-fluid" src="{% static 'assets/images/businesse-events2.jpg' %}">
+            <div class="img">
+                <h1 class="text-uppercase font-weight-bold">Maik Johnson</h1>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <p>Your Profile Info</p>
+            <form method="post">
+              {% csrf_token %}
+              {{ user_form.as_p }}
+              {{ profile_form.as_p }}
+              <button type="submit">Save changes</button>
+            </form>
+        </div>
+    </div>
+        <div>
+            <a dudus href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=86f8uy16fb1esd&redirect_uri=http://127.0.0.1:8000/users/&state=balaska&scope=r_liteprofile%20r_emailaddress%20w_member_social"></a>
+        </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+@import "../_utils/variables";
+@import "../_utils/_mixins/button";
+#add-rss{
+  div{
+    div{
+      .modal-body{
+        form{
+          .btn-rss{
+            @include green-button;
+          }
+        }
+      }
+    }
+  }
+}
+
+#header {
+  div {
+    .rss-button {
+      @include white-button;
+      i{
+        font-size: 1.5rem;
+        vertical-align: middle;
+      }
+      span{
+        vertical-align: middle;
+      }
+    }
+  }
+}
+#news {
+  margin-bottom: 350px;
+  .container {
+    .main-news {
+
+      position: relative;
+
+
+      .main-news-img {
+        display: flex;
+        height: inherit;
+        width: inherit;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+      }
+
+      .main-news-text {
+        position: absolute;
+        bottom: 2rem;
+        padding-left: 4rem;
+        color: #fff;
+        @media screen and (max-width: $tablet-l) {
+        bottom: 1rem;
+        padding-left: 1rem;
+      }
+      }
+    }
+
+    .news-content {
+      .news-meta {
+      }
+
+      .news-description {
+        margin-top: -0.7rem;
+        .news-link {
+          text-decoration: none;
+          color: #212121;
+          &:hover{
+            text-decoration: none;
+            color:#007bff;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+@import "../_utils/_mixins/button";
+@import "../_utils/colors";
+@import "../_utils/_mixins/transition";
+
+.home {
+  .navbar-brand {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  overflow: hidden;
+
+  .is-fixed {
+    /* when the user scrolls down, we hide the header right above the viewport */
+    position: fixed;
+    top: -69px;
+    -webkit-transition: -webkit-transform 0.2s;
+    transition: -webkit-transform 0.2s;
+    transition: transform 0.2s;
+    transition: transform 0.2s, -webkit-transform 0.2s;
+    background-color: transparent;
+  }
+
+  .is-visible {
+    /* if the user changes the scrolling direction, we show the header */
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  .bg-menu {
+    background-color: #232323;
+    //border-bottom: 1px solid #fff;
+  }
+
+  .menu-active {
+    .menu-item {
+      color: #fff;
+    }
+  }
+
+  .menu-item {
+    color: #ababab;
+    font-family: "Lato", serif;
+    font-weight: bold;
+    font-size: 14px;
+
+    .menu-profile-cont {
+      display: flex;
+
+      .menu-profile-pic {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+      }
+
+      .menu-profile-name {
+        font-size: 15px;
+        color: #08c65b;
+        font-family: "Lato", Serif;
+        font-weight: 900;
+        margin: unset;
+        padding: unset;
+      }
+
+      .menu-profile-title {
+        font-size: 14px;
+        color: #ffffff;
+        font-family: "Lato";
+        font-weight: 400;
+        margin: unset;
+        padding: unset;
+      }
+    }
+  }
+
+  .buy-ticket-menu {
+    @include green-button;
+
+    a {
+      font-size: 0.8rem;
+      text-decoration: none;
+    }
+  }
+
+  .m-c-button {
+    border-radius: 30px;
+    border: 2px solid $button-color;
+    font-size: 12px;
+    padding: 6px 30px;
+    color: #fff !important;
+    @include transition(all ease-in-out 300ms);
+    &:hover{
+      border-color: #fff;
+      color: $button-color !important;
+      cursor: pointer;
+    }
+  }
+
+  .sign-up-button {
+    @include green-button;
+    font-size: 12px;
+    color: #fff !important;
+
+    &:hover {
+      color: $button-color !important;
+    }
+
+  }
+
+  .or {
+    font-size: 12px;
+    color: #fff;
+    margin: auto 0;
+    padding-left: 8px;
+    color: #a4a4a4;
+    font-weight: bold;
+  }
+}
+
+

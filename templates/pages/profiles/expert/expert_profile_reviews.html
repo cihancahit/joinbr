@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Who is {{ expert.name }}? {% endblock %}
+{% block main %}
+    <div class="wrapper d-flex align-items-stretch">
+        {% include 'pages/profiles/expert/navbar.html' %}
+        <!-- Page Content  -->
+        <div id="content" style="width: 100%">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="content-c col-12">
+                        <div class="row mob-view">
+                            <div class="col-3 text-right pr-0">
+                                <a href="#"><img class="expert-profile-pic"
+                                                 src="{% static 'assets/images/lorem_profile.jpg' %}" alt="Revealin Expert"></a>
+                            </div>
+                            <div class="col-5 d-flex flex-column">
+                                <h1>{{ expert.name }}</h1>
+                                <p>Expert</p>
+                            </div>
+                            <div class="col-2 d-flex align-items-center px-0">
+                                <div class="icon-wrapper">
+                                    <i class="fa fa-bell fa-inverse"></i>
+                                    <span class="badge">11</span>
+                                </div>
+                            </div>
+                            <div class="col-2 d-flex align-items-center pl-0">
+                                <div class="icon-wrapper">
+                                    <i class="fa fa-envelope fa-inverse"></i>
+                                    <span class="badge">14</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="bro-score-progress p-3">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-12">
+                                            <div class="stars">
+                                                <p class="st-bro-score">ET Score</p>
+                                                <div class="expert-rating">
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs icon-c-bg"
+                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs icon-c-bg"
+                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs icon-c-bg"
+                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs icon-c-bg"
+                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs icon-c-bg"
+                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                                <a href="#" class="st-what-mean" data-toggle="popover"
+                                                   data-trigger="focus"
+                                                   data-content="ET score is the average score experts and companies earn from users."><span
+                                                        class="fa fa-info-circle pr-1"></span>What does it mean?</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 col-12">
+                                            <div class="st-progress">
+                                                <div class="st-badges">
+                                                    <img src="{% static 'assets/images/profiles/expert/badge1.png' %}"
+                                                         alt="Revealin badge"Revealin bro score>
+                                                    <img src="{% static 'assets/images/profiles/expert/badge2.png' %}"
+                                                         alt="Revealin badge"Revealin bro score>
+                                                    <img src="{% static 'assets/images/profiles/expert/badge3.png' %}"
+                                                         alt="Revealin badge"Revealin bro score>
+                                                    <img src="{% static 'assets/images/profiles/expert/badge4.png' %}"
+                                                         alt="Revealin badge"Revealin bro score>
+                                                    <img src="{% static 'assets/images/profiles/expert/badge5.png' %}"
+                                                         alt="Revealin badge">
+                                                </div>
+                                                <div class="pgbar">
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: {{ expert.score }}%;"
+                                                             aria-valuenow="{{ expert.score }}" aria-valuemin="0"
+                                                             aria-valuemax="100">
+                                                            {{ expert.score }}/100
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-12 bro-score-meta-con">
+                                <div class="bro-score-meta p-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-4 text-center">
+                                            <img class="icon-money"
+                                                 src="{% static 'assets/images/profiles/expert/icon_money_bag.png' %}"
+                                                 alt="Revealin bro score">
+                                        </div>
+                                        <div class="col-5 bro-point">
+                                            <p>921</p>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-4 text-center">
+                                            <p class="bro-points">ET points</p>
+                                        </div>
+                                        <div class="col-8 more-bro">
+                                            <a href="#" data-toggle="popover" data-trigger="focus"
+                                               data-content="ET points have direct correlation with every expert's ET score, responsiveness and how up-to-date their profile is. We highly recommend you to fulfill your profile. "><span
+                                                    class="fa fa-home pr-1"></span>How to increase my ET points?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-12 bro-score-meta-con">
+                                <div class="bro-score-meta py-3 px-1">
+                                    <div class="col">
+                                        <div class="counter">
+                                            <div class="bro-point">
+                                                <p>921</p>
+                                                <p class="treview">Total Review</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+
+                            <div class="col-12">
+                                <div class="profile-stat p-3">
+                                    <div class="d-flex flex-column">
+                                        <p class="profile-stat-title">Latest Reviews</p></div>
+                                    <div class="d-flex justify-content-between">
+
+                                        <div id="reviews-list">
+
+                                            {% for i in "123456789" %}
+
+                                                <div class="row exd-r-review" id="rev{{ review.id }}"
+                                                     data-cdate="12.02.2020"
+                                                     data-rating="3">
+                                                    <div class="col-md-2 col-12">
+                                                        <a href="#">
+                                                            <img class="exd-rr-profile-pic"
+                                                                 src="http://via.placeholder.com/106x106">
+                                                        </a>
+                                                        <div class="exd-rr-info2">
+                                                            <div>
+                                                                <h5 class="exd-rr-title">review title</h5>
+                                                                <p class="exd-rr-name-btitle">
+                                                    <span>
+
+                                                            <a href="#">
+ Bob Marley
+                                                    </a>
+
+                                                    </span>
+                                                                </p>
+                                                                {#<p class="exd-rr-address">Brooklyn, NY, USA</p>#}
+                                                            </div>
+                                                            <div><p>12.02.2020</p></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7 col-12">
+                                                        <div class="exd-rr-info">
+                                                            <h5 class="exd-rr-title">rev title</h5>
+                                                            <p class="exd-rr-name-btitle">
+                                                <span>
+                                                    <a href="#">
+                                                        Bob Marley
+                                                    </a>
+                                                </span></p>
+                                                            {#                                            <p class="exd-rr-address">Brooklyn, NY, USA</p>#}
+                                                        </div>
+                                                        <div class="exd-rr-content">
+                                                            <p>
+                                                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                                elit. Amet aut autem cumque dolorem doloremque et
+                                                                harum
+                                                                nesciunt nisi nobis officiis!
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 col-12">
+                                                        <div class="exd-rr-date">
+                                                            <p>12.02.2020</p>
+                                                        </div>
+                                                        <div class="exd-rr-ss">
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="expert-rating mr-1">
+                                                                    <button type="button"
+                                                                            class="btn btn-star-gray btn-xs {% if review.score < 1 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                                    </button>
+                                                                    <button type="button"
+                                                                            class="btn btn-star-gray btn-xs {% if review.score < 2 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                                    </button>
+                                                                    <button type="button"
+                                                                            class="btn btn-star-gray btn-xs {% if review.score < 3 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                                    </button>
+                                                                    <button type="button"
+                                                                            class="btn btn-star-gray btn-xs {% if review.score < 4 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                                    </button>
+                                                                    <button type="button"
+                                                                            class="btn btn-star-gray btn-xs {% if review.score < 5 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                                    </button>
+                                                                </div>
+                                                                <a class="ep-review-link"
+                                                                   href="http://127.0.0.1:8000/experts/alex_linenko#rev2">view
+                                                                    <span class="fa fa-arrow-circle-right"></span></a>
+                                                            </div>
+
+                                                            <div class="review-label-speaker">
+                                                                <p>speaker</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            {% endfor %}
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

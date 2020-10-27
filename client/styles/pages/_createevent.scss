@@ -1,0 +1,292 @@
+@import "../_utils/_mixins/button";
+@import "../_utils/colors";
+
+#ce-modal {
+  $color_1: #000;
+  $color_2: white;
+  $background_color_1: #efefef;
+  $background_color_2: #09c75b;
+  $background_color_3: #0fa24e;
+  $border_color_1: #acacac;
+
+  // Dont use sass like me
+  .modal-header {
+    background-color: $background_color_1;
+  }
+
+  .previous-btn {
+    background: none;
+    border: none;
+    opacity: .5;
+
+    i {
+      font-size: 16px;
+      color: $color_1;
+      text-shadow: 0 1px 0 #fff;
+    }
+  }
+
+  .form-group {
+    label {
+      font-size: 12px;
+    }
+  }
+
+  .form-control {
+    border-color: $border_color_1;
+
+    &::placeholder {
+      font-size: 1rem;
+    }
+  }
+
+  .modal-body {
+    .step {
+      display: none;
+    }
+
+    .active-step {
+      display: flex;
+    }
+  }
+
+  .modal-footer {
+    border: none;
+  }
+
+  .progress {
+    height: 3px;
+    margin-left: 5px;
+  }
+
+  .green-line {
+    height: 100%;
+    background-color: $background_color_2;
+  }
+
+  .green-line-1 {
+    width: 33.33%;
+  }
+
+  .green-line-2 {
+    width: 66.66%;
+  }
+
+  .green-line-3 {
+    width: 100%;
+  }
+
+  .form-btn {
+    background-color: $background_color_2;
+    border: none;
+    color: $color_2;
+    outline: 0;
+    box-shadow: none;
+
+    &:hover {
+      background-color: $background_color_3;
+      color: $color_2;
+      outline: 0;
+      box-shadow: none;
+    }
+
+    &:focus {
+      background-color: $background_color_3;
+      color: $color_2;
+      outline: 0;
+      box-shadow: none;
+    }
+
+    &:active {
+      background-color: $background_color_3;
+      color: $color_2;
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+
+
+  .step-text {
+    left: 21px;
+    bottom: 20px;
+  }
+
+  .ce-file-upload {
+    font-size: 11px;
+    text-align: right;
+  }
+
+  [type='radio'] {
+    display: none;
+  }
+
+  .fee-btn {
+    background-color: transparent;
+    color: #a09f9f;
+    outline: 0;
+    box-shadow: none;
+    border-color: #acacac;
+
+    &:hover {
+      background-color: #a09f9f;
+      color: $color_2;
+      outline: 0;
+      box-shadow: none;
+    }
+
+    &:focus {
+      background-color: #a09f9f;
+      color: $color_2;
+      outline: 0;
+      box-shadow: none;
+    }
+
+    &:active {
+      background-color: #a09f9f;
+      color: $color_2;
+      outline: 0;
+      box-shadow: none;
+    }
+
+  }
+
+  .input-container {
+
+    input[type='file'] {
+      display: none;
+    }
+
+    .file-info {
+      font-size: 0.9em;
+      display: block;
+      margin: 10px 5px;
+    }
+  }
+
+
+  .fee-btn:not(:disabled):not(.disabled).active, .fee-btn:not(:disabled):not(.disabled):active, .show > .fee-btn.dropdown-toggle {
+    color: #fff;
+    background-color: #a09f9f;
+    border-color: #005cbf;
+  }
+
+  .btn-light {
+    border: 1px solid #acacac;
+    background: none;
+  }
+}
+
+//
+//$color_1: #ffffff;
+//$font_family_1: Raleway;
+//$background_color_1: #ecfab6;
+//$color_white: #fff;
+//$background_color_3: #ffdddd;
+//$background_color_4: #4CAF50;
+//$background_color_5: #bbbbbb;
+//
+///*custom font*/
+///* Multi-Step Form */
+///* Mark input boxes that get errors during validation: */
+///* Hide all steps by default: */
+///* Step marker: Place in the form. */
+///* Mark the steps that are finished and valid: */
+//
+//#create-event {
+//  //height: 30em;
+//
+//  .container-div {
+//    background-color: $color_white;
+//    padding-left: 0px;
+//    padding-right: 0px;
+//
+//    .create-event-title {
+//      background-color: #efefef;
+//    }
+//  }
+//}
+//
+//* {
+//  box-sizing: border-box;
+//}
+//
+//#regForm {
+//
+//  font-family: $font_family_1;
+//  padding: 40px;
+//  width: 100%;
+//  min-width: 600px;
+//
+//  .create-event-pre {
+//    @include green-button;
+//  }
+//
+//  .create-event-next {
+//
+//    @include green-button;
+//  }
+//}
+//
+//h1 {
+//  text-align: center;
+//}
+//
+//input {
+//  padding: 10px;
+//  width: 100%;
+//  font-size: 17px;
+//  font-family: $font_family_1;
+//  border: 1px solid #aaaaaa;
+//}
+//select {
+//  padding: 10px;
+//  width: 100%;
+//  font-size: 17px;
+//  font-family: $font_family_1;
+//  border: 1px solid #aaaaaa;
+//}
+//
+//input.invalid {
+//  background-color: $background_color_3;
+//}
+//
+//.tab {
+//  display: none;
+//}
+//
+//button {
+//  //background-color: $background_color_4;
+//  //color: $color_1;
+//  //border: none;
+//  //padding: 10px 20px;
+//  //font-size: 17px;
+//  //font-family: $font_family_1;
+//  //cursor: pointer;
+//
+//  &:hover {
+//    opacity: 0.8;
+//  }
+//}
+//
+//#prevBtn {
+//  background-color: $background_color_5;
+//}
+//
+//.step {
+//  height: 2px;
+//  width: 32%;
+//  //margin: 0 2px;
+//  background-color: $button-color;
+//  border: none;
+//  //border-radius: 50%;
+//  display: inline-block;
+//  opacity: 0.5;
+//}
+//
+//.step.active {
+//  opacity: 1;
+//}
+//
+//.step.finish {
+//  background-color: $background_color_4;
+//}

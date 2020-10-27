@@ -1,0 +1,184 @@
+{% if experts %}
+    {% if name and not skills and not language and not  country and not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is {{ name }} available on
+            Revealin expert database.
+            Don't see yourself? <strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                        class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif skills and language and country and city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is the list of {{ skills }} experts speak {{ language }} in {{ city }}, {{ country }}
+            available on Revealin. <strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                          class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif not skills and language and country and city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is the list of experts speak {{ language }} in {{ city }}, {{ country }}
+            available on Revealin. <strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                          class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif not skills and not language and country and city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is the list of experts working in {{ city }}, {{ country }}
+            available on Revealin.<strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                         class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif not skills and not language and country and not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is the list of experts working in {{ country }}
+            available on Revealin. <strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                          class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif skills and not language and not country and not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is the list of {{ skills }} experts
+            available on Revealin. <strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                          class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif not skills and language and not country and not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is the list of experts working
+            at {{ language }}
+            available on Revealin. <strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                          class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif  skills and language and not country and not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is the list {{ skills }} of experts speak {{ language }}
+            available on Revealin. <strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                          class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif  skills and not language and  country and  city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is the list of {{ skills }} experts working in {{ city }}, {{ country }}
+            available on Revealin. <strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                          class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif  skills and not language and  country and  not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is the list of {{ skills }} experts working in {{ country }}
+            available on Revealin. <strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                          class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif  not skills and  language and  country and  not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is the list of experts speak {{ language }} in {{ country }}
+            available on Revealin. <strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                          class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif skills and  language and  country and  not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            This is the list of {{ skills }} experts speak {{ language }} in {{ country }}
+            available on Revealin. <strong>Don't see yourself ?</strong><a href="{% url 'new_expert' %}"
+                                                                          class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% endif %}
+{% else %}
+    {% if name and not skills and not language and not  country and not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            It looks like nothing was found for {{ name }}.</label>
+        <div class="col-sm-12 col-md-5 col-lg-4 align-self-center">
+            <div class="as-cta-btn">
+                <a href="{% url 'new_expert' %}" class="btn btn-warning btn-lg">Be the first! <i
+                        class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    {% elif skills and language and country and city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            Revealin doesn't have {{ language }} speaking {{ skills }} experts in {{ city }}, {{ country }} at the
+            moment.</label>
+        <div class="col-sm-12 col-md-5 col-lg-4 align-self-center">
+            <div class="as-cta-btn">
+                <a href="{% url 'new_expert' %}" class="btn btn-warning btn-lg">Be the first! <i
+                        class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    {% elif not skills and language and country and city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            Revealin doesn't have {{ language }} speaking experts in {{ city }}, {{ country }} at the moment.</label>
+        <div class="col-sm-12 col-md-5 col-lg-4 align-self-center">
+            <div class="as-cta-btn">
+                <a href="{% url 'new_expert' %}" class="btn btn-warning btn-lg">Be the first! <i
+                        class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    {% elif not skills and not language and country and city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            Revealin doesn't have experts in {{ city }}, {{ country }} at the moment.</label>
+        <div class="col-sm-12 col-md-5 col-lg-4 align-self-center">
+            <div class="as-cta-btn">
+                <a href="{% url 'new_expert' %}" class="btn btn-warning btn-lg">Be the first! <i
+                        class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    {% elif not skills and not language and country and not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            Revealin doesn't have experts in {{ country }} at the moment.<a href="{% url 'new_expert' %}"
+                                                                           class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif skills and not language and not country and not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            Revealin doesn't have {{ skills }} experts in at the moment.</label>
+        <div class="col-sm-12 col-md-5 col-lg-4 align-self-center">
+            <div class="as-cta-btn">
+                <a href="{% url 'new_expert' %}" class="btn btn-warning btn-lg">Be the first! <i
+                        class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    {% elif not skills and language and not country and not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            Revealin doesn't have {{ language }} speaking at the moment.<a href="{% url 'new_expert' %}"
+                                                                          class="btn btn-apply-as-expert">Apply as an
+            Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif  skills and language and not country and not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            Revealin doesn't have {{ language }} speaking {{ skills }} experts at the moment.<a
+                href="{% url 'new_expert' %}" class="btn btn-apply-as-expert">Apply as an Expert <i
+                class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif  skills and not language and  country and  city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            Revealin doesn't have {{ skills }} experts in {{ city }}, {{ country }} at the moment.<a
+                href="{% url 'new_expert' %}" class="btn btn-apply-as-expert">Apply as an Expert <i
+                class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif  skills and not language and  country and  not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            Revealin doesn't have {{ skills }} experts in {{ country }} at the moment.<a href="{% url 'new_expert' %}"
+                                                                                        class="btn btn-apply-as-expert">Apply
+            as an Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif  not skills and  language and  country and  not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            doesn't have {{ language }} speaking experts in {{ country }} at the moment.<a href="{% url 'new_expert' %}"
+                                                                                           class="btn btn-apply-as-expert">Apply
+            as an Expert <i class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% elif skills and  language and  country and  not city %}
+        <label for="main-search" id="main-search-label">
+            <span style="color: #08c65b;">Revealin</span>
+            doesn't have {{ language }} speaking {{ skills }} experts in {{ country }} at the moment.
+            <a href="{% url 'new_expert' %}" class="btn btn-apply-as-expert">Apply as an Expert <i
+                    class="fa fa-angle-right" aria-hidden="true"></i></a></label>
+    {% endif %}
+{% endif %}

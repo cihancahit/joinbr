@@ -1,0 +1,158 @@
+@import "../_utils/colors";
+@import "../_utils/variables";
+@import "../_utils/_mixins/transition";
+
+#footer {
+  color: #fff;
+
+  .footer {
+    display: flex;
+    //margin-top: 100px;
+    //background-color: #00181c;
+    background-color: #232323;
+    width: 100vw;
+    //height: 200px;
+    flex-direction: column;
+    align-items: center;
+
+    .footer-logo {
+      width: 115px;
+      height: auto;
+    }
+
+    .footer-menu {
+      margin-top: 30px;
+
+      a {
+        color: #787878;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        font-size: 13px;
+        @include transition(all ease-in-out 500ms);
+        @media screen and (max-width: $tablet-l) {
+          font-size: 13px;
+        }
+
+        &:not(:first-child) {
+          margin-left: 10px;
+        }
+
+        &:hover {
+          color: $button-color;
+          border-color: #787878;
+          transition: all ease-in-out 500ms;
+        }
+      }
+    }
+
+    .footer-soc {
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: inline-block;
+          background-color: $button-color;
+          margin: 5px;
+          border-radius: 50%;
+
+          a {
+            color: #fff;
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 50%;
+
+            // icon size is controlled by class="icon-5x"
+            // below is to control the circle sizes
+            height: 26px;
+            width: 26px;
+            @include transition(all ease-in-out 500ms);
+
+            &:hover, &:active {
+              background-color: #fff;
+              text-decoration: none;
+
+              i {
+                font-size: 13px;
+              }
+            }
+          }
+
+          @media screen and (max-width: $tablet-l) {
+            margin: 15px 10px;
+          }
+        }
+      }
+    }
+
+    .footer-sep {
+      border-bottom: 1px solid #d1d1d1;
+    }
+
+    .footer-copy {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      //border-top: 1px solid #787878;
+      padding: 10px 0;
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          display: inline-block;
+
+          &:not(:first-child) {
+            padding: 0px 10px;
+          }
+
+          &:first-child {
+            padding-right: 10px;
+          }
+
+          a {
+            font-family: Lato;
+            color: #787878;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            font-size: 14px;
+            @include transition(all ease-in-out 500ms);
+
+            &:hover {
+              color: $button-color;
+              border-color: #787878;
+            }
+          }
+        }
+      }
+
+      p {
+        color: #787878;
+        margin: 0;
+      }
+
+      @media screen and (max-width: $tablet-l) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .cut {
+      position: absolute;
+      margin-top: -100px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 0 100px 100vw;
+      border-color: transparent transparent #232323 transparent;
+    }
+
+  }
+
+}

@@ -1,0 +1,541 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} All Companies {% endblock %}
+{% block main %}
+    <div class="exd-slider-container">
+        <div class="exd-slider owl-carousel">
+            <a href="{% url 'AllEvents' %}" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/events.png' %}" alt="Revealin Events">
+                    <div id="ovrl" class="overlay"></div>
+                    <h3 class="text">Events</h3>
+                </div>
+            </a>
+            <a href="{% url 'expert' %}" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/experts.png' %}" alt="Revealin Experts">
+                    <div class="overlay"></div>
+                    <h3 class="text">Experts</h3>
+                </div>
+            </a>
+            <a href="#" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/speakers.png' %}" alt="Revealin Speakers">
+                    <div class="overlay"></div>
+                    <h3 class="text">Speakers</h3>
+                </div>
+            </a>
+            <a href="{% url 'companies' %}" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/companies.png' %}" alt="Revealin Companies">
+                    <div class="overlay-active"></div>
+                    <h3 class="text">Companies</h3>
+                </div>
+            </a>
+            <a href="#" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/startup.png' %}" alt="Revealin Startups">
+                    <div class="overlay"></div>
+                    <h3 class="text">Start-up</h3>
+                </div>
+            </a>
+            <a href="#" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/organizers.png' %}" alt="Revealin Organizers">
+                    <div class="overlay"></div>
+                    <h3 class="text">Organizers</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+    <form id="event-search-form" name="companysearch" method="POST" onsubmit="return CompanyOnSubmitForm();">
+        <div class="event-search p-5">
+
+            {% csrf_token %}
+            <div class="main-part">
+
+                <div class="form-row esf-form1 pb-5">
+                    <div class="form-group col-md-6 col-sm-12 offset-md-4 offset-sm-0 ">
+                        <div class="input-group esf-form-ing">
+                            <div class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <input type="text" class="form-control" name="company_name" id="main-search"
+                                   placeholder="Company Name" value="{{ name }}">
+                        </div>
+                        <label for="main-search" id="main-search-label"><span style="color: #08c65b;">Reveal</span>
+                            list of Companies from
+                            all over the World</label>
+                    </div>
+                </div>
+                <div class="form-row esf-form2">
+                    <div class="col-6  col-md-2 offset-md-3  mt-1">
+                        <select class="form-control" id="market">
+                            {% if inq_market %}
+                                <option disabled>Industry</option>
+                                {% for market in markets %}
+                                    {% if inq_market == market.market_name %}
+                                        <option selected>{{ inq_market }}</option>
+                                    {% else %}
+                                        <option>{{ market.market_name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <option disabled selected>Industry</option>
+                                {% for market in markets %}
+                                    <option>{{ market.market_name }}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="col-6  col-md-2  mt-1">
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Location"
+                               name="location" id="location" value="{{ location }}">
+                    </div>
+                    <div class="col-6 col-md-1 mt-1">
+                        <input type="submit" class="form-control" name="event-submit" id="event-submit"
+                               value="GO!">
+                    </div>
+                    <div class="col-6 col-md-2 mt-1">
+                        <button type="button" class="form-control esf-filter">Filter <i class="fa fa-sliders"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="container esf-form3-cont mt-4">
+            <div class="row esf-form3-first-part">
+                <div class="col-md-3 col-12 my-2">
+                    <input type="text" class="form-control" name="country" id="country"
+                           placeholder="Country">
+                </div>
+                <div class="col-md-3 col-12 my-2">
+                    <input type="text" class="form-control" name="language" id="language"
+                           placeholder="Language">
+                </div>
+                <div class="col-md-3 col-12 my-2">
+                    <input type="text" class="form-control" name="speaker" id="speaker"
+                           placeholder="Speaker">
+                </div>
+                <div class="col-md-3 col-12 my-2">
+                    <input type="text" class="form-control" name="organizer" id="organizer"
+                           placeholder="Organizer">
+                </div>
+            </div>
+            <div class="row esf-form3">
+
+                <div class="col-md-3 col-6 col-fil">
+                    <input type="text" class="form-control sponsors" name="sponsors" id="sponsors"
+                           placeholder="Sponsors">
+                </div>
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Time</p>
+                    <label class="container">This Weekend
+                        <input type="checkbox" name="ind1" value="this_week">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Next Week
+                        <input type="checkbox" name="ind1" value="next_week">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Next Month
+                        <input type="checkbox" name="ind1" value="next_month">
+                        <span class="checkmark"></span>
+                    </label>
+                    {#                    <label class="container">From - To#}
+                    {#                        <input type="text"#}
+                    {#                               class="form-control"#}
+                    {#                               placeholder="When" autocomplete="off"#}
+                    {#                               data-provide="datepicker"#}
+                    {#                               data-date-format="yyyy-mm-dd"#}
+                    {#                               name="date" id="date">#}
+                    {#                        <span class="checkmark"></span>#}
+                    {#                    </label>#}
+                </div>
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Price</p>
+                    <label class="container">$1-$50
+                        <input type="checkbox" name="ind1" value="1-50">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">$50-$100
+                        <input type="checkbox" name="ind1" value="50-100">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">$100-$500
+                        <input type="checkbox" name="ind1" value="100-500">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">$500-$1000
+                        <input type="checkbox" name="ind1" value="500-1000">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">$1000+
+                        <input type="checkbox" name="ind1" value="1000+">
+                        <span class="checkmark"></span>
+                    </label>
+
+                </div>
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Duration</p>
+                    <label class="container">1 Hour
+                        <input type="checkbox" name="ind1" value="one_hour">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Half Day
+                        <input type="checkbox" name="ind1" value="half_day">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Whole Day
+                        <input type="checkbox" name="ind1" value="whole_day">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Multiple Days
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <a href="#">see all</a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="search-result-cont" id="search-result-cont">
+        <div class="container search-result">
+            <div class="sr-sort">
+                <div class="sort">
+                    <p>{{ companies.count }} Companies</p>
+                    |
+                    <div class="sortby">Sort by {{ sort_type }}
+                        <select name="ev-sortby" id="com-sortby">
+                            <option {% if sort_type == 'relevancy' %} selected {% endif %} value="relevancy">Relevancy
+                            </option>
+                            <option {% if sort_type == 'alphabetic-asc' %} selected {% endif %} value="alphabetic-asc">
+                                A-Z
+                            </option>
+                            <option {% if sort_type == 'alphabetic-desc' %} selected {% endif %}value="alphabetic-desc">
+                                Z-A
+                            </option>
+                            <option {% if sort_type == 'popularity' %} selected {% endif %} value="popularity">
+                                Popularity
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="paginate-by">
+                    Show
+                    <select id="company-paginate-by">
+                        <option {% if pagec == '10' %} selected {% endif %}>10</option>
+                        <option {% if pagec == '20' %} selected {% endif %}>20</option>
+                        <option {% if pagec == '30' %} selected {% endif %}>30</option>
+                        <option {% if pagec == '40' %} selected {% endif %}>40</option>
+                        <option {% if pagec == '50' %} selected {% endif %}>50</option>
+                    </select>
+                    per page
+
+                </div>
+            </div>
+            <div class="row m-2" id="event-container">
+                {% for company in companies %}
+                    <div class="single-comp-container my-2 p-1">
+                        <div class="row">
+                            <div class="col-lg-2 col-5 d-flex align-items-center justify-content-center bg-white">
+                                <a href="{% url "company_detail" slug=company.slug %}">
+                                    {{ company.get_image_thumbnail }}
+                                </a>
+                            </div>
+                            <div class="col-lg-3  col-7 d-flex flex-column justify-content-center single-com-meta py-2 bg-white">
+                                <a href="{% url "company_detail" slug=company.slug %}"
+                                   class="h6">{{ company.name|striptags }}</a>
+                                {% for loc in company.location.all %}
+                                    <h7>{{ loc }}</h7>
+                                {% endfor %}
+                                <p>{{ company.single_info }}</p>
+                            </div>
+                            <div class="col-lg-5 single-com-g-info py-2 bg-white">
+                                <div class="d-flex justify-content-between flex-wrap col-12">
+                                    <div class="col-6 col-lg-3">
+                                        <h7 class="single-com-info-title">Company Size</h7>
+                                        {% if company.size %}
+                                            <p>{{ company.size }}</p>
+                                        {% else %}
+                                            <p>-</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-6 col-lg-3">
+                                        <h7 class="single-com-info-title">Events</h7>
+                                        <p>0</p>
+                                    </div>
+                                    <div class="col-6 col-lg-3">
+                                        <h7 class="single-com-info-title">Jobs</h7>
+                                        <p>-</p>
+                                    </div>
+                                    <div class="col-6 col-lg-3">
+                                        <h7 class="single-com-info-title">Reviews</h7>
+                                        <p>{{ company.reviews.count }}</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between single-com-industry">
+                                    <ul class="m-0 p-0">
+                                        {% for market in company.markets.all|slice:3 %}
+                                            <li><a href="#">{{ market }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="col-5 py-2">
+                                    <div class="d-flex flex-column align-items-center single-com-score-mob">
+                                        <h7>BroScore</h7>
+                                        <p>{{ company.avg_rating }}</p>
+                                         <div class="star-r-rating">
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs {% if company.avg_rating < 20 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                            aria-label="Left Align">
+                                                        <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs {% if company.avg_rating < 40 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                            aria-label="Left Align">
+                                                        <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs {% if company.avg_rating < 60 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                            aria-label="Left Align">
+                                                        <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs {% if company.avg_rating < 80 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                            aria-label="Left Align">
+                                                        <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs {% if company.avg_rating < 100 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                            aria-label="Left Align">
+                                                        <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 py-2">
+                                <div class="d-flex flex-column align-items-center single-com-score">
+                                    <h7>BroScore</h7>
+                                    <p> {{ company.avg_rating }}</p>
+                                     <div class="star-r-rating">
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs {% if company.avg_rating < 20 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                            aria-label="Left Align">
+                                                        <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs {% if company.avg_rating < 40 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                            aria-label="Left Align">
+                                                        <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs {% if company.avg_rating < 60 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                            aria-label="Left Align">
+                                                        <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs {% if company.avg_rating < 80 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                            aria-label="Left Align">
+                                                        <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs {% if company.avg_rating < 100 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                            aria-label="Left Align">
+                                                        <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                </div>
+                                <div class="d-flex justify-content-between single-com-industry-mob p-2">
+                                    <ul class="m-0 p-0">
+                                        {% for market in company.markets.all|slice:3 %}
+                                            <li><a href="#">{{ market }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if page_obj.has_other_pages %}
+                <script type="text/javascript">
+                    let url_string = window.location.href
+                    let url = new URL(url_string);
+                    let paginate_by1 = url.searchParams.get("paginate_by");
+                    if (!paginate_by1) {
+                        paginate_by = 15
+                    } else {
+                        paginate_by = paginate_by1
+                    }
+                </script>
+                <div class="row pagination-bottom" id="aaa">
+                    <div class="pag-info">
+                        <p>Displaying <span>{{ pagec}}</span> - {{ company_count }} results </p>
+                    </div>
+                    <div class="pag-paginate">
+                        {% if page_obj.has_previous %}
+                            <a
+                                    href="{{ request.path }}?page={{ page_obj.previous_page_number }}&paginate_by={{ pagec}}&sort={{ sort_type }}"
+                                    class="">Previous</a>
+                        {% else %}
+                            <p>Previous</p>
+                        {% endif %}
+                        {% ifequal 1 page_obj.number %}
+                            <a
+                                    href="{{ request.path }}?page=1&paginate_by={{ pagec }}&sort={{ sort_type }}"
+                                    class="page-active">1 </a>
+                        {% else %}
+                            <a
+                                    href="{{ request.path }}?page=1&paginate_by={{ pagec }}&sort={{ sort_type }}"
+                                    class="">1</a>
+                        {% endifequal %}
+                        {% ifequal 2 page_obj.number %}
+                            <a
+                                    href="{{ request.path }}?page=2&paginate_by={{ pagec }}&sort={{ sort_type }}"
+                                    class="page-active">2</a>
+                        {% else %}
+                            <a
+                                    href="{{ request.path }}?page=2&paginate_by={{ pagec }}&sort={{ sort_type }}"
+                                    class="">2</a>
+                        {% endifequal %}
+                        {% for linkpage  in paginator.page_range %}
+
+                            {% if forloop.counter == page_obj.number|add:"-3" and  page_obj.number > 5 %}
+                                ...
+                            {% endif %}
+                            {% if forloop.counter > page_obj.number|add:"-3" and forloop.counter < page_obj.number|add:"3" and forloop.counter != 2 and forloop.counter != 1 and forloop.counter != paginator.num_pages|add:"-1" and forloop.counter != paginator.num_pages %}
+                                {% ifequal linkpage page_obj.number %}
+                                    <a
+                                            href="{{ request.path }}?page={{ page_obj.number }}&paginate_by={{ pagec }}&sort={{ sort_type }}"
+                                            class="page-active">{{ page_obj.number }}</a>
+                                {% else %}
+                                    <a
+                                            href="{{ request.path }}?page={{ linkpage }}&paginate_by={{ pagec }}&sort={{ sort_type }}"
+                                            class="">{{ linkpage }}</a>
+                                {% endifequal %}
+                                {#                                    normal goster end#}
+                            {% endif %}
+                            {% if forloop.counter == page_obj.number|add:"3" and page_obj.number < paginator.num_pages|add:"-3" %}
+                                ...
+                            {% endif %}
+
+                        {% endfor %}
+                        {% ifequal paginator.num_pages|add:"-1" page_obj.number %}
+                            <a
+                                    href="{{ request.path }}?page={{ paginator.num_pages|add:"-1" }}&paginate_by={{ pagec }}&sort={{ sort_type }}"
+                                    class="page-active">{{ paginator.num_pages|add:"-1" }}</a>
+                        {% else %}
+                            <a
+                                    href="{{ request.path }}?page={{ paginator.num_pages|add:"-1" }}&paginate_by={{ pagec }}&sort={{ sort_type }}"
+                                    class="page">{{ paginator.num_pages|add:"-1" }}</a>
+                        {% endifequal %}
+                        {% if  page_obj.number != 2 or page_obj.number != 1 %}
+                            {% ifequal paginator.num_pages page_obj.number %}
+                                <a
+                                        href="{{ request.path }}?page={{ paginator.num_pages }}&paginate_by={{ pagec }}&sort={{ sort_type }}"
+                                        class="page-active">{{ paginator.num_pages }}</a>
+                            {% else %}
+                                <a
+                                        href="{{ request.path }}?page={{ paginator.num_pages }}&paginate_by={{ pagec }}&sort={{ sort_type }}"
+                                        class="page">{{ paginator.num_pages }}</a>
+                            {% endifequal %}
+                        {% endif %}
+
+                        {% if page_obj.has_next %}
+
+                            <a
+                                    href="
+                                            {{ get_full_path }}?page={{ page_obj.next_page_number }}&paginate_by={{ pagec }}&sort={{ sort_type }}">Next</a>
+                        {% else %}
+                            <p>Next</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    <div class="container top-companies mt-5">
+        <div class="row">
+            <div class="col-md-8 top-com-info">
+                <div class="top-com-header">
+                    <h3>Top Profiles</h3>
+                    <span class="divider-title"></span>
+                    <a href="{% url "expert" %}">View all Profiles</a>
+                </div>
+                <div class="d-flex flex-row flex-wrap com-wrapper">
+                    {% for expert in popular_experts %}
+                        <div class="card mb-3" style="max-width: 50%;">
+                            <div class="row no-gutters">
+
+                                <div class="col-md-4 d-flex align-items-center img-con">
+                                    <a href="{% url "expert_detail" slug=expert.slug %}">
+                                        {{ expert.get_image_thumbnail }}
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body top-com-name-loc-con">
+                                        <a class="card-title name" href="{% url "expert_detail" slug=expert.slug %}">
+                                            {{ expert.name }}
+                                        </a>
+                                        <ul class="markets">
+                                            <li class="markets-list-item"> {{ expert.business_title }}</li>
+                                        </ul>
+                                        <p class="card-text loc"> {{ expert.location }}</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="top-com-header mt-5">
+                    <h3>Top Events</h3>
+                    <span class="divider-title"></span>
+                    <a href="{% url "AllEvents" %}">View all Events</a>
+                </div>
+                <div class="d-flex flex-row flex-wrap com-wrapper">
+                    {% for event in popular_events %}
+                        <div class="card mb-3" style="max-width: 50%;">
+                            <div class="row no-gutters">
+
+                                <div class="col-md-4 d-flex align-items-center img-con">
+                                    <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                        <img class="card-img" src="{{ event.event_img.url }}"
+                                             alt="{{ event.name }}"/>
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body top-com-name-loc-con">
+                                        <a class="card-title name" href="{% url 'event_detail_url' slug=event.slug %}">
+                                            {{ event.name }}
+                                        </a>
+                                        <ul class="markets">
+                                            <li class="markets-list-item"> {% for cat in event.category.all %}
+                                                {{ cat.name }}
+                                            {% endfor %} |
+                                                {{ event.start_event_dt|date:"M d, Y" }}</li>
+                                        </ul>
+                                        <p class="card-text loc">{{ event.location }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <a href="#"><img class="img-fluid mb-3" src="{% static 'assets/images/ex/startup-ad.png' %}" alt="Revealin Startups"></a>
+                <a href="#"><img class="img-fluid" src="{% static 'assets/images/ex/company-ad.png' %}" alt="Revealin Companies"></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

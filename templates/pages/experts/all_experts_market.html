@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} List of Experts in {{ slug }}{% endblock %}
+{% block main %}
+    <header class="masthead" style="background-image: url('{% static 'assets/images/all_experts.png' %}'); margin-bottom: 0px">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="page-heading">
+                        <h1>All Experts</h1>
+                        <span class="subheading">Reveal {{ slug }} industry Experts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+     <section id="experts">
+        <div class="container">
+                <div class="row my-3 expert-list expert-header">
+                <div class="col-md-2 col-lg-3 col-sm-12 expert-profile">
+                    <h6 class="font-weight-bold pl-3" style="margin-left: 100px">Name</h6></div>
+                <div class="btitle col-md-4 col-lg-4 col-sm-12 ">
+                    <h6 class="font-weight-bold">Business Title</h6>
+                </div>
+                <div class="col-md-5 col-lg-5 col-sm-12 d-flex flex-row justify-content-between expert-detail">
+                    <div>
+
+                        <h6 class="font-weight-bold">
+                            Company
+                        </h6>
+
+                    </div>
+                    <div>
+
+                        <h6 class="font-weight-bold">
+                            Industry
+                        </h6>
+
+
+                    </div>
+                    <div class="loc">
+                        <h6 class="font-weight-bold">
+                            Location
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            {% for expert in expertmarkets %}
+                <div class="row my-3 expert-list">
+                    <div class="col-md-2 col-lg-3 col-sm-12 expert-profile">
+                        <a href="{% url 'expert_detail' slug=expert.slug %}">
+                            {{ expert.get_image_thumbnail }}
+                        </a>
+                        <a class="expert-name " href="{% url 'expert_detail' slug=expert.slug %}">
+                            <h5 class="pl-3 font-weight-bold">{{ expert.name }}</h5>
+                        </a></div>
+                    <div class="btitle col-md-4 col-lg-4 col-sm-12 ">
+                        <p>{{ expert.business_title }}</p>
+                    </div>
+                    <div class="col-md-5 col-lg-5 col-sm-12 d-flex flex-row justify-content-between expert-detail">
+                        <div>
+                             {% for expert_com in expert.company.all %}
+                                <p>
+                                   <a href="{% url 'expert_company' slug=expert_com.slug %}">
+                                        {{ expert_com.name }}
+                                    </a>
+                                </p>
+                            {% endfor %}
+                        </div>
+                        <div>
+                            {% if expert.industry %}
+                                <p>{% for industry in expert.industry.all %}<a
+                                        href="{% url 'expert_industry' slug=industry.slug %}">{{ industry.name }}</a>{% endfor %}
+                                </p>
+                            {% endif %}
+                        </div>
+                        <div class="loc">
+                            <p>
+                                <a href="/people/country/{{ expert.country|cut:" " }}">{{ expert.country }}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if page_obj.has_other_pages %}
+                <nav aria-label="Page navigation" class="page-nav">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Previous</a>
+                            </li>
+                        {% endif %}
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="{{ request.path }}?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                            </li>
+                        {% endif %}
+                        <li class="page-item active">
+                            <a class="page-link"
+                               href="{{ request.path }}?page={{ page_obj.number }}">{{ page_obj.number }} </a>
+                        </li>
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="{{ request.path }}?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }} </a>
+                            </li>
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="{{ request.path }}?page={{ page_obj.next_page_number }}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

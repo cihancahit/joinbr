@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} All Experts {% endblock %}
+{% block main %}
+    <div class="exd-slider-container">
+        <div class="exd-slider owl-carousel">
+
+            <a href="{% url 'AllEvents' %}" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/events.png' %}" alt="">
+                    <div id="ovrl" class="overlay"></div>
+                    <h3 class="text">Events</h3>
+                </div>
+            </a>
+            <a href="{% url 'expert' %}" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/experts.png' %}" alt="">
+                    <div class="overlay-active"></div>
+                    <h3 class="text">Experts</h3>
+                </div>
+            </a>
+            <a href="#" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/speakers.png' %}" alt="">
+                    <div class="overlay"></div>
+                    <h3 class="text">Speakers</h3>
+                </div>
+            </a>
+            <a href="{% url 'companies' %}" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/companies.png' %}" alt="">
+                    <div class="overlay"></div>
+                    <h3 class="text">Companies</h3>
+                </div>
+            </a>
+            <a href="#" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/startup.png' %}" alt="">
+                    <div class="overlay"></div>
+                    <h3 class="text">Start-up</h3>
+                </div>
+            </a>
+            <a href="#" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/organizers.png' %}" alt="">
+                    <div class="overlay"></div>
+                    <h3 class="text">Organizers</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+    <form method="POST" id="expert-search-form" name="myform2" onsubmit="return ExpertOnSubmitForm();">
+        <div class="expert-search p-5">
+
+            {% csrf_token %}
+            <div class="main-part">
+
+                <div class="form-row esf-form1">
+                    <div class="form-group col-md-6 col-sm-12 offset-md-4 offset-sm-0 ">
+                        <div class="input-group esf-form-ing">
+                            <div class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <input type="text" class="form-control" name="main-search" id="main-search"
+                                   placeholder="search Bros..." value="{{ name }}">
+                        </div>
+                        {% include "_partials/search_titles.html" %}
+                    </div>
+                </div>
+                <div class="form-row esf-form2 align-items-center">
+                    <div class="col-6 col-md-2 col-sm-4 mt-1 offset-md-3">
+                        <input type="text" class="form-control" name="location" id="location" value="{{ location }}"
+                               placeholder="Location">
+                    </div>
+                    <div class="col-6  col-md-2 col-sm- mt-14">
+                        <input type="text" class="form-control" name="skills" id="skills" value="{{ skills }}"
+                               placeholder="Skills">
+                    </div>
+                    <div class="col-6 col-md-1 col-sm-4 mt-1">
+                        <input type="submit" class="form-control" name="esf-submit" id="esf-submit"
+                               value="GO!">
+                    </div>
+                    <div class="col-6 col-md-2 col-sm-4 mt-1">
+                        <button type="button" class="form-control esf-filter">Filter <i class="fa fa-sliders"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container esf-form3-cont mt-4">
+            <div class="row esf-form3-first-part">
+                <div class="col-md-4 col-12 my-2">
+                    <input type="text" class="form-control" name="country" id="country" value="{{ country }}"
+                           placeholder="Country">
+                </div>
+                <div class="col-md-4 col-12 my-2">
+                    <input type="text" class="form-control" name="city" id="city" value="{{ city }}"
+                           placeholder="City">
+                </div>
+                <div class="col-md-4 col-12 my-2">
+                    <input type="text" class="form-control" name="language" id="language" value="{{ language }}"
+                           placeholder="Language">
+                </div>
+            </div>
+            <div class="row esf-form3">
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Industry</p>
+                    <label class="container">Design
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Customer Service
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Web Development
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Devops
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <a href="#">see all Industries</a>
+                </div>
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Skills</p>
+                    <label class="container">Graphic Designer
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Copywriting
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">HTML
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Virtual Asistant
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <a href="#">see all Skills</a>
+                </div>
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Company</p>
+                    <label class="container">Excepteur
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Customer Service
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Web Development
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Devops
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <a href="#">see all Companies</a>
+                </div>
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Last Activity</p>
+                    <label class="container">Any Time
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Last 2 Weeks
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Within 1 Month
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Within 2 Months
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Bro Score</p>
+                    <label class="container">1-20
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">21-50
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">51-75
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">76-100
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Language</p>
+                    <label class="container">English
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Russian
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Spanish
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">French
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+    <div class="search-result-cont">
+        <div class="container search-result">
+            {% for expert in experts %}
+                <div class="result">
+                    <div class="result-list-item container">
+                        <div class="expert-list-detail row">
+                            <div class="expert-list-info col-md-2">
+                                <div class="img-prf">
+
+                                    <a class="expert-list-link" href="{% url 'expert_detail' slug=expert.slug %}">
+                                        {{ expert.get_image_thumbnail }}
+                                    </a>
+                                    <h3 class="name-mob">{{ expert.name }}</h3>
+                                </div>
+                            </div>
+                            <div class="expert-list-company col-md-5">
+                                <div class="expert-info-2 col-8">
+                                    <div class="expert-list-name-loc-title">
+                                        <h3 class="name">{{ expert.name }}</h3>
+                                        <p class="loc">{{ expert.location }}</p>
+                                        <ul class="fields-of-expertise">
+                                            {% for field in expert.fields_of_experties.all %}
+                                                <li class="foe-list-item">{{ field }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                        <p class="b-title">{{ expert.business_title|slice:30 }}</p>
+                                    </div>
+                                    <div class="follow-message">
+                                        <button type="button" data-href="{% url 'expert_follow' slug=expert.slug %}"
+                                                class="btn follow expert-follow">
+                                            {% if logged_user in expert.follower_list.all %}
+                                                Unfollow
+                                            {% else %}
+                                                Follow
+                                            {% endif %}
+                                        </button>
+                                        <a class="message" href="#">
+                                                        <span class="fa-stack">
+                                                             <i class="fa fa-circle fa-stack-2x"
+                                                                style="color:#ababab"></i>
+                                                             <i style="color:#fff"
+                                                                class="fa fa-envelope fa-stack-1x"></i>
+                                                        </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="company-wrapper col-4">
+                                    {% for company in expert.company.all %}
+                                        <p class="txt-company">company</p>
+                                        <a href="{% url 'company_detail' slug=company.slug %}">
+                                            {% if company.company_logo %}
+                                                <img class="expert-list-company-logo"
+                                                     src="{{ company.company_logo.url }}"
+                                                     alt="{{ company.name }}">
+                                            {% endif %}
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="expert-list-events col-md-5">
+                                <div class="expert-list-event-header">
+                                    <p class="txt-events">Events</p>
+                                    <a class="e-list-event-header-profile-url" href="#">Go to Expert Profile</a>
+                                </div>
+                                <div class="expert-event-slider">
+                                    <div class="e-list-slider">
+                                        {% for event in expert.expert.all %}
+                                            <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                               class="e-e-slider-item-link">
+                                                <div class="e-e-slider-item">
+                                                    <div class="event-label-speaker">
+                                                        <p>Speaker</p>
+                                                    </div>
+                                                    <img src="{{ event.event_img.url }}" alt="{{ event.name }}">
+                                                </div>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div style="padding-top: 100px"></div>
+    </section>
+{% endblock %}

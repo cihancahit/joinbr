@@ -1,0 +1,54 @@
+@import "../_utils/_mixins/button";
+     .pagination-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d1d1d1;
+
+    .pag-info {
+      p {
+        font-family: Lato;
+        font-weight: bold;
+        color: #787878;
+        margin-bottom: 0;
+
+        span {
+          color: $button-color;
+        }
+      }
+    }
+
+    .pag-paginate {
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        font-family: Lato;
+        font-weight: bold;
+        color: #adadad;
+        margin-bottom: 0;
+        padding: 0 10px;
+      }
+
+      a {
+        font-family: Lato;
+        font-weight: bold;
+        color: #adadad;
+        padding: 0 10px;
+
+        &:hover {
+          color: $button-color;
+          transition: all ease-in-out 400ms;
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+
+      .page-active {
+        font-family: Lato;
+        font-weight: bold;
+        color: $button-color;
+      }
+    }
+  }

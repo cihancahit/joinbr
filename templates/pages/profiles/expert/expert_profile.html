@@ -1,0 +1,497 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Who is {{ expert.name }}? {% endblock %}
+{% block main %}
+    <div class="wrapper d-flex align-items-stretch">
+        {% include 'pages/profiles/expert/navbar.html' %}
+        <!-- Page Content  -->
+        <div id="content" style="width: 100%">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="content-c col-lg-9 col-12">
+                        <div class="row mob-view">
+                            <div class="col-3 text-right pr-0">
+                                <a href="#"><img class="expert-profile-pic"
+                                                 src="{% static 'assets/images/lorem_profile.jpg' %}" alt="{{ expert.name }}"></a>
+                            </div>
+                            <div class="col-5 d-flex flex-column">
+                                <h1>{{ expert.name }}</h1>
+                                <p>Expert</p>
+                            </div>
+                            <div class="col-2 d-flex align-items-center px-0">
+                                <div class="icon-wrapper">
+                                    <i class="fa fa-bell fa-inverse"></i>
+                                    <span class="badge">11</span>
+                                </div>
+                            </div>
+                            <div class="col-2 d-flex align-items-center pl-0">
+                                <div class="icon-wrapper">
+                                    <i class="fa fa-envelope fa-inverse"></i>
+                                    <span class="badge">14</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-12 p-0">
+                                <div class="bro-score-progress p-3">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-12">
+                                            <div class="stars">
+                                                <p class="st-bro-score">ET Score</p>
+                                                <div class="expert-rating">
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs icon-c-bg"
+                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs icon-c-bg"
+                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs icon-c-bg"
+                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs icon-c-bg"
+                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-star-gray btn-xs icon-c-bg"
+                                                            aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                                <a href="#" class="st-what-mean" data-toggle="popover" data-trigger="focus" data-content="ET score is the average score experts and companies earn from users."><span
+                                                        class="fa fa-info-circle pr-1"></span>What does it mean?</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 col-12">
+                                            <div class="st-progress">
+                                                <div class="st-badges">
+                                                    <img src="{% static 'assets/images/profiles/expert/badge1.png' %}"
+                                                         alt="badge">
+                                                    <img src="{% static 'assets/images/profiles/expert/badge2.png' %}"
+                                                         alt="badge">
+                                                    <img src="{% static 'assets/images/profiles/expert/badge3.png' %}"
+                                                         alt="badge">
+                                                    <img src="{% static 'assets/images/profiles/expert/badge4.png' %}"
+                                                         alt="badge">
+                                                    <img src="{% static 'assets/images/profiles/expert/badge5.png' %}"
+                                                         alt="badge">
+                                                </div>
+                                                <div class="pgbar">
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar" style="width: {{ expert.score }}%;"
+                                                             aria-valuenow="{{ expert.score }}" aria-valuemin="0" aria-valuemax="100">
+                                                            {{expert.score}}/100
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-12 bro-score-meta-con">
+                                <div class="bro-score-meta p-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-4 text-center">
+                                            <img class="icon-money"
+                                                 src="{% static 'assets/images/profiles/expert/icon_money_bag.png' %}"
+                                                 alt="">
+                                        </div>
+                                        <div class="col-5 bro-point">
+                                            <p>{{ expert.et_points }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-4 text-center">
+                                            <p class="bro-points">ET points</p>
+                                        </div>
+                                        <div class="col-8 more-bro">
+                                            <a href="#" data-toggle="popover" data-trigger="focus" data-content="ET points have direct correlation with every expert's ET score, responsiveness and how up-to-date their profile is. We highly recommend you to fulfill your profile. "><span class="fa fa-home pr-1"></span>How to increase my ET points?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-6 col-12 p-0">
+                                <div class="profile-stat p-3">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-column">
+                                            <p class="profile-stat-title">Profile Stats</p>
+                                            <form action="" class="profile-stat-filter">
+                                                <label for="profile-stat-range">Views</label>
+                                                <select name="profile-stat-range" id="profile-stat-range"
+                                                        name="profile-stat-range">
+                                                    <option value="last 7 days">last 7 days</option>
+                                                    <option value="last 30 days">last 30 days</option>
+                                                    <option value="last 90 days">last 90 days</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <p class="profile-stat-title">51.023</p>
+                                            <p class="profile-stat-subtitle">Total Views</p>
+                                        </div>
+                                    </div>
+                                    <div class="chartWrapper">
+                                        <div class="chartAreaWrapper">
+                                            <canvas id="myChart" height="350" width="800"></canvas>
+                                        </div>
+                                        <canvas id="myChartAxis" height="350" width="0"></canvas>
+                                    </div>
+                                    <script>
+                                        var ctx = document.getElementById('myChart').getContext('2d');
+                                        var myChart = new Chart(ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: {{ days }},
+                                                datasets: [{
+                                                    data: {{ counts }},
+                                                    backgroundColor: '#fc7d27',
+                                                    barThickness: '4',
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    yAxes: [{
+                                                        ticks: {
+                                                            beginAtZero: true
+                                                        },
+                                                    }],
+                                                    xAxes: [{
+                                                        gridLines: {
+                                                            display: false
+                                                        }
+                                                    }],
+                                                }, legend: {
+                                                    display: false
+                                                },
+                                            }
+                                        });
+                                        new Chart(ctx).Bar(data, {
+                                            onAnimationComplete: function () {
+                                                var sourceCanvas = this.chart.ctx.canvas;
+                                                var copyWidth = this.scale.xScalePaddingLeft - 5;
+                                                // the +5 is so that the bottommost y axis label is not clipped off
+                                                // we could factor this in using measureText if we wanted to be generic
+                                                var copyHeight = this.scale.endPoint + 5;
+                                                var targetCtx = document.getElementById("myChartAxis").getContext("2d");
+                                                targetCtx.canvas.width = copyWidth;
+                                                targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
+                                            }
+                                        });
+
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12 profile-com-con">
+                                <div class="profile-com py-3 pl-3 pr-0" style="height: 100%">
+                                    <p class="profile-com-title">Profile Compilation</p>
+                                    <div class="d-flex justify-content-around">
+                                        <div>
+                                            <div class="c100 p{{ expert.completion_percentage }}">
+                                                <span>{{ expert.completion_percentage }}%</span>
+                                                <div class="slice">
+                                                    <div class="bar"></div>
+                                                    <div class="fill"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-column profile-com-list">
+                                            {% for step in profile_compilation %}
+                                                <div class="d-flex justify-content-around mb-2">
+                                                    <img src='/static/assets/images/profiles/expert/{{ step.icon_url }}'
+                                                         alt="Revealin step">
+                                                    <div class="d-flex flex-column mb-1">
+                                                        <p>{{ step.name  }}</p>
+                                                        <a href="{% url "expert_profile_edit" expert.slug %}">Update Now</a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-6 col-12 p-0">
+                                <div class="expert-followers p-3">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-12 d-flex justify-content-start align-items-center pb-4">
+                                            <p class="title">See Who Follows You</p>
+                                        </div>
+                                        <div class="col-8 pb-1">
+                                            <div class="row">
+                                                {% for follower in expert.follower_list.all %}
+                                                    <div class="follower-con col-lg-2 col-3">
+                                                         <a href="{% url "user_public_profile" slug=follower.slug %}">
+                                                             {% if follower.img %}
+                                                                 <img style="width: 43px; height: 43px"
+                                                                 class="follower-profile-pic"
+                                                                 src="{{ follower.img.url }}"
+                                                                 alt="follower profile">
+                                                             {% else %}
+                                                                  <img style="width: 43px; height: 43px"
+                                                                 class="follower-profile-pic"
+                                                                 src="http://via.placeholder.com/106x106"
+                                                                 alt="follower profile">
+                                                             {% endif %}
+                                                        </a>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-right"><a href="#" class="other-follower">
+                                            {% if expert.follower_list.count > 0 %}
+                                                +{{ expert.follower_list.count }} Users
+                                            {% else %}
+                                                0 User
+                                            {% endif %}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12 expert-host-event-con">
+                                <div class="expert-host-event p-3">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <a href="#">
+                                                <img src="{% static 'assets/images/profiles/expert/host_event.png' %}"
+                                                     alt="Revealin Event">
+                                            </a>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="d-flex flex-column ehe-right">
+                                                <h5>Host an Event</h5>
+                                                <p>Attract participants. Hire speakers. Get exposure with JoinBro</p>
+                                                <a href="{% url 'expert_profile_myevent' slug=expert.slug %}">Create a new event</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 pl-0">
+                                <div class="expert-fav p-3">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-12 expert-fav-header pb-4">
+                                            <p class="title">Your Favorites</p>
+                                            <ul class="nav nav-tabs" id="edfe-tab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="liveevents-tab" data-toggle="tab"
+                                                       href="#liveevents" role="tab"
+                                                       aria-controls="home" aria-selected="true">Events</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="favexp-tab" data-toggle="tab"
+                                                       href="#favexp" role="tab"
+                                                       aria-controls="profile" aria-selected="false">Experts</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="favcom-tab" data-toggle="tab"
+                                                       href="#favcom" role="tab"
+                                                       aria-controls="profile" aria-selected="false">Company</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-12 pb-1">
+                                            <div class="tab-content" id="edfe-content">
+                                                <div class="tab-pane fade show active" id="liveevents" role="tabpanel"
+                                                     aria-labelledby="home-tab">
+                                                    <div class="ed-slider1">
+                                                        {% for event in following_events %}
+                                                            <div class="card-h-e card mx-3">
+                                                                <div>
+                                                                    <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                                                        <img class="card-img-top" style="height: 150px;"
+                                                                             src="{{ event.event_img.url }}"
+                                                                             alt="{{ event.name }}">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="card-block">
+                                                                    <figure class="profile shadow">
+                                                                        <span class="profile-avatar">{{ event.start_event_dt|date:"M d" }}</span>
+                                                                    </figure>
+                                                                    <div class="card-text text-right">
+                                                                        <a href="#">
+                                                                            {% for cat in event.category.all %}
+                                                                                {{ cat.name }}
+                                                                            {% endfor %}
+                                                                        </a>
+                                                                    </div>
+                                                                    <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                                                       class="card-title mt-3 h6 v-link">{{ event.name|striptags|slice:":30" }}</a>
+                                                                    <div class="meta">
+                                                                        <p>{% if event.city %}
+                                                                            {{ event.city }}{% endif %},
+                                                                            {% if event.location %}
+                                                                                {{ event.location }}{% endif %}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="favexp" role="tabpanel"
+                                                     aria-labelledby="favcom-tab">
+                                                    <div class="row slick-ex">
+                                                        {% for expert in following_experts %}
+                                                            <div class="col-md-6 col-lg-3 h-exp-cont">
+                                                                <div class="e-profile-card py-1 card-h-e text-left">
+                                                                    <div class="card-body">
+                                                                        <div>
+                                                                            <a href="{% url "expert_detail" slug=expert.slug %}">
+                                                                                <img class="profile-picture rounded-circle"
+                                                                                     src="{{ expert.expert_img.url }}" alt="{{ expert.name }}"/>
+                                                                            </a>
+                                                                        </div>
+                                                                        <a href="{% url "expert_detail" slug=expert.slug %}"
+                                                                           class="name">
+                                                                            {{ expert.name }}
+                                                                        </a>
+                                                                        <p class="b-title">
+                                                                            {{ expert.business_title }}
+                                                                        </p>
+                                                                        <p class="loc">
+                                                                            {% if expert.city %}{{ expert.city }}
+                                                                                , {% endif %}{{ expert.country }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="favcom" role="tabpanel"
+                                                     aria-labelledby="favcom-tab">
+                                                    <div class="row slick-ex">
+                                                        {% for company in following_companies %}
+                                                            <div class="col-lg-4">
+                                                                <div class="evd-sr-organizer ">
+                                                                    <div class="row">
+                                                                        <div class="col-3 p-0">
+                                                                            <a href="{% url "company_detail" company.slug %}" alt="organizer profile">
+                                                                                <img class="evd-sr-organizer-logo"
+                                                                                     src="{{ company.company_logo.url }}"
+                                                                                     alt="organizer logo">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="col-9">
+                                                                            <a href="{% url "company_detail" company.slug %}" class="evd-sr-organizer-title">{{ company.name }}</a>
+                                                                            <p class="evd-sr-organizer-desc">Lorem ipsum
+                                                                                dolor sit amet</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 pl-0">
+                                <div class="expert-rec-events p-3">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-12 d-flex justify-content-start align-items-center pb-4">
+                                            <p class="title">Recommended Events</p>
+                                        </div>
+                                        <div class="col-12 pb-1">
+                                            <div class="row">
+                                                {% for event in recommended_events %}
+                                                    <div class="col-12 col-md-4 col-lg-4 mt-1">
+                                                        <div class="card-h-e card"
+                                                             style="position: relative; padding-bottom: 50px; height: 100%">
+                                                            <div>
+                                                                <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                                                    <img class="card-img-top" style="height: 150px"
+                                                                         src="{{ event.event_img.url }}" alt="{{ event.name }}">
+                                                                </a>
+                                                            </div>
+                                                            <div class="card-block">
+                                                                <figure class="profile shadow">
+                                                                    <span class="profile-avatar">{{ event.start_event_dt|date:"M d" }}</span>
+                                                                </figure>
+                                                                <div class="card-text text-right">
+                                                                    <a>
+                                                                        {% for cat in event.category.all %}
+                                                                            {{ cat.name }}
+                                                                        {% endfor %}
+                                                                    </a>
+                                                                </div>
+                                                                <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                                                   class="card-title mt-3 h7 v-link">{{ event.name|striptags|slice:"30" }}</a>
+                                                                <div class="meta">
+                                                                    <p>{% if event.city %}{{ event.city }}{% endif %},
+                                                                        {% if event.location %}
+                                                                            {{ event.location }}{% endif %}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer" style="position: absolute;">
+                                                                <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                                                   class="card-att-event">See More</a>
+                                                                <button class="c-icon" data-href="event_follow_url">
+                                                                    <i class="fa  fa-heart event-follow "
+                                                                       data-href="{% url 'event_follow' slug=event.slug %}"
+                                                                            {% if logged_user != 'anonymous' and logged_user in event.follower_list.all %}
+                                                                       style="color: #fff; background-color: #09c75b"
+                                                                            {% else %}
+                                                                       style="color: #fff; background-color: #c2c2c2"
+                                                                            {% endif %}></i>
+                                                                </button>
+                                                                <button class="c-icon btn-share" id="1{{ event.id }}"
+                                                                        onclick="share(this.id)">
+                                                                    <i style="color:#fff"
+                                                                       class="fa fa-share"></i>
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+                                                        <div id="sh1{{ event.id }}" class="shadow soc-share-con"
+                                                             style="display: none"> {% include '_partials/soc.html' %}</div>
+
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-r col-lg-3 col-12">
+                        <ul class="timeline">
+                            {% for i in "12345" %}
+                                <li class="activity">
+                                    <h6>{{ forloop.counter }} minute ago</h6>
+                                    <a href="#" class="activity-title">What is here?</a>
+                                    <br>
+                                    <p>We will have a surprise here soon.</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

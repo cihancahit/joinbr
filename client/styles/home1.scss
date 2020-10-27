@@ -1,0 +1,1056 @@
+@import "_utils/colors";
+@import "_utils/variables";
+@import "_utils/_mixins/button";
+@import "_utils/_mixins/tools";
+
+.for-you-login {
+  font-family: "Lato Medium";
+  color: $button-color;
+  text-decoration: none;
+
+  &:hover {
+    @include transition(all ease-in-out 300ms);
+    color: #787878;
+  }
+}
+
+
+
+//.w1-diagonal {
+//  width: 0;
+//  height: 0;
+//  position: absolute;
+//  bottom: 0px;
+//  border-top: 100px solid #fff;
+//  border-left: 100vw solid transparent;
+//  @media screen and (max-width: $tablet-l) {
+//    border-top: 50px solid #fff;
+//  }
+//}
+
+.divider {
+  width: 0;
+  height: 0;
+  border-bottom: 100px solid #fff;
+  border-left: 100vw solid transparent;
+  z-index: -1;
+  margin-top: -150px;
+  @media screen and (max-width: $tablet-l) {
+    margin-top: -200px;
+  }
+}
+
+.w-diagonal {
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 0px;
+  border-bottom: 100px solid #f7f5f5;
+  border-left: 100vw solid transparent;
+  @media screen and (max-width: $tablet-l) {
+    border-bottom: 50px solid #f7f5f5;
+  }
+}
+.cat-ev-diagonal {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0px;
+    border-top: 100px solid #fff;
+    border-right: 100vw solid transparent;
+  @media screen and (max-width: $tablet-l) {
+    border-top: 100px solid #fff;
+  }
+}
+.w1-diagonal {
+  width: 0;
+  height: 0;
+  border-top: 100px solid #fff;
+  border-left: 100vw solid transparent;
+  @media screen and (max-width: $tablet-l) {
+    border-top: 50px solid #fff;
+  }
+}
+
+
+.ce-diagonal {
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 100px solid #f7f5f5;
+  border-right: 100vw solid transparent;
+  @media screen and (max-width: $tablet-l) {
+    border-top: 100px solid #f7f5f5;
+  }
+}
+
+.st-diagonal {
+  width: 0;
+  height: 0;
+  border-top: 100px solid #f7f5f5;
+  border-left: 100vw solid transparent;
+  @media screen and (max-width: $tablet-l) {
+    border-top: 50px solid #f7f5f5;
+  }
+}
+
+
+.home-header {
+  padding-top: 68px;
+
+  position: relative;
+
+  .h-bg-img {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-color: #222222;
+    z-index: -1;
+    opacity: 0.8;
+  }
+
+  .h-h-center {
+    .h-search-con {
+      .heading {
+        h1 {
+          color: #fff;
+          font-family: "Lato Black";
+        }
+
+        h2 {
+          font-family: "Lato Medium";
+          color: #fefffe;
+
+        }
+      }
+
+      .bg-tr-white {
+        background-color: rgba(255, 255, 255, 0.2);
+        @include border-radius(50px);
+
+        .form-group {
+          margin-bottom: 0;
+
+          input, select {
+            @include border-radius(30px);
+          }
+
+          .btn-follow {
+            @include green-button;
+            width: 100%;
+          }
+
+
+        }
+      }
+
+      .f-event-name-con {
+        @include border-radius(15px 0px 0px 15px);
+        background-color: rgba(0, 0, 0, 0.4);
+        display: flex;
+        justify-content: flex-end;
+        float: right;
+        padding: 10px;
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+
+        p {
+          font-family: Lato;
+          font-weight: bold;
+          color: #fff;
+          margin-bottom: 0;
+          text-align: right;
+        }
+      }
+
+      .f-title-con {
+        text-align: center;
+        position: relative;
+        border-bottom: 0;
+        margin-top: 5px;
+        padding-bottom: 0;
+        margin-bottom: 10px;
+        display: inline-block;
+        width: 100%;
+
+        &:before {
+          background-color: rgba(255, 255, 255, 0.3);
+          left: 0;
+          content: "";
+          position: absolute;
+          width: 40%;
+          height: 1px;
+          -webkit-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3);;
+          -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3);;
+          box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3);;
+          top: 50%;
+          z-index: 0;
+          @media screen and (max-width: $tablet-l) {
+            width: 25%;
+          }
+        }
+
+        &:after {
+          right: 0;
+          background-color: rgba(255, 255, 255, 0.3);
+          content: "";
+          position: absolute;
+          width: 40%;
+          height: 1px;
+          -webkit-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3);;
+          -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3);;
+          box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3);;
+          top: 50%;
+          z-index: 0;
+
+          @media screen and (max-width: $tablet-l) {
+            width: 25%;
+          }
+        }
+
+        h5 {
+          font-family: "Lato Heavy";
+          color: rgba(255, 255, 255, 0.5);
+          text-align: center;
+          display: inline-block;
+          border-bottom: 0;
+          padding: 0 24px;
+          background-color: transparent;
+          position: relative;
+          z-index: 1;
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .f-events {
+      @media screen and (max-width: $tablet-l) {
+        display: none;
+      }
+
+      .f-event-con {
+        height: auto;
+
+        .f-event {
+          background-color: #fff;
+          @include border-radius(40px);
+          padding: 20px;
+          height: 100%;
+          justify-content: space-between;
+          display: flex;
+          flex-direction: column;
+
+          .f-event-cdate {
+            font-family: "Lato Heavy";
+            color: $button-color;
+          }
+
+          .f-event-name {
+            font-family: "Lato Heavy";
+            color: #5e5e5e;
+          }
+
+          .f-event-loc {
+            font-size: 13px;
+          }
+
+          .f-event-link {
+            font-family: "Lato Heavy";
+            color: $button-color;
+            @include transition(all ease-in-out 300ms);
+            text-decoration: none;
+
+            &:hover {
+              color: #787878;
+            }
+          }
+        }
+      }
+
+
+    }
+
+    .slick-fe {
+      display: none;
+      @media screen and (max-width: $tablet-l) {
+        display: flex;
+      }
+
+      .f-event-con {
+
+        .f-event {
+          background-color: #fff;
+          @include border-radius(40px);
+          padding: 20px;
+          height: 240px;
+          justify-content: space-between;
+          display: flex;
+          flex-direction: column;
+
+          .f-event-cdate {
+            font-family: "Lato Heavy";
+            color: $button-color;
+          }
+
+          .f-event-name {
+            font-family: "Lato Heavy";
+            color: #5e5e5e;
+          }
+
+          .f-event-loc {
+            font-size: 13px;
+          }
+
+          .f-event-link {
+            font-family: "Lato Heavy";
+            color: $button-color;
+            @include transition(all ease-in-out 300ms);
+            text-decoration: none;
+
+            &:hover {
+              color: #787878;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+
+}
+
+.home-events {
+  margin-top: 6rem;
+  @media screen and (max-width: $tablet-l) {
+    margin-top: 8rem;
+  }
+
+  .h-e-filter-link {
+    display: flex;
+    justify-content: space-between;
+    @media screen and (max-width: $tablet-l) {
+      justify-content: center;
+    }
+
+    .h-e-filter {
+      .h-ev-filters {
+        overflow: hidden;
+        list-style: inline;
+        padding: 0 0 2px;
+        -webkit-margin-before: 0;
+        -webkit-margin-after: 0;
+        margin: 0 1em 1em;
+
+        li {
+          display: inline-block;
+          margin-top: 2px;
+          margin-bottom: -2px;
+          position: relative;
+          z-index: 2;
+
+          &:after {
+            content: " ";
+            position: absolute;
+            bottom: -2px;
+            right: -1000px;
+            width: 1000px;
+            height: 0;
+            border-bottom: 2px solid #d3d3d3;
+            z-index: 1;
+          }
+
+          &:not(.active) {
+            border-bottom: 2px solid #d3d3d3;
+          }
+
+          &.active {
+            border-bottom: 2px solid $button-color;
+
+            a {
+              font-family: "Lato Bold" !important;
+              color: $button-color;
+            }
+          }
+
+          &:not(:last-of-type) {
+            margin-right: -.275em;
+          }
+
+          a {
+            font-family: "Lato Semibold";
+            color: #b3b3b3;
+            text-decoration: none;
+            padding: 3px 10px;
+            box-sizing: border-box;
+            display: block;
+            @include transition(all ease-in-out 300ms);
+
+            &:hover {
+              border-color: $button-color;
+              color: $button-color;
+            }
+
+          }
+
+          &:hover {
+            border-bottom: 2px solid $button-color;
+          }
+        }
+
+        //a {
+        //  font-family: "Lato Semibold";
+        //  color: #b3b3b3;
+        //  border-bottom: 2px solid #b3b3b3;
+        //  text-decoration: none;
+        //  @include transition(all ease-in-out 300ms);
+        //
+        //  &:hover {
+        //    border-color: $button-color;
+        //    color: $button-color;
+        //  }
+        //
+        //}
+        //
+        //.efl-active {
+        //  border-bottom: 2px solid $button-color;
+        //  color: $button-color;
+        //}
+      }
+    }
+
+    .h-e-link {
+      @media screen and (max-width: $tablet-l) {
+        display: none;
+      }
+
+      a {
+        font-family: "Lato Heavy";
+        color: $button-color;
+        text-decoration: none;
+
+        &:hover {
+          @include transition(all ease-in-out 300ms);
+          color: #787878;
+        }
+      }
+
+    }
+  }
+
+  .h-e-title {
+    display: flex;
+    justify-content: space-between;
+    @media screen and (max-width: $tablet-l) {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .h-e-title-dyn {
+      font-family: "Lato Heavy";
+      color: #3f3f3f;
+      text-transform: uppercase;
+
+      span {
+        color: $button-color;
+      }
+    }
+
+    .h-e-title-static {
+      font-family: "Lato Semibold";
+      color: #b3b3b3;
+    }
+  }
+
+  .h-ev-load-more-cont {
+    width: 100%;
+    text-align: center;
+
+    .h-ev-load-more {
+      border: none;
+      background: unset;
+      font-family: "Lato Heavy";
+      color: $button-color;
+      text-transform: uppercase;
+      @include transition(all ease-in-out 300ms);
+
+      &:hover {
+        color: #787878;
+      }
+    }
+  }
+
+  .ev-more {
+    display: none;
+  }
+}
+
+.h-top-experts {
+  background-color: #232323;
+  position: relative;
+  @media screen and (max-width: $tablet-l) {
+    //top: -2px;
+  }
+
+  .container {
+    padding-top: 20px;
+    padding-bottom: 100px;
+
+    .h-e-filter-link {
+      display: flex;
+      justify-content: space-between;
+      @media screen and (max-width: $tablet-l) {
+        justify-content: center;
+      }
+
+      .h-e-filter {
+        color: $button-color;
+      }
+
+      .h-e-link {
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+
+        a {
+          font-family: "Lato Heavy";
+          color: $button-color;
+          text-decoration: none;
+
+          &:hover {
+            @include transition(all ease-in-out 300ms);
+            color: #787878;
+          }
+        }
+
+      }
+    }
+
+    .h-e-title {
+      display: flex;
+      justify-content: space-between;
+      @media screen and (max-width: $tablet-l) {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .h-e-title-dyn {
+        font-family: "Lato Heavy";
+        color: #fff;
+        text-transform: uppercase;
+
+      }
+
+      .h-e-title-static {
+        font-family: "Lato Semibold";
+        color: #fff;
+      }
+    }
+  }
+
+  .expert-row {
+    @media screen and (max-width: $tablet-l) {
+      display: none;
+    }
+
+    .h-ex-load-more-cont {
+      width: 100%;
+      text-align: center;
+
+      .h-ex-load-more {
+        border: none;
+        background: unset;
+        font-family: "Lato Heavy";
+        color: #fff;
+        text-transform: uppercase;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          color: $button-color;
+        }
+      }
+    }
+
+    .exp-more {
+      display: none;
+    }
+  }
+
+  .slick-ex {
+    display: none;
+    @media screen and (max-width: $tablet-l) {
+      display: flex;
+    }
+  }
+
+
+}
+
+.h-venues {
+  position: relative;
+  background: #f7f5f5;
+  @media screen and (max-width: $tablet-l) {
+    //top: -3px;
+  }
+
+  .h-v-title-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    @media screen and (max-width: $tablet-l) {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .h-v-title {
+      display: flex;
+      flex-direction: column;
+      @media screen and (max-width: $tablet-l) {
+        align-items: center;
+      }
+
+      h5 {
+        font-family: "Lato Heavy";
+        color: #3f3f3f;
+        text-transform: uppercase;
+        margin-bottom: 0;
+      }
+
+      p {
+        font-family: "Lato Semibold";
+        color: #b3b3b3;
+        margin-bottom: 0;
+      }
+    }
+
+    .h-v-link {
+      @media screen and (max-width: $tablet-l) {
+        display: none;
+      }
+
+      a {
+        font-family: "Lato Heavy";
+        color: $button-color;
+        text-decoration: none;
+
+        &:hover {
+          @include transition(all ease-in-out 300ms);
+          color: #787878;
+        }
+      }
+    }
+  }
+
+  .h-ven-load-more-cont {
+    width: 100%;
+    text-align: center;
+
+    .h-ven-load-more {
+      border: none;
+      background: unset;
+      font-family: "Lato Heavy";
+      color: $button-color;
+      text-transform: uppercase;
+      @include transition(all ease-in-out 300ms);
+
+      &:hover {
+        color: #787878;
+      }
+    }
+  }
+
+  .ven-more {
+    display: none;
+  }
+
+}
+
+.h-startups {
+  position: relative;
+  background: #fff;
+  @media screen and (max-width: $tablet-l) {
+    //top: -5px;
+  }
+
+  .container {
+
+    padding-top: 20px;
+    padding-bottom: 100px;
+
+    .h-v-title-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      @media screen and (max-width: $tablet-l) {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .h-v-title {
+        display: flex;
+        flex-direction: column;
+        @media screen and (max-width: $tablet-l) {
+          align-items: center;
+        }
+
+        h5 {
+          font-family: "Lato Heavy";
+          color: #3f3f3f;
+          text-transform: uppercase;
+          margin-bottom: 0;
+        }
+
+        p {
+          font-family: "Lato Semibold";
+          color: #b3b3b3;
+          margin-bottom: 0;
+        }
+      }
+
+      .h-v-link {
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+
+        a {
+          font-family: "Lato Heavy";
+          color: $button-color;
+          text-decoration: none;
+
+
+          &:hover {
+            @include transition(all ease-in-out 300ms);
+            color: #787878;
+          }
+        }
+      }
+    }
+
+    .h-st-load-more-cont {
+      width: 100%;
+      text-align: center;
+
+      .h-st-load-more {
+        border: none;
+        background: unset;
+        font-family: "Lato Heavy";
+        color: $button-color;
+        text-transform: uppercase;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          color: #787878;
+        }
+      }
+    }
+
+    .st-more {
+      display: none;
+    }
+  }
+}
+
+.h-cats {
+  position: relative;
+  background-color: #f7f5f5;
+  @media screen and (max-width: $tablet-l) {
+    //top: -6px;
+  }
+
+  .container {
+    padding-top: 20px;
+    padding-bottom: 100px;
+
+    .h-v-title-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      @media screen and (max-width: $tablet-l) {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .h-v-title {
+        display: flex;
+        flex-direction: column;
+        @media screen and (max-width: $tablet-l) {
+          align-items: center;
+        }
+
+        h5 {
+          font-family: "Lato Heavy";
+          color: #3f3f3f;
+          text-transform: uppercase;
+          margin-bottom: 0;
+        }
+
+        p {
+          font-family: "Lato Semibold";
+          color: #b3b3b3;
+          margin-bottom: 0;
+        }
+      }
+
+      .h-v-link {
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+
+        a {
+          font-family: "Lato Heavy";
+          color: $button-color;
+          text-decoration: none;
+
+          &:hover {
+            @include transition(all ease-in-out 300ms);
+            color: #787878;
+          }
+        }
+      }
+    }
+
+    .h-c-cont {
+      a {
+        text-decoration: none;
+        cursor: pointer;
+
+        .h-cat-item {
+          position: relative;
+
+          img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: 30px;
+            z-index: 1;
+          }
+
+
+          .overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 30px;
+            z-index: 2;
+          }
+
+
+          .overlay-active-h {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(31, 195, 90, 0.5);
+            border-radius: 30px;
+            z-index: 2;
+            @include transition(all ease-in-out 300ms);
+          }
+
+          .text {
+            font-family: "Lato Heavy";
+            position: relative;
+            z-index: 3;
+            height: 140px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 0 20%;
+            @media screen and (max-width: $tablet-l) {
+              padding: 0 15%;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.h-create-event {
+  position: relative;
+  background-color: #f7f5f5;
+  @media screen and (max-width: $tablet-l) {
+    //top: -7px;
+  }
+
+  .a {
+    background: rgba(0, 0, 0, 0) url(https://revealin.com/static/assets/images/home/footer_back2.png) no-repeat scroll center center / cover;
+    padding: 150px 0px;
+
+    .info-row {
+      align-items: flex-end;
+      @media screen and (max-width: $tablet-l) {
+        text-align: center;
+      }
+
+      .info-text {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        @media screen and (max-width: $tablet-l) {
+          width: 100%;
+        }
+
+        h3 {
+          font-family: "Lato Bold";
+          color: #fefffe;
+        }
+
+        p {
+          font-family: "Lato Medium";
+          margin-bottom: 0;
+          color: #fefffe;
+
+          span {
+            font-family: "Lato Bold";
+            color: $button-color;
+          }
+        }
+      }
+    }
+
+    .info-lm {
+      @include green-button;
+    }
+  }
+
+}
+
+.clients-bg {
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.slick-fe {
+  button {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .slide-arrow {
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+  }
+
+  .prev-arrow {
+    left: 4px;
+    width: 44px;
+    z-index: 5;
+    border-radius: 50%;
+    background-color: #09c75b;
+    font-size: 38px;
+    line-height: 1;
+    padding: 4px;
+    color: #fff;
+  }
+
+  .next-arrow {
+    right: 4px;
+    width: 44px;
+    z-index: 5;
+    border-radius: 50%;
+    background-color: #09c75b;
+    font-size: 38px;
+    line-height: 1;
+    padding: 4px;
+    color: #fff;
+  }
+
+  .slick-list {
+    padding: 20px 10px;
+  }
+
+  .slick-dots {
+    .slick-active {
+      button {
+        &:before {
+          color: $button-color !important;
+
+        }
+      }
+    }
+  }
+}
+
+.slick-ex {
+  button {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .slide-arrow {
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+  }
+
+  .prev-arrow {
+    left: 4px;
+    width: 44px;
+    z-index: 5;
+    border-radius: 50%;
+    background-color: #09c75b;
+    font-size: 38px;
+    line-height: 1;
+    padding: 4px;
+    color: #fff;
+  }
+
+  .next-arrow {
+    right: 4px;
+    width: 44px;
+    z-index: 5;
+    border-radius: 50%;
+    background-color: #09c75b;
+    font-size: 38px;
+    line-height: 1;
+    padding: 4px;
+    color: #fff;
+  }
+
+  .slick-list {
+    padding: 20px 10px;
+  }
+
+  .slick-dots {
+    .slick-active {
+      button {
+        &:before {
+          color: $button-color !important;
+
+        }
+      }
+    }
+  }
+}

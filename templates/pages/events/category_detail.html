@@ -1,0 +1,408 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} {{ category.name }} Events {% endblock %}
+{% block main %}
+    <div class="container-fluid cat-header popular-events px-0" style="padding-top: 68px;">
+        <div class="row p-0">
+            <div class="col-lg-4 offset-1 hide-mob">
+                <div class="cat-header-content">
+                    <h1><span>{{ category.name }}</span> Events</h1>
+                    <p>Lorem ipsum dolor sit amet, vconsectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. </p>
+                </div>
+            </div>
+            <div class="col-lg-7 col-12">
+                <img class="img-fluid hide-mob" src="{% static 'assets/images/category/cat-bg.png' %}" alt="{{ category.name }}">
+                <img class="img-fluid show-mob-header" src="{% static 'assets/images/category/cat-bg_mob.png' %}"
+                     alt="{{ category.name }}">
+                <div class="show-mob px-5 py-3">
+                    <h1><span>{{ category.name }}</span><br>Events</h1>
+                    <p>Lorem ipsum dolor sit amet, vconsectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container pop-events">
+            <div class="h-v-title-link pt-5">
+                <div class="h-v-title">
+                    <h5>POPULAR EVENTS</h5>
+                </div>
+                <div class="h-v-link">
+                    <a href="#">View All</a>
+                </div>
+            </div>
+            <div class="row" id="cat-event-container">
+                {% for event in related_events|slice:"4" %}
+                    <div class="col-12 col-md-6 col-lg-3 mt-4">
+                        <div class="card-c-e card" style="position: relative; padding-bottom: 40px; height: 100%">
+                            <div>
+                                <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                    <img class="card-img-top" src="{{ event.event_img.url }}" alt="{{ event.name }}">
+                                </a>
+                            </div>
+                            <div class="card-block">
+                                <figure class="profile shadow">
+                                    <span class="profile-avatar">{{ event.start_event_dt|date:"M d" }}</span>
+                                </figure>
+                                <div class="card-text text-right">
+                                    <a>
+                                        {% for cat in event.category.all %}
+                                            {{ cat.name|striptags }}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+                                <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                   class="card-title mt-3 h6 v-link">{{ event.name|striptags|slice:"60" }}</a>
+                                <div class="meta">
+                                    <p>{% if event.city %}{{ event.city }}{% endif %},
+                                        {% if event.location %}{{ event.location }}{% endif %}</p>
+                                </div>
+                            </div>
+                            <div class="card-footer" style="position:absolute;">
+                                <a href="{% url 'event_detail_url' slug=event.slug %}" class="card-att-event">Attend
+                                    this event</a>
+                                <button class="c-icon" data-href="event_follow_url">
+                                    <i class="fa  fa-heart event-follow "
+                                       data-href="{% url 'event_follow' slug=event.slug %}"
+                                            {% if logged_user != 'anonymous' and logged_user in event.follower_list.all %}
+                                       style="color: #fff; background-color: #09c75b"
+                                            {% else %}
+                                       style="color: #fff; background-color: #c2c2c2"
+                                            {% endif %}></i>
+                                </button>
+                                <button class="c-icon btn-share" id="1{{ event.id }}" onclick="share(this.id)">
+                                    <i style="color:#fff"
+                                       class="fa fa-share"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="sh1{{ event.id }}" class="shadow soc-share-con"
+                             style="display: none"> {% include '_partials/soc.html' %}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="coming-next">
+        <div class="cat-cn-t-diagonal"></div>
+        <div class="container">
+            <div class="h-v-title-link pt-5">
+                <div class="h-v-title">
+                    <h5>Coming Next</h5>
+                </div>
+                <div class="h-v-link">
+                    <a href="#">View All</a>
+                </div>
+            </div>
+            <div class="row" id="cat-event-container">
+                {% for event in related_events|slice:"4" %}
+                    <div class="col-12 col-md-6 col-lg-3 mt-4">
+                        <div class="card-c-e card" style="position: relative; padding-bottom: 40px; height: 100%">
+                            <div>
+                                <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                    <img class="card-img-top" src="{{ event.event_img.url }}" alt="{{ event.name }}">
+                                </a>
+                            </div>
+                            <div class="card-block">
+                                <figure class="profile shadow">
+                                    <span class="profile-avatar">{{ event.start_event_dt|date:"M d" }}</span>
+                                </figure>
+                                <div class="card-text text-right">
+                                    <a>
+                                        {% for cat in event.category.all %}
+                                            {{ cat.name|striptags }}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+                                <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                   class="card-title mt-3 h6 v-link">{{ event.name|striptags|slice:"60" }}</a>
+                                <div class="meta">
+                                    <p>{% if event.city %}{{ event.city }}{% endif %},
+                                        {% if event.location %}{{ event.location }}{% endif %}</p>
+                                </div>
+                            </div>
+                            <div class="card-footer" style="position:absolute;">
+                                <a href="{% url 'event_detail_url' slug=event.slug %}" class="card-att-event">Attend
+                                    this event</a>
+                                <button class="c-icon" data-href="event_follow_url">
+                                    <i class="fa  fa-heart event-follow "
+                                       data-href="{% url 'event_follow' slug=event.slug %}"
+                                            {% if logged_user != 'anonymous' and logged_user in event.follower_list.all %}
+                                       style="color: #fff; background-color: #09c75b"
+                                            {% else %}
+                                       style="color: #fff; background-color: #c2c2c2"
+                                            {% endif %}></i>
+                                </button>
+                                <button class="c-icon btn-share" id="1{{ event.id }}" onclick="share(this.id)">
+                                    <i style="color:#fff"
+                                       class="fa fa-share"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div id="sh1{{ event.id }}" class="shadow soc-share-con"
+                             style="display: none"> {% include '_partials/soc.html' %}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="can-cn-b-diagonal"></div>
+    </div>
+    <div class="free-events">
+        <div class="container">
+            <div class="h-v-title-link pt-5">
+                <div class="h-v-title">
+                    <h5>Free Events</h5>
+                </div>
+                <div class="h-v-link">
+                    <a href="#">View All</a>
+                </div>
+            </div>
+            <div class="row mt-4" id="cat-event-container">
+                {% for event in free_events|slice:"4" %}
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="card-c-e card" style="position: relative; padding-bottom: 40px; height: 100%">
+                            <div>
+                                <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                    <img class="card-img-top" src="{{ event.event_img.url }}" alt="{{ event.name }}">
+                                </a>
+                            </div>
+                            <div class="card-block">
+                                <figure class="profile shadow">
+                                    <span class="profile-avatar">{{ event.start_event_dt|date:"M d" }}</span>
+                                </figure>
+                                <div class="card-text text-right">
+                                    <a>
+                                        {% for cat in event.category.all %}
+                                            {{ cat.name|striptags }}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+                                <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                   class="card-title mt-3 h6 v-link">{{ event.name|striptags|slice:"60" }}</a>
+                                <div class="meta">
+                                    <p>{% if event.city %}{{ event.city }}{% endif %},
+                                        {% if event.location %}{{ event.location }}{% endif %}</p>
+                                </div>
+                            </div>
+                            <div class="card-footer" style="position:absolute;">
+                                <a href="{% url 'event_detail_url' slug=event.slug %}" class="card-att-event">Attend
+                                    this event</a>
+                                <button class="c-icon" data-href="event_follow_url">
+                                    <i class="fa  fa-heart event-follow "
+                                       data-href="{% url 'event_follow' slug=event.slug %}"
+                                            {% if logged_user != 'anonymous' and logged_user in event.follower_list.all %}
+                                       style="color: #fff; background-color: #09c75b"
+                                            {% else %}
+                                       style="color: #fff; background-color: #c2c2c2"
+                                            {% endif %}></i>
+                                </button>
+                                <button class="c-icon btn-share" id="1{{ event.id }}" onclick="share(this.id)">
+                                    <i style="color:#fff"
+                                       class="fa fa-share"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="sh1{{ event.id }}" class="shadow soc-share-con"
+                             style="display: none"> {% include '_partials/soc.html' %}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="top-organizers pb-5">
+        <div class="cat-cn-t-diagonal"></div>
+        <div class="container">
+            <div class="h-v-title-link pt-5">
+                <div class="h-v-title">
+                    <h5>Top Organizers</h5>
+                </div>
+                <div class="h-v-link">
+                    <a href="#">View All</a>
+                </div>
+            </div>
+            <div class="row mt-4 cat-expert-row" id="cat-top-org-container">
+                {% for event in related_events|slice:"4" %}
+                    <div class="cat-top-org col-md-4 col-lg-3 col-12">
+                        <div class="cat-org-up ">
+                            <div class="row py-3">
+                                <div class="col-3">
+                                    <a href="#" alt="organizer profile">
+                                        <img class="evd-sr-organizer-logo" style="width: 50px; height: auto;"
+                                             src="{% static 'assets/images/eu_blockchain.png' %}"
+                                             alt="organizer logo">
+                                    </a>
+                                </div>
+                                <div class="col-9">
+                                    <a href="#" class="evd-sr-organizer-title">EU Blockchain Observatory & Forum</a>
+                                    <p class="evd-sr-organizer-desc">Lorem ipsum dolor sit amet</p>
+                                    <a href="#" class="cat-org-follow">Follow</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row mt-4 slick-cat-org" id="cat-top-org-container">
+                {% for event in related_events|slice:"4" %}
+                    <div class="cat-top-org col-md-4 col-lg-3 col-12">
+                        <div class="cat-org-up ">
+                            <div class="row py-3">
+                                <div class="col-3">
+                                    <a href="#" alt="organizer profile">
+                                        <img class="evd-sr-organizer-logo" style="width: 50px; height: auto;"
+                                             src="{% static 'assets/images/eu_blockchain.png' %}"
+                                             alt="organizer logo">
+                                    </a>
+                                </div>
+                                <div class="col-9">
+                                    <a href="#" class="evd-sr-organizer-title">EU Blockchain Observatory & Forum</a>
+                                    <p class="evd-sr-organizer-desc">Lorem ipsum dolor sit amet</p>
+                                    <a href="#" class="cat-org-follow">Follow</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="can-cn-b-exp-diagonal"></div>
+    </div>
+    <div class="h-top-experts">
+        <div class="container">
+            <div class="h-v-title-link pt-5">
+                <div class="h-v-title">
+                    <h5>POPULAR SPEAKERS</h5>
+                </div>
+                <div class="h-v-link">
+                    <a href="#">View All</a>
+                </div>
+            </div>
+            <div class="row expert-row">
+                {% for expert in experts %}
+                    <div class="col-md-6 col-lg-3 h-exp-cont mt-4 filter n-w">
+                        <div class="e-profile-card py-3 card text-left">
+                            <div class="card-body">
+                                <div>
+                                    <a href="{% url "expert_detail" slug=expert.slug %}">
+                                        <img class="profile-picture rounded-circle"
+                                             src="{{ expert.expert_img.url }}" alt="{{ expert.name }}"/>
+                                    </a>
+                                </div>
+                                <a href="{% url "expert_detail" slug=expert.slug %}" class="name">
+                                    {{ expert.name }}
+                                </a>
+                                <p class="b-title">
+                                    {{ expert.business_title }}
+                                </p>
+                                <p class="loc">
+                                    {% if expert.city %}{{ expert.city }}, {% endif %}{{ expert.country }}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url "expert_detail" slug=expert.slug %}" class="card-att-event">View
+                                    Profile</a>
+                                <button class="c-icon" data-href="_follow_url">
+                                    <i class="fa  fa-heart h-expert-follow"
+                                       data-href="{% url 'expert_follow' slug=expert.slug %}"
+                                            {% if logged_user != 'anonymous' and logged_user in expert.follower_list.all %}
+                                       style="color: #fff; background-color: #09c75b"
+                                            {% else %}
+                                       style="color: #fff; background-color: #c2c2c2"
+                                            {% endif %}></i>
+                                </button>
+                                <button class="c-icon">
+                                    <i style="color:#fff"
+                                       class="fa fa-share"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row slick-ex">
+                {% for expert in experts %}
+                    <div class="col-md-6 col-lg-3 h-exp-cont mt-4 filter n-w">
+                        <div class="e-profile-card py-3 card text-left">
+                            <div class="card-body">
+                                <div>
+                                    <a href="{% url "expert_detail" slug=expert.slug %}">
+                                        <img class="profile-picture rounded-circle"
+                                             src="{{ expert.expert_img.url }}" alt="{{ expert.name }}"/>
+                                    </a>
+                                </div>
+                                <a href="{% url "expert_detail" slug=expert.slug %}" class="name">
+                                    {{ expert.name }}
+                                </a>
+                                <p class="b-title">
+                                    {{ expert.business_title }}
+                                </p>
+                                <p class="loc">
+                                    {% if expert.city %}{{ expert.city }}, {% endif %}{{ expert.country }}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url "expert_detail" slug=expert.slug %}" class="card-att-event">View
+                                    Profile</a>
+                                <button class="c-icon" data-href="_follow_url">
+                                    <i class="fa  fa-heart h-expert-follow"
+                                       data-href="{% url 'expert_follow' slug=expert.slug %}"
+                                            {% if logged_user != 'anonymous' and logged_user in expert.follower_list.all %}
+                                       style="color: #fff; background-color: #09c75b"
+                                            {% else %}
+                                       style="color: #fff; background-color: #c2c2c2"
+                                            {% endif %}></i>
+                                </button>
+                                <button class="c-icon">
+                                    <i style="color:#fff"
+                                       class="fa fa-share"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="h-cats">
+        <div class="cat-cn-exp-diagonal"></div>
+        <div class="container">
+            <div class="h-v-title-link pt-5 pb-4">
+                <div class="h-v-title">
+                    <h5>BROWSE CATEGORIES</h5>
+                    <p>Browse groups by topics you're interested in</p>
+                </div>
+            </div>
+            <div class="row d-flex flex-row justify-content-between flex-wrap h-c-cont" id="event-container">
+                {% for cat in all_category %}
+                    <div class="col-md-3 col-6 my-2">
+                        <a href="{% url "category_detail" cat.slug %}" class="h-c-item-link">
+                            <div class="h-cat-item">
+                                {% if cat.img %}
+                                    <img src="{{ cat.thumbnail255x140.url }}" alt="{{ cat.name }}">
+                                {% endif %}
+                                <div id="ovrl" class="overlay"></div>
+                                <p class="text">{{ cat.name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="ed-subcribe">
+        <div class="sub-diagonal"></div>
+        <div class="a d-flex flex-column align-items-center justify-content-center">
+            <h2 class="sub-title">Subscribe to stay updated about upcoming events</h2>
+            <div>
+                <form class="form-inline d-flex justify-content-center align-items-center">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <input type="email" class="form-control sub-email" id="sub-email" name="sub-email"
+                               placeholder="Email Address">
+                    </div>
+                    <button type="submit" class="btn sub-submit mb-2">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

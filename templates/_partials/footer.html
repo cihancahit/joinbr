@@ -1,0 +1,55 @@
+{% load static %}
+
+<section id="footer" style="overflow: hidden">
+    <div class="footer">
+        <div class="footer-logo">
+            <img class="footer-logo" src="{% static '/assets/images/getet_logo_white_small.png' %}" alt="Revealin.com"
+                 class="footer-logo-img">
+        </div>
+        <div class="footer-menu d-flex justify-content-center">
+            <a href="{% url 'AllEvents' %}">Events</a>
+            <a href="{% url 'expert' %}">Experts</a>
+            <a href="{% url 'companies' %}">Companies</a>
+            <a href="{% url 'news' %}">News</a>
+            <a href="{% url 'about' %}">About Us</a>
+        </div>
+        <div class="footer-soc d-flex justify-content-center align-items-center my-2">
+            <ul>
+                <li>
+                    <a target="_blank" href="https://twitter.com/joinbrocom">
+                        <i style="color: #232323;" class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li><a target="_blank" href="https://www.facebook.com/joinbrocom/">
+                    <i style="color: #232323;" class="fa fa-facebook"></i>
+                </a>
+                </li>
+                <li>
+                    <a target="_blank" href="https://www.linkedin.com/company/29369595/">
+                        <i style="color: #232323;" class="fa fa-linkedin"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        {#        <div class="footer-sep"></div>#}
+        <div class="container">
+            <div class="row">
+                <div class="footer-copy">
+                    <ul>
+                        <li style='background:url("{% static 'assets/images/line.png' %}") right no-repeat;background-size: 2px 11px;'>
+                            <a href="{% url "privacy" %}">Privacy Policy</a>
+                        </li>
+                        <li style='background:url("{% static 'assets/images/line.png' %}") right no-repeat;background-size: 2px 11px;'>
+                            <a href="{% url "terms" %}">Terms</a>
+                        </li>
+                        <li>
+                            <a href="{% url "faq" %}">FAQS</a>
+                        </li>
+                    </ul>
+                    <p>All rights reserved. www.revealin.com {% now "Y" %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="cut"></div>
+    </div>
+</section>

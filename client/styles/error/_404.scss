@@ -1,0 +1,184 @@
+@import "../_utils/colors";
+@import "../_utils/_mixins/button";
+@import "../_utils/variables";
+@import "../_utils/_mixins/tools";
+
+.parallax {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: $button-color;
+  position: relative;
+
+  div {
+    /*enable 3D rendering*/
+    transform: translateZ(0);
+    will-change: transform;
+  }
+}
+
+.layer {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+}
+
+.layer1 {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.source-layer1 {
+  background-image: url(/static/assets/images/errors/1.png);
+  background-position: top center;
+  margin-left: 180px;
+  margin-top: 80px !important;
+  @media screen and (max-width: $tablet-l) {
+    padding-left: 20px;
+    margin-left: 0px;
+    margin-top: 80px !important;
+
+  }
+}
+.err-exp{
+   background-image: url(/static/assets/images/errors/11.png);
+  @media screen and (max-width: $tablet-l) {
+      background-image: url(/static/assets/images/errors/1_mob.png);
+  }
+}
+
+.err-comp{
+   background-image: url(/static/assets/images/errors/2.png);
+  @media screen and (max-width: $tablet-l) {
+      background-image: url(/static/assets/images/errors/2_mob.png);
+  }
+}
+
+.err-event{
+   background-image: url(/static/assets/images/errors/3.png);
+  @media screen and (max-width: $tablet-l) {
+      background-image: url(/static/assets/images/errors/3_mob.png);
+  }
+}
+
+.err-gen{
+   background-image: url(/static/assets/images/errors/4.png);
+  @media screen and (max-width: $tablet-l) {
+      background-image: url(/static/assets/images/errors/4_mob.png);
+  }
+}
+
+.source-layer3 {
+  background-image: url(/static/assets/images/errors/wave3.png);
+  background-position: bottom center;
+  @media screen and (max-width: $tablet-l) {
+    display: none;
+  }
+}
+
+.source-layer4 {
+  background-image: url(/static/assets/images/errors/wave2.png);
+  background-position: bottom center;
+  @media screen and (max-width: $tablet-l) {
+    display: none;
+
+  }
+}
+
+.message-404 {
+  margin-top: 80px !important;
+  margin-left: 115px;
+  width: 30%;
+  @media screen and (max-width: $tablet-l) {
+    width: 100%;
+    margin-left: 20px;
+    margin-top: 250px !important;
+  }
+
+  h1 {
+    font-family: "Lato Black", Serif;
+
+    color: #fff;
+    font-size: 5.8rem;
+    @media screen and (max-width: $tablet-l) {
+      font-size: 3rem;
+    }
+  }
+
+  h2 {
+    font-family: "Lato Heavy", Serif;
+    color: #fff;
+    font-size: 2.3rem;
+
+    @media screen and (max-width: $tablet-l) {
+      font-size: 1.3rem;
+    }
+  }
+
+  .bring-me-home-mob {
+    display: none !important;
+    @include green-button;
+    background-color: #09c55b;
+    box-shadow: 0 0rem 1rem rgba(20, 142, 73, .85) !important;
+    @media screen and (max-width: $tablet-l) {
+      display: inline-block !important;
+    }
+  }
+
+  h4 {
+    font-family: "Lato Bold", Serif;
+    color: #ececec;
+    @media screen and (max-width: $tablet-l) {
+      display: none;
+    }
+  }
+
+  p {
+    font-family: "Lato", Serif;
+    color: #fff;
+    font-size: 1.3rem;
+    @media screen and (max-width: $tablet-l) {
+      font-size: 1.2rem;
+      padding-right: 20px;
+      margin-top: .5rem;
+      line-height: 1.1;
+    }
+  }
+
+  .links-404 {
+    margin-top: 20px;
+    @media screen and (max-width: $tablet-l) {
+      margin-top: unset;
+    }
+
+    a {
+      font-family: "Lato Bold", Serif;
+      color: #ececec;
+      font-size: 18px;
+      @include transition(all ease-in-out 300ms);
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.bring-me-home-cont {
+  .bring-me-home {
+    @include green-button;
+    background-color: #09c55b;
+    box-shadow: 0 0rem 1rem rgba(20, 142, 73, .85) !important;
+    @media screen and (max-width: $tablet-l) {
+      display: none;
+    }
+  }
+}

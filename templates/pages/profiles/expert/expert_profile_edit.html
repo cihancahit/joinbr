@@ -1,0 +1,443 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Who is {{ expert.name }}? {% endblock %}
+{% block main %}
+    <div class="wrapper d-flex align-items-stretch">
+        {% include 'pages/profiles/expert/navbar.html' %}
+        <!-- Page Content  -->
+        <div id="content">
+            <div class="container-fluid">
+                <form method="POST" action="{% url "expert_profile_edit_submit" expert.slug %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-3 col-12 l-info">
+                            <div class="row mob-view">
+                                <div class="col-3 text-right pr-0">
+                                    <a href="#"><img class="expert-profile-pic"
+                                                     src="{{ expert.expert_img.url }}" alt="{{ expert.name }}"></a>
+                                </div>
+                                <div class="col-5 d-flex flex-column">
+                                    <h1>{{ expert.name }}</h1>
+                                    <p>Expert</p>
+                                </div>
+                                <div class="col-2 d-flex align-items-center px-0">
+                                    <div class="icon-wrapper">
+                                        <i class="fa fa-bell fa-inverse"></i>
+                                        <span class="badge">11</span>
+                                    </div>
+                                </div>
+                                <div class="col-2 d-flex align-items-center pl-0">
+                                    <div class="icon-wrapper">
+                                        <i class="fa fa-envelope fa-inverse"></i>
+                                        <span class="badge">14</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-cont p-3">
+                                <div class="ep-edit-profile-image">
+                                    <img class="ex-profile-pic" id="ep-profile-image" src="{{ expert.expert_img.url }}"
+                                         alt="{{ expert.name }}">
+                                    <span class="expert-badge">Expert</span>
+                                    <input type='file' id="ep-edit-profile-pic" accept=".png, .jpg, .jpeg"/>
+                                    <label for="ep-edit-profile-pic"></label>
+                                </div>
+                                <h3 class="ex-profile-name my-2">{{ expert.name }}</h3>
+                                <p class="ex-profile-ex my-1">{{ expert.business_title }}</p>
+                                {% if expert.company.all.count > 0 %}
+                                    <a class="ex-profile-comp my-2"
+                                       href="{% url 'company_detail' slug=expert.company.first.slug %}">
+                                        <img src="{{ expert.company.first.company_logo.url }}"
+                                             alt="{{ expert.company.first.name }}">
+                                        <span>{{ expert.company.first.name }}</span>
+                                    </a>
+                                {% endif %}
+                                <div class="social">
+                                    <div class="web pr-1">
+                                        <a class="message" href="#weblinks">
+                                            <i style="color:#fff"
+                                               class="fa fa-globe"></i>
+                                        </a>
+                                    </div>
+                                    <div class="twitter px-1">
+                                        <a class="message" href="#weblinks">
+                                            <i style="color:#fff"
+                                               class="fa fa-twitter"></i>
+
+                                        </a>
+                                    </div>
+                                    <div class="fb px-1">
+                                        <a class="message" href="#weblinks">
+                                            <i style="color:#fff"
+                                               class="fa fa-facebook"></i>
+                                        </a>
+                                    </div>
+                                    <div class="linkedin px-1">
+                                        <a class="message" href="#weblinks">
+                                            <i style="color:#fff"
+                                               class="fa fa-linkedin"></i>
+                                        </a>
+                                    </div>
+                                    <div class="mail pl-1">
+                                        <a class="message" href="#weblinks">
+                                            <i style="color:#fff"
+                                               class="fa fa-envelope"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <hr class="ex-profile-divider d-sm-none d-md-block">
+                                <p class="ex-profile-loc">Location: <span>{{ expert.location }}</span></p>
+                                {% if expert.language.count > 0 %}
+                                    <p class="ex-profile-lang d-sm-none d-md-block">Language
+                                        {% for lang in expert.language.all %}
+                                            {% if forloop.first %}
+                                                <span>{{ lang }}</span>
+                                            {% else %}
+                                                <span>, {{ lang }}</span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </p>
+                                {% endif %}
+                                <p class="ex-profile-bio d-sm-none d-md-block">{{ expert.bio|safe|slice:":250" }}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-12 c-edit">
+                            <div class="profile-edit-cont p-4">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4>Edit Profile</h4>
+                                    <button class="ep-edit-submit-btn" type="submit">Save</button>
+                                </div>
+                                <div class="ex-profile-sec-header my-4 d-flex justify-content-between">
+                                    <h5>Basic Information</h5>
+                                    <button type="button" class="ep-panel-nav-btn" id="ep-basic-nav"><span
+                                            id="ep-basic-h-icon" class="fa fa-chevron-up"></span></button>
+                                </div>
+                                <div class="ex-profile-basic" id="ep-basic">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 pl-0">
+                                            <label for="exp_fullname">Full Name</label>
+                                            <input type="text" class="form-control jb-input-w" id="exp_fullname"
+                                                   name="exp_fullname" value="{{ expert.name }}">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="exp_location">Location</label>
+                                            <input type="text" class="form-control jb-input-w" id="exp_location"
+                                                   name="exp_location"
+                                                   value="{{ expert.location }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-row mt-3">
+                                        <div class="form-group">
+                                            <label for="exp_pub_url">Public URL</label>
+                                            <div class="d-flex align-items-center">
+                                                <p id="exp_pub_url1" class="text-muted m-0">revealin.com/people/</p>
+                                                <input type="text" class="form-control jb-input-w" id="exp_pub_url"
+                                                       name="exp_pub_url"
+                                                       value="{{ expert.slug }}" aria-describedby="exp_pub_url1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ex-profile-sec-header my-4 d-flex justify-content-between">
+                                    <h5>Expert Details</h5>
+                                    <button type="button" class="ep-panel-nav-btn" id="ep-detail-nav"><span
+                                            id="ep-detail-h-icon" class="fa fa-chevron-up"></span></button>
+                                </div>
+                                <div class="ex-profile-detail" id="ep-detail">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6 pl-0">
+                                            <label for="exp_title">Title</label>
+                                            <input type="text" class="form-control jb-input-w" id="exp_title"
+                                                   name="exp_title" value="{{ expert.business_title }}">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="exp_currentcomp">Current Company</label>
+                                            <div class="inner-addon left-addon current-comp-form-cont">
+                                                <img src="{{ expert.company.first.company_logo.url }}"
+                                                     id="current-comp-form-img"
+                                                     alt="{{ expert.name }}">
+                                                <input type="text" class="form-control jb-input-w"
+                                                       id="company_name_profile"
+                                                       style="border-left: unset;"
+                                                       name="exp_currentcomp"
+                                                       value="{{ expert.company.first }}">
+                                                <input type="hidden" name="current_comp" id="current_comp"
+                                                       value="{{ expert.company.first.pk }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12">
+                                            <label for="exp-bio">Bio</label>
+                                            <textarea style="height: 150px" class="form-control jb-input-w p-3"
+                                                      id="exp-bio" name="exp-bio"
+                                                      rows="5" cols="50"
+                                                      placeholder="{{ expert.bio|striptags }}"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-lg-6 col-12 pl-0">
+                                            <label for="exp_skill_search">Skills</label>
+                                            <input type="text" class="form-control jb-input-w" id="exp_skill_search"
+                                                   placeholder="Skill">
+                                            <input type="hidden" id="exp_skills" name="exp_skills"
+                                                   value="{% for e in expert.fields_of_experties.all %}{% if forloop.last %}{{ e.expertise_fields }}{% else %}{{ e.expertise_fields }};{% endif %}{% endfor %}">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="skill-list">
+                                            <ul class="tagList">
+                                                {% for foe in expert.fields_of_experties.all %}
+                                                    <li id="{{ expert.id }}_{{ foe.expertise_fields }}" class="lili"
+                                                        data-value="{{ foe.expertise_fields }}">
+                                                        {{ foe.expertise_fields }} <span class="rmTag">x</span></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ex-profile-sec-header my-4 d-flex justify-content-between" id="weblinks">
+                                    <h5>Languages</h5>
+                                    <button type="button" class="ep-panel-nav-btn" id="ep-links-nav"><span
+                                            id="ep-links-h-icon" class="fa fa-chevron-up"></span></button>
+                                </div>
+                                <div class="ex-profile-langs" id="ep-links">
+                                    <input type="hidden" name="ep-langs" id="ex-profile-lang-list"
+                                           value="{% if languages.count > 0 %}{% for eplang in expert.language.all %}{% if forloop.first %}{{ eplang.iso_code }}{% else %};{{ eplang.iso_code }}{% endif %}{% endfor %}{% else %}init{% endif %}">
+                                    {% if languages.count > 0 %}
+                                    {% for eplang in languages %}
+                                        {% if forloop.first %}
+                                            <div class="form-row align-items-end" id="{{ eplang.language.iso_code }}">
+                                                <div class="form-group col-md-5 pl-0">
+                                                    <label for="lang-level">LEVEL</label>
+                                                    <select class="form-control" name="lang-level-{{ eplang.language.iso_code }}">
+                                                        {% for level in lang_levels %}
+                                                            <option>{{ level }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-5 pl-0">
+                                                    <input type="hidden" name="ep-lang-{{ eplang.language.iso_code }}" id="ep-lang-{{ eplang.language.iso_code }}" value="{{ eplang.language.language }}">
+                                                    <label for="exp-lang">LANGUAGE</label>
+                                                    <div class="inner-addon left-addon">
+                                                        <i class="fa fa-language"></i>
+                                                        <input type="text" class="form-control jb-input-w exp_lang"
+                                                               id="exp_lang"
+                                                               name="exp-lang-{{ eplang.language.iso_code }}" value="{{ eplang.language.language }}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-2 pl-0">
+                                                    <button class="ep-lang-add-new-input mb-1" type="button"><span
+                                                            class="fa fa-plus"></span></button>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="form-row align-items-end" id="{{ eplang.language.iso_code }}">
+                                                <div class="form-group col-md-5 pl-0">
+                                                    <select class="form-control"
+                                                            name="lang-level-{{ eplang.language.iso_code }}">
+                                                        {% for level in lang_levels %}
+                                                            <option>{{ level }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-5 pl-0">
+                                                    <input type="hidden" name="ep-lang-{{ eplang.language.iso_code }}" id="ep-lang-{{ eplang.language.iso_code }}" value="{{ eplang.language.language }}">
+                                                    <div class="inner-addon left-addon">
+                                                        <i class="fa fa-language"></i>
+                                                        <input type="text" class="form-control jb-input-w exp_lang"
+                                                               id="exp_lang"
+                                                               name="exp-lang-{{ eplang.language.iso_code }}" value="{{ eplang.language.language }}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-2 pl-0">
+                                                    <button class="ep-lang-remove-input mb-1" type="button" data-name="{{ eplang.language.iso_code }}"><span
+                                                            class="fa fa-minus"></span></button>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                        <div class="form-row align-items-end" id="init">
+                                                <div class="form-group col-md-5 pl-0">
+                                                    <select class="form-control"
+                                                            name="lang-level-init">
+                                                        {% for level in lang_levels %}
+                                                            <option>{{ level }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-5 pl-0">
+                                                    <input type="hidden" name="ep-lang-init" id="ep-lang-init" value="">
+                                                    <div class="inner-addon left-addon">
+                                                        <i class="fa fa-language"></i>
+                                                        <input type="text" class="form-control jb-input-w exp_lang"
+                                                               id="exp_lang"
+                                                               name="exp-lang-init" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-2 pl-0">
+                                                    <button class="ep-lang-remove-input mb-1" type="button" data-name="init"><span
+                                                            class="fa fa-minus"></span></button>
+                                                </div>
+                                            </div>
+                                {% endif %}
+                                </div>
+                            <div class="ex-profile-sec-header my-4 d-flex justify-content-between" id="weblinks">
+                                <h5>Web Links</h5>
+                                <button type="button" class="ep-panel-nav-btn" id="ep-links-nav"><span
+                                        id="ep-links-h-icon" class="fa fa-chevron-up"></span></button>
+                            </div>
+                            <div class="ex-profile-web-links" id="ep-links">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 pl-0">
+
+                                        <label for="exp_web_link">WEBSITE LINK</label>
+                                        <div class="inner-addon left-addon">
+                                            <i class="fa fa-globe"></i>
+                                            <input type="text" class="form-control jb-input-w" id="exp_web_link"
+                                                   name="exp_web_link" value="{{ expert.personal_url }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 pl-0">
+                                        <label for="exp_fb_link">FACEBOOK LINK</label>
+                                        <div class="inner-addon left-addon">
+                                            <i class="fa fa-facebook"></i>
+                                            <input type="text" class="form-control jb-input-w" id="exp_fb_link"
+                                                   name="exp_fb_link" value="{{ expert.facebook_url }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 pl-0">
+                                        <label for="exp_tw_link">TWITTER LINK</label>
+                                        <div class="inner-addon left-addon">
+                                            <i class="fa fa-twitter"></i>
+                                            <input type="text" class="form-control jb-input-w" id="exp_tw_link"
+                                                   name="exp_tw_link" value="{{ expert.twitter_url }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 pl-0">
+                                        <label for="exp_ln_link">LINKEDIN LINK</label>
+                                        <div class="inner-addon left-addon">
+                                            <i class="fa fa-linkedin"></i>
+                                            <input type="text" class="form-control jb-input-w" id="exp_ln_link"
+                                                   name="exp_ln_link" value="{{ expert.linkedin_url }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ex-profile-sec-header my-4 d-flex justify-content-between">
+                                <h5>Participated Events</h5>
+                                <button type="button" class="ep-panel-nav-btn" id="ep-pe-nav"><span
+                                        id="ep-pe-h-icon" class="fa fa-chevron-up"></span></button>
+
+                            </div>
+                            <div class="ex-profile-events" id="ep-pe">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 pl-0">
+                                        <input type="text" class="form-control jb-input-w" id="exp_search_events"
+                                               placeholder="Search Events">
+                                        <input type="hidden" value="
+                                                    {% for event in expert_events %}{{ event.event.pk }};{% endfor %}"
+                                               name="exp_events" id="exp_events">
+                                    </div>
+                                </div>
+                                <div class="row event-row-list">
+                                    {% for event in expert_events %}
+                                        <div class="col-6 mt-3" data-value="{{ event.event.pk }}">
+                                            <span class="exp-ev-x">x</span>
+                                            <div class="exp-event-block">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <a href="{% url 'event_detail_url' slug=event.event.slug %}"><img
+                                                                src="{{ event.event.event_img.url }}"
+                                                                alt="event name" class="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-7 py-3">
+                                                        <div class="exp-event-content">
+                                                            <a href="{% url 'event_detail_url' slug=event.event.slug %}"
+                                                               class="h5 exp-ec-name">{{ event.event.name }}</a>
+                                                            <p class="exp-ec-startdate">{{ event.event.start_event_dt|date:"M d, Y" }}</p>
+                                                            <select name="exp-event-atendee-type{{ event.event.pk }}"
+                                                                    class="exp-ec-at exp-ec-at-bg-speaker"
+                                                                    id="exp-event-atendee-type{{ event.event.pk }}">
+
+                                                                <option value="speaker"
+                                                                        selected>{{ event.tag.tags }}</option>
+                                                                {% for tag in event_tags %}
+                                                                    {% if event.tag.tags != tag.tags %}
+                                                                        <option value="{{ tag.tags }}">{{ tag.tags }}</option>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row pt-4">
+                                    <div class="col-12 text-center">
+                                        <a href="#" class="exp-ev-show-less">SHOW LESS EVENTS</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ex-profile-sec-header my-4 d-flex justify-content-between">
+                                <h5>Colleagues</h5>
+                                <button type="button" class="ep-panel-nav-btn" id="ep-coll-nav"><span
+                                        id="ep-coll-h-icon" class="fa fa-chevron-up"></span></button>
+                            </div>
+                            <div class="ex-profile-coll" id="ep-coll">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 pl-0">
+                                        <input type="text" class="form-control jb-input-w" id="exp_search_coll"
+                                               placeholder="Search Colleagues">
+                                        <input type="hidden" value="{% for colleg in colleagues %}{% if forloop.last %}{{ colleg.colleague.pk }}{% else %}{{ colleg.colleague.pk }};{% endif %}{% endfor %}"
+                                               name="exp_colls" id="exp_colls">
+                                    </div>
+                                </div>
+                                <div class="row ex-coll-list">
+                                    {% for colleg in colleagues %}
+                                        {#                                            <a href="#">#}
+                                        <div class="col-4 mt-4">
+                                            <span class="exp-col-x">x</span>
+                                            <div class="exp-coll-block px-2 py-3 ">
+                                                <div class="row align-items-center">
+                                                    <div class="col-2">
+                                                        <a href="{% url "expert_detail" colleg.colleague.slug %}"
+                                                           class="exp-coll-img-link"><img
+                                                                src="{{ colleg.colleague.expert_img.url }}"
+                                                                alt="expert name" class=""></a>
+                                                    </div>
+                                                    <div class="col-10">
+                                                        <a href="{% url "expert_detail" colleg.colleague.slug %}"
+                                                           class="exp-coll-name h5">{{ colleg.colleague.name }}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                                <div class="row pt-4">
+                                    <div class="col-12 text-center">
+                                        <a href="#" class="exp-ev-show-less">SHOW MORE COLLEAGUES</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button class="ep-edit-submit-btn" type="submit">Save</button>
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}

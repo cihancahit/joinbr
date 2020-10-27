@@ -1,0 +1,925 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Who is {{ expert.name }}? {% endblock %}
+{% block main %}
+    <div class="wrapper d-flex align-items-stretch">
+        {% include 'pages/profiles/expert/navbar.html' %}
+        <!-- Page Content  -->
+        <div id="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-7 col-12 l-part">
+                        <div class="row mob-view">
+                            <div class="col-3 text-right pr-0">
+                                <a href="#"><img class="expert-profile-pic"
+                                                 src="{% static 'assets/images/lorem_profile.jpg' %}" alt="Revealin Expert"></a>
+                            </div>
+                            <div class="col-5 d-flex flex-column">
+                                <h1>Robert Sanders</h1>
+                                <p>Expert</p>
+                            </div>
+                            <div class="col-2 d-flex align-items-center px-0">
+                                <div class="icon-wrapper">
+                                    <i class="fa fa-bell fa-inverse"></i>
+                                    <span class="badge">11</span>
+                                </div>
+                            </div>
+                            <div class="col-2 d-flex align-items-center pl-0">
+                                <div class="icon-wrapper">
+                                    <i class="fa fa-envelope fa-inverse"></i>
+                                    <span class="badge">14</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="l-up-events p-3">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-12 expert-fav-header pb-2">
+                                    <p class="title">Upcoming Events</p>
+                                    <button class="l-ue-search">Search</button>
+                                    <button type="button" class="ep-panel-nav-btn" id="ep-ue-nav"><span
+                                            id="ep-ue-h-icon" class="fa fa-chevron-up"></span></button>
+                                </div>
+                                <div class="col-12" id="ep-ue-tabs">
+                                    <ul class="nav nav-tabs" id="edfe-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="hostevents-tab" data-toggle="tab"
+                                               href="#hostevents" role="tab"
+                                               aria-controls="home" aria-selected="true">You are Hosting</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="speakingevents-tab" data-toggle="tab"
+                                               href="#speakingevents" role="tab"
+                                               aria-controls="profile" aria-selected="false">Speaking at</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="goingevents-tab" data-toggle="tab"
+                                               href="#goingevents" role="tab"
+                                               aria-controls="profile" aria-selected="false">Going</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="folllowingingevents-tab" data-toggle="tab"
+                                               href="#followingevents" role="tab"
+                                               aria-controls="profile" aria-selected="false">Following</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-12 pb-1" id="ep-ue">
+                                    <div class="tab-content" id="edfe-content">
+                                        <div class="tab-pane fade show active" id="hostevents" role="tabpanel"
+                                             aria-labelledby="hostevents-tab">
+                                            <div class="events-container" id="events-container">
+                                                {% for event in events|slice:2 %}
+                                                    <div class="row exd-e-upcoming py-3">
+
+                                                        <div class="col-md-4">
+                                                            <div class="img-con">
+                                                                <a href="{% url "event_detail_url" slug=event.slug %}">
+                                                                    <img src="{{ event.event_img.url }}" alt="{{ event.name }}"
+                                                                         class="exd-e-up-event-image">
+                                                                </a>
+
+                                                                <div class="event-label-speaker">
+                                                                    <p>Speaker</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="exd-e-event-meta">
+                                                                <a href="{% url "event_detail_url" slug=event.slug %}"
+                                                                   class="title">{{ event.name }}</a>
+                                                                {% for cat in event.category.all %}
+                                                                    <a href="{% url "category_detail" slug=cat.slug %}"
+                                                                       class="see-detail text-right">{{ cat.name }}</a>
+                                                                {% endfor %}
+                                                            </div>
+                                                            <div>
+                                                                <p class="l-ue-meta m-0">12, may, 2020|Scotland, UK</p>
+                                                            </div>
+                                                            <div class="text-justify">
+                                                                {{ event.info|striptags|safe|slice:":320" }}...
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="speakingevents" role="tabpanel"
+                                             aria-labelledby="speakingevents-tab">
+                                            <div class="row slick-ex">
+                                                {% for expert in following_experts %}
+                                                    <div class="col-md-6 col-lg-3 h-exp-cont">
+                                                        <div class="e-profile-card py-1 card-h-e text-left">
+                                                            <div class="card-body">
+                                                                <div>
+                                                                    <a href="{% url "expert_detail" slug=expert.slug %}">
+                                                                        <img class="profile-picture rounded-circle"
+                                                                             src="{{ expert.expert_img.url }}" alt="{{ expert.name }}"/>
+                                                                    </a>
+                                                                </div>
+                                                                <a href="{% url "expert_detail" slug=expert.slug %}"
+                                                                   class="name">
+                                                                    {{ expert.name }}
+                                                                </a>
+                                                                <p class="b-title">
+                                                                    {{ expert.business_title }}
+                                                                </p>
+                                                                <p class="loc">
+                                                                    {% if expert.city %}{{ expert.city }}
+                                                                        , {% endif %}{{ expert.country }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="goingingevents" role="tabpanel"
+                                             aria-labelledby="goingevents-tab">
+                                            <div class="row slick-ex">
+                                                {% for company in following_companies %}
+                                                    <div class="col-lg-4">
+                                                        <div class="evd-sr-organizer ">
+                                                            <div class="row">
+                                                                <div class="col-3 p-0">
+                                                                    <a href="{% url "company_detail" company.slug %}"
+                                                                       alt="organizer profile">
+                                                                        <img class="evd-sr-organizer-logo"
+                                                                             src="{{ company.company_logo.url }}"
+                                                                             alt="{{ company.name }}">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-9">
+                                                                    <a href="{% url "company_detail" company.slug %}"
+                                                                       class="evd-sr-organizer-title">{{ company.name }}</a>
+                                                                    <p class="evd-sr-organizer-desc">Lorem ipsum
+                                                                        dolor sit amet</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="followingevents" role="tabpanel"
+                                             aria-labelledby="followingevents-tab">
+                                            <div class="row slick-ex">
+                                                {% for company in following_companies %}
+                                                    <div class="col-lg-4">
+                                                        <div class="evd-sr-organizer ">
+                                                            <div class="row">
+                                                                <div class="col-3 p-0">
+                                                                    <a href="{% url "company_detail" company.slug %}"
+                                                                       alt="organizer profile">
+                                                                        <img class="evd-sr-organizer-logo"
+                                                                             src="{{ company.company_logo.url }}"
+                                                                             alt="organizer logo">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-9">
+                                                                    <a href="{% url "company_detail" company.slug %}"
+                                                                       class="evd-sr-organizer-title">{{ company.name }}</a>
+                                                                    <p class="evd-sr-organizer-desc">Lorem ipsum
+                                                                        dolor sit amet</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-12 r-part">
+                        <div class="r-as-speaker p-3">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-12 expert-fav-header pb-2">
+                                    <p class="title">Apply as a Speaker</p>
+                                    <button type="button" class="ep-panel-nav-btn" id="ep-ass-nav"><span
+                                            id="ep-ass-h-icon" class="fa fa-chevron-up"></span></button>
+                                </div>
+                                {% for event in events|slice:4 %}
+                                    <div class="col-12 r-as-cont mt-3 ep-ass">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="d-flex flex-column">
+                                                    <a href="#" class="r-as-title" data-toggle="modal"
+                                                       data-target=".bs-example-modal-new{{ event.pk }}">{{ event.name }}</a>
+                                                    <p class="r-as-meta p-0 m-0">12, may, 2020 | scotland, UK</p>
+                                                    <a href="{% url 'category_detail' slug=event.category.first.slug %}"
+                                                       class="p-0 r-as-cat">{{ event.category.first.name }}</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="ep-ass-app-detail">
+                                                    <button class="r-as-apply">Apply</button>
+                                                    <a href="#" class="r-as-details">Details</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {#                                    modal#}
+                                    <div class="modal fade bs-example-modal-new{{ event.pk }}" tabindex="-1"
+                                         role="dialog"
+                                         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <!-- Modal Content: begins -->
+                                            <div class="modal-content"
+                                                 style="border-radius: 40px;border:unset;position: relative">
+                                                <span class="ep-as-event-modal-close" data-dismiss="modal">x</span>
+                                                <div class="card-ep-modal card">
+                                                    <div style="position: relative">
+                                                        <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                                            <img class="card-img-top"
+                                                                 src="{{ event.event_img.url }}"
+                                                                 alt="{{ event.name }}">
+                                                        </a>
+                                                        <a href="#" class="ep-m-cat">
+                                                            {% for cat in event.category.all %}
+                                                                {{ cat.name }}
+                                                            {% endfor %}
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                                           class="card-title mt-3 h6 v-link">{{ event.name|striptags|slice:":30" }}</a>
+                                                        <div class="meta">
+                                                            <p class="py-2">{{ event.start_event_dt|date:"M d, Y" }} |
+                                                                {% if event.city %}
+                                                                    {{ event.city }}{% endif %},
+                                                                {% if event.location %}
+                                                                    {{ event.location }}{% endif %}</p>
+                                                        </div>
+                                                        <div class="info text-justify">
+                                                            {{ event.info|slice:"400"|striptags }}
+                                                        </div>
+                                                        <div class="d-flex justify-content-between align-items-center mt-3">
+                                                            <button class="ep-as-apply">APPLY</button>
+                                                            <a href="#" class="ep-as-readmore">Read More &#8594;</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal Content: ends -->
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12 p-0">
+                        <div class="ep-create-event">
+                            <div class="row m-0">
+                                <div class="col-lg-5 col-12 p-3 ep-ce-preview">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-12 expert-fav-header pb-2">
+                                            <p class="title">Create a New Event</p>
+                                            <button type="button" class="ep-panel-nav-btn" id="ep-cne-nav"><span
+                                                    id="ep-cne-h-icon" class="fa fa-chevron-up"></span></button>
+                                        </div>
+                                    </div>
+                                    <div class="ep-ce-img-cont p-3">
+                                        <img src="{% static 'assets/images/meeting.jpg' %}" alt="Revealin Meeting"
+                                             class="ep-ce-img img-fluid" id="ep-ce-cover-image">
+                                        <input type='file' id="ep-ce-cover-image-inp" name="ep-ce-cover-image"
+                                               accept=".png, .jpg, .jpeg"/>
+                                        <label for="ep-ce-cover-image-inp"></label>
+                                    </div>
+                                    <div class="ep-ce-info-cont pt-4">
+                                        <a href="#" class="ep-ce-title">Excepteur sint occaecat cupidatat non</a>
+                                        <p class="ep-ce-meta">JANUARY 10, 2020 - JANUARY 15, 2020 | SCOTLAND, UK</p>
+                                        <p class="ep-ce-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Aperiam asperiores,
+                                            dicta ducimus esse excepturi iure necessitatibus porro ut! Accusantium culpa
+                                            cum et magnam molestias mollitia sequi? Eveniet nemo quae temporibus.</p>
+                                        <div class="tag-list">
+                                            <ul class="tagListP"></ul>
+                                        </div>
+                                        <div class="pticket-price row">
+                                            <div class="col-6">
+                                                <div id="ep-ce-init" class="p-2 pticket-p-meta">
+                                                    <h6 class="pprice" id="ep-ce-init-pp">$</h6>
+                                                    <p class="pinfo" id="ep-ce-init-tp">&nbsp;</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="prefund mt-4">
+                                            <p class="prefund-title"><span class="fa fa-check mr-2"></span>With Refund
+                                                Policy</p>
+                                            <div id="prefund-links">
+                                                <a href="#" class="prefund-link"></a><br>
+                                                <a href="#" class="prefund-email mr-2"></a>
+                                            </div>
+                                        </div>
+                                        <div class="container p-ssoh">
+                                            <div class="panel-group" id="accordion">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <a class="accordion-toggle" data-toggle="collapse"
+                                                           data-parent="#accordion" href="#collapseOne">
+                                                            Speakers
+                                                        </a>
+                                                    </div>
+                                                    <div id="collapseOne" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <div id="pspeaker-list" class="row my-1">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <a class="accordion-toggle" data-toggle="collapse"
+                                                           data-parent="#accordion" href="#collapseTwo">
+                                                            Sponsors
+                                                        </a>
+                                                    </div>
+                                                    <div id="collapseTwo" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            Sponsors list will be here
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <a class="accordion-toggle" data-toggle="collapse"
+                                                           data-parent="#accordion" href="#collapseThree">
+                                                            Organizers
+                                                        </a>
+                                                    </div>
+                                                    <div id="collapseThree" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            organizers list will be here
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <a class="accordion-toggle" data-toggle="collapse"
+                                                           data-parent="#accordion" href="#collapseFour">
+                                                            Hosts
+                                                        </a>
+                                                    </div>
+                                                    <div id="collapseFour" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            Hosts list will be here
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-12 p-3 ep-ce-form ep-cne">
+                                    <div class="row">
+                                        <div class="col-12 ml-auto mr-auto mb-4">
+                                            <div class="multisteps-form__progress">
+                                                <button class="multisteps-form__progress-btn js-active p-0"
+                                                        type="button"
+                                                        title="25%"></button>
+                                                <button class="multisteps-form__progress-btn p-0" type="button"
+                                                        title="50%"></button>
+                                                <button class="multisteps-form__progress-btn p-0" type="button"
+                                                        title="75%"></button>
+                                                <button class="multisteps-form__progress-btn p-0" type="button"
+                                                        title="100%"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form  method="POST" class="multisteps-form__form" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {#                                        step 1#}
+                                        <div class="multisteps-form__panel js-active" data-animation="fadeIn">
+                                            <div class="form-row">
+                                                <div class="form-group col-12 pl-0">
+                                                    <label for="ep-ce-event-name">EVENT NAME</label>
+{#                                                    <input type="text" class="form-control jb-input-w"#}
+{#                                                           id="ep-ce-event-name"#}
+{#                                                           name="ep-ce-event-name" value="Event Name here">#}
+                                                    {{ event_form.name }}
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6 pl-0">
+
+                                                    <label for="ep-ce-event-sdate">START DATE & TIME</label>
+                                                    <div class="inner-addon right-addon">
+                                                        <i class="fa fa-calendar"></i>
+{#                                                        <input type="text" class="form-control jb-input-w p-2"#}
+{#                                                               id="ep-ce-event-sdate"#}
+{#                                                               autocomplete="off"#}
+{#                                                               data-provide="datepicker"#}
+{#                                                               data-date-format="yyyy-mm-dd"#}
+{#                                                               name="ep-ce-event-sdate"#}
+{#                                                               value="{{ expert.personal_url }}">#}
+                                                        {{ event_form.start_event_dt }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 pl-0">
+                                                    <label for="ep-ce-event-edate">END DATE & TIME</label>
+                                                    <div class="inner-addon right-addon">
+                                                        <i class="fa fa-calendar"></i>
+{#                                                        <input type="text" class="form-control jb-input-w p-2"#}
+{#                                                               id="ep-ce-event-edate"#}
+{#                                                               autocomplete="off"#}
+{#                                                               data-provide="datepicker"#}
+{#                                                               data-date-format="yyyy-mm-dd"#}
+{#                                                               name="ep-ce-event-edate"#}
+{#                                                               value="{{ expert.facebook_url }}">#}
+                                                        {{ event_form.finish_event_dt }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6 pl-0">
+
+                                                    <label for="ep-ce-event-loc">Location</label>
+                                                    <div class="inner-addon left-addon">
+                                                        <i class="fa fa-map-marker"></i>
+{#                                                        <input type="text" class="form-control jb-input-w"#}
+{#                                                               id="ep-ce-event-loc"#}
+{#                                                               name="ep-ce-event-loc" value="Scotland, UK">#}
+                                                        {{ event_form.location }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 pl-0">
+                                                    <label for="exp_fb_link">LINK TO BUY TICKETS</label>
+{#                                                    <input type="text" class="form-control jb-input-w" id="exp_fb_link"#}
+{#                                                           name="exp_fb_link" value="{{ expert.facebook_url }}">#}
+                                                    {{ event_form.ticket_url }}
+                                                </div>
+                                            </div>
+                                            <div class="form-row mb-4 pb-4" style="border-bottom: 1px solid #eaeaea;">
+                                                <div class="form-group col-12">
+                                                    <label for="ep-ce-event-info">DESCRIPTION</label>
+{#                                                    <textarea style="height: 150px" class="form-control jb-input-w p-3"#}
+{#                                                              id="ep-ce-event-info" name="ep-ce-event-info"#}
+{#                                                              rows="5" cols="50"#}
+{#                                                              placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, asperiores assumenda aut corporis cum dignissimos fugiat inventore libero maiores minima non, nostrum nulla perspiciatis porro sed sunt unde velit voluptatem!"></textarea>#}
+                                                {{ event_form.info }}
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button class="ep-ce-sasdraft">SAVE AS DRAFT</button>
+                                                <button class="ep-ce-next js-btn-next" type="button">NEXT</button>
+                                            </div>
+                                        </div>
+                                        {# step 1 end #}
+                                        {# step 2 #}
+                                        <div class="multisteps-form__panel" data-animation="fadeIn">
+                                            <div class="form-row">
+                                                <div class="form-group col-lg-6 col-12 pl-0">
+                                                    <label for="ep_ce_tag_search">Tags</label>
+                                                    <input type="text" class="form-control jb-input-w"
+                                                           id="ep_ce_tag_search"
+                                                           placeholder="Tag">
+                                                    <input type="hidden" id="ep_ce_tags" name="ep-ce-tags"
+                                                           value=";PHOTO;HACKING FEST">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="tag-list">
+                                                    <ul class="tagListCe"></ul>
+                                                </div>
+                                            </div>
+                                            <div class="form-row" id="ep-ce-pt-row">
+                                                <input type="hidden" name="ep-ce-pt-list" id="ep-ce-pt-list"
+                                                       value="">
+                                                <div class="form-group col-md-6 pl-0">
+                                                    <label for="ep-ce-init-price">PRICE & TICKET</label>
+                                                    <div class="inner-addon left-addon">
+                                                        <i class="fa fa-dollar"></i>
+                                                        <input type="number" class="form-control jb-input-ce ep-ce-tp"
+                                                               autocomplete="off"
+                                                               name="ep-ce-init-price"
+                                                               id="ep-ce-init-p"
+                                                               value="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-5 pl-0">
+                                                    <label for="ep-ce-init-price-title">&nbsp</label>
+                                                    <input type="text" class="form-control jb-input-w p-2 ep-ce-tt"
+                                                           autocomplete="off"
+                                                           id="ep-ce-init-t"
+                                                           name="ep-ce-init-price-title"
+                                                           value="">
+                                                </div>
+                                                <div class="form-group col-md-1 d-flex align-items-end">
+                                                    <button class="ep-ce-add-new-input mb-1" type="button"><span
+                                                            class="fa fa-plus"></span></button>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6 pl-0">
+
+                                                    <label for="ep-ce-lrefund">LINK TO REFUND POLICY</label>
+
+{#                                                    <input type="text" class="form-control jb-input-w"#}
+{#                                                           id="ep-ce-lrefund"#}
+{#                                                           name="ep-ce-lrefund" placeholder="https://www.site.com/">#}
+                                                    {{ event_form.refund_policy_url }}
+
+                                                </div>
+                                                <div class="form-group col-md-6 pl-0">
+                                                    <label for="ep-ce-contactemail">CONTACT EMAIL</label>
+{#                                                    <input type="text" class="form-control jb-input-w"#}
+{#                                                           id="ep-ce-contactemail"#}
+{#                                                           name="ep-ce-contactemail" placeholder="contact@email.com">#}
+                                                    {{ event_form.contact_email }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-row align-items-center">
+{#                                                <input type="checkbox" name="ep-ce-norefund" value="yes"#}
+{#                                                       onchange="noRefund()" id="ep-ce-norefund">#}
+                                                {{ event_form.no_refund }}
+                                                <label for="ep-ce-norefund" class="m-0 pl-2">No Refund</label>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button class="ep-ce-sasdraft">SAVE AS DRAFT</button>
+                                                <button class="ep-ce-next js-btn-next" type="button">NEXT</button>
+                                            </div>
+                                        </div>
+                                        {# step 2 end #}
+                                        {# step 3 #}
+                                        <div class="multisteps-form__panel ep-profile" data-animation="fadeIn">
+                                            <div class="form-row mt-4">
+                                                <div class="form-group col-md-6 pl-0">
+                                                    <label for="ep-ce-lrefund">SPEAKERS</label>
+                                                    <input type="text" class="form-control jb-input-w"
+                                                           id="ep-ce-search-speaker"
+                                                           placeholder="Search Speakers">
+                                                    <input type="hidden" value=";11;12;13"
+                                                           name="exp_colls" id="exp_colls">
+                                                </div>
+                                            </div>
+                                            <div class="row ex-coll-list" id="ep-ce-speaker-list">
+                                                {#new  speakers will be added here #}
+                                            </div>
+                                            <div class="form-row mt-4">
+                                                <div class="form-group col-md-6 pl-0">
+                                                    <label for="ep-ce-lrefund">SPONSORS</label>
+                                                    <input type="text" class="form-control jb-input-w"
+                                                           id="ep-ce-search-sponsor"
+                                                           placeholder="Add your Sponsors">
+                                                    <input type="hidden" value=";1;2"
+                                                           name="ep-ce-sponsors" id="exp_colls">
+                                                </div>
+                                            </div>
+                                            <div class="row ex-coll-list" id="ep-ce-sponsor-list">
+                                                {#new  speakers will be added here #}
+                                            </div>
+                                            <div class="form-row mt-4">
+                                                <div class="form-group col-md-6 pl-0">
+                                                    <label for="ep-ce-org">ORGANIZERS</label>
+                                                    <input type="text" class="form-control jb-input-w"
+                                                           id="ep-ce-search-org"
+                                                           placeholder="Search Organizers">
+                                                    <input type="hidden" value=";2;3"
+                                                           name="ep-ce-org" id="exp_colls">
+                                                </div>
+                                            </div>
+                                            <div class="row ex-coll-list" id="ep-ce-org-list">
+                                                {#new  oragnizers will be added here #}
+                                            </div>
+                                            <div class="form-row mt-4">
+                                                <div class="form-group col-md-6 pl-0">
+                                                    <label for="ep-ce-host">HOSTS</label>
+                                                    <input type="text" class="form-control jb-input-w"
+                                                           id="ep-ce-search-host"
+                                                           ep-ce-ac-speaker placeholder="Search Hosts">
+                                                    <input type="hidden" value=""
+                                                           name="ep-ce-host" id="exp_colls">
+                                                </div>
+                                            </div>
+                                            <div class="row ex-coll-list" id="ep-ce-host-list">
+                                                {#new  hosts will be added here #}
+                                            </div>
+                                            <div class="form-row mt-4">
+                                                <fieldset class="form-group">
+                                                    <div class="row">
+                                                        <legend class="col-form-label col-12 pt-0 ep-ce-ac-speaker">ARE
+                                                            YOU ACCEPTING SPEAKER SUBMISSIONS?
+                                                        </legend>
+                                                        <div class="col-12">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="ep-ce-ac-op form-check-input "
+                                                                       type="radio"
+                                                                       name="ep-ce-ac-op" id="ep-ce-ac-yes"
+                                                                       value="yes">
+                                                                <label class="form-check-label ep-ce-ac-op"
+                                                                       for="ep-ce-ac-yes">YES</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="ep-ce-ac-op form-check-input" type="radio"
+                                                                       name="ep-ce-ac-op" id="ep-ce-ac-no"
+                                                                       value="no">
+                                                                <label class="form-check-label ep-ce-ac-op"
+                                                                       for="ep-ce-ac-no">NO</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <div class="form-row ep-ce-acs-details" id="ep-ce-acs-details"
+                                                 style="display: none">
+                                                <textarea style="height: 100px" class="form-control jb-input-w p-3"#}
+                                                          name="ep-ce-ac-desc"
+                                                          placeholder="Details here"></textarea>
+
+                                                <div class="p-2">
+                                                    <div style="border-left: 5px solid #ababab38; padding-left: 9px;">
+                                                        <fieldset class="form-group">
+                                                            <div class="row">
+                                                                <legend class="col-form-label col-12 pt-0 ep-ce-ac-speaker">
+                                                                    HOW
+                                                                    DO YOU WANT TO RECEIVE APPLICATIONS?
+                                                                </legend>
+                                                                <div class="col-12">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="ep-ce-acs-receive-type"
+                                                                               id="ep-ce-ac-receive-email"
+                                                                               value="yes">
+                                                                        <label class="form-check-label ep-ce-ac-op"
+                                                                               for="ep-ce-ac-receive-email">By
+                                                                            Email</label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="ep-ce-acs-receive-type"
+                                                                               id="ep-ce-ac-receive-website"
+                                                                               value="no">
+                                                                        <label class="form-check-label ep-ce-ac-op"
+                                                                               for="ep-ce-ac-receive-website">On our
+                                                                            website
+                                                                            Form</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-9 pl-0">
+                                                                <input type="text" class="form-control jb-input-w"
+                                                                       id="ep-ce-acs-receive-address"
+                                                                       name="ep-ce-acs-receive-address" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button class="ep-ce-sasdraft">SAVE AS DRAFT</button>
+                                                <button class="ep-ce-next js-btn-next" type="button">NEXT</button>
+                                            </div>
+                                        </div>
+                                        {# step 3 end #}
+                                        {#step 4#}
+                                        <div class="multisteps-form__panel ep-ce-past-images" data-animation="fadeIn">
+                                            <div id="drop-zone" class="p-2">
+                                                <span class="fa fa-upload"></span>
+                                                <p>Drag your image here</p>
+                                                <div id="clickHere">BROWSE
+{#                                                    <input type="file" name="file" id="file" multiple/>#}
+                                                        {{ event_form.event_img }}
+                                                </div>
+
+                                                <div id='filename'></div>
+                                            </div>
+                                            <div class="d-flex justify-content-end mt-4">
+                                                <button class="ep-ce-sasdraft">SAVE AS DRAFT</button>
+                                                <button class="ep-ce-next" type="submit">ADD EVENT</button>
+                                            </div>
+                                        </div>
+                                        {#                                        step 4 end#}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12 p-0">
+                        <div class="ep-events-stat">
+                            <div class="row m-0">
+                                <div class="col-lg-7 col-12 p-3">
+                                    <div class="profile-stat">
+                                        <div class="d-flex justify-content-between">
+                                            <p class="profile-stat-title">My Events Stats</p>
+                                            <form action="" class="profile-stat-filter">
+                                                <label for="profile-stat-range">Views</label>
+                                                <select name="profile-stat-range" id="profile-stat-range"
+                                                        style="width: unset">
+                                                    <option value="last 7 days">last 7 days</option>
+                                                    <option value="last 30 days">last 30 days</option>
+                                                    <option value="last 90 days">last 90 days</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="chartWrapper">
+                                            <div class="chartAreaWrapper">
+                                                <canvas id="myChart" height="350" width="800"></canvas>
+                                            </div>
+                                            <canvas id="myChartAxis" height="350" width="0"></canvas>
+                                        </div>
+                                        <script>
+                                            var lineChartData = {
+                                                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                                                datasets: [{
+                                                    label: 'Button Clicks',
+                                                    fill: false,
+                                                    data: [13, 16, 11, 25, 33, 18, 23],
+                                                    yAxisID: 'y-axis-1',
+                                                    backgroundColor: '#3ad27c',
+                                                    borderColor: '#3ad27c'
+                                                }, {
+                                                    label: 'Event Views',
+                                                    fill: false,
+                                                    data: [6, 17, 11, 17, 25, 22, 27, 33],
+                                                    yAxisID: 'y-axis-2',
+                                                    backgroundColor: '#fc7d27',
+                                                    borderColor: '#fc7d27'
+                                                }, {
+                                                    label: 'Speaker Applications',
+                                                    fill: false,
+                                                    data: [3, 5, 9, 6, 15, 11, 18, 23],
+                                                    yAxisID: 'y-axis-2',
+                                                    backgroundColor: '#1f4a78',
+                                                    borderColor: '#1f4a78'
+                                                }]
+                                            };
+
+                                            var ctx = document.getElementById('myChart').getContext('2d');
+                                            window.myLine = Chart.Line(ctx, {
+                                                data: lineChartData,
+                                                options: {
+                                                    responsive: true,
+                                                    hoverMode: 'index',
+                                                    stacked: false,
+                                                    scales: {
+                                                        yAxes: [{
+                                                            type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                                                            display: true,
+                                                            position: 'left',
+                                                            id: 'y-axis-1',
+                                                        }, {
+                                                            type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                                                            display: true,
+                                                            position: 'right',
+                                                            id: 'y-axis-2',
+
+                                                            // grid line settings
+                                                            gridLines: {
+                                                                drawOnChartArea: false, // only want the grid lines for one axis to show up
+                                                            },
+                                                        }],
+                                                    }
+                                                }
+                                            });
+
+
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-12 p-3 stat-right">
+                                    {% for i in "123" %}
+                                        {% if forloop.first %}
+                                            <div class="row py-5 align-items-center">
+                                        {% else %}
+                                            <div class="row pb-5 align-items-center">
+                                        {% endif %}
+                                    <div class="col-3 stat-meta">
+                                        <p class="stat-g-count">2242</p>
+                                        <p class="stat-g-text">Going</p>
+                                    </div>
+                                    <div class="col-6 stat-user">
+                                        {% for i in "123" %}
+                                            <a href="#">
+                                                <img src="{% static 'assets/images/lorem_profile.jpg' %}"
+                                                     class="img-fluid stat-g-profile-pic m-1"
+                                                     alt="user name">
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-3 stat-other">
+                                        <p class="stat-t-user">+2239 users</p>
+                                    </div>
+                                    </div>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12 pl-0">
+                        <div class="expert-fav p-3">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-12 expert-fav-header pb-4">
+                                    <p class="title">Your Favorites</p>
+                                    <ul class="nav nav-tabs" id="edfe-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="ep-upevent-tab" data-toggle="tab"
+                                               href="#ep-upevent" role="tab"
+                                               aria-controls="home" aria-selected="true">Upcoming</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="ep-pastevent-tab" data-toggle="tab"
+                                               href="#ep-pastevent" role="tab"
+                                               aria-controls="profile" aria-selected="false">Past</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-12 pb-1">
+                                    <div class="tab-content" id="edfe-content">
+                                        <div class="tab-pane fade show active" id="ep-upevent" role="tabpanel"
+                                             aria-labelledby="home-tab">
+                                            <div class="ep-up-events">
+                                                {% for event in events %}
+                                                    <div class="card-h-e card mx-3">
+                                                        <div>
+                                                            <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                                                <img class="card-img-top" style="height: 150px;"
+                                                                     src="{{ event.event_img.url }}"
+                                                                     alt="{{ event.name }}">
+                                                            </a>
+                                                        </div>
+                                                        <div class="card-block">
+                                                            <figure class="profile shadow">
+                                                                <span class="profile-avatar">{{ event.start_event_dt|date:"M d" }}</span>
+                                                            </figure>
+                                                            <div class="card-text text-right">
+                                                                <a href="#">
+                                                                    {% for cat in event.category.all %}
+                                                                        {{ cat.name }}
+                                                                    {% endfor %}
+                                                                </a>
+                                                            </div>
+                                                            <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                                               class="card-title mt-3 h6 v-link">{{ event.name|striptags|slice:":30" }}</a>
+                                                            <div class="meta">
+                                                                <p>{% if event.city %}
+                                                                    {{ event.city }}{% endif %},
+                                                                    {% if event.location %}
+                                                                        {{ event.location }}{% endif %}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="ep-pastevent" role="tabpanel"
+                                             aria-labelledby="home-tab">
+                                            <div class="ep-past-events">
+                                                {% for event in events %}
+                                                    <div class="card-h-e card mx-3">
+                                                        <div>
+                                                            <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                                                <img class="card-img-top" style="height: 150px;"
+                                                                     src="{{ event.event_img.url }}"
+                                                                     alt="{{ event.name }}">
+                                                            </a>
+                                                        </div>
+                                                        <div class="card-block">
+                                                            <figure class="profile shadow">
+                                                                <span class="profile-avatar">{{ event.start_event_dt|date:"M d" }}</span>
+                                                            </figure>
+                                                            <div class="card-text text-right">
+                                                                <a href="#">
+                                                                    {% for cat in event.category.all %}
+                                                                        {{ cat.name }}
+                                                                    {% endfor %}
+                                                                </a>
+                                                            </div>
+                                                            <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                                               class="card-title mt-3 h6 v-link">{{ event.name|striptags|slice:":30" }}</a>
+                                                            <div class="meta">
+                                                                <p>{% if event.city %}
+                                                                    {{ event.city }}{% endif %},
+                                                                    {% if event.location %}
+                                                                        {{ event.location }}{% endif %}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,577 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Who is {{ expert.name }}? {% endblock %}
+{% block main %}
+    <div class="container exd-header">
+        <a href="{% url 'expert' %}" class="back-to-sr">&lt; Back to Search Result</a>
+    </div>
+    <div class="container exd-content">
+        <div class="row">
+            <div class="col-md-8 col-lg-8 col-12 sidebar-center">
+                <div class="row">
+                    <div class="col-12 exd-sc-1">
+                        <div class="row exd-sc-header">
+                            <div class="col-md-2 col-12 img-prf-con">
+                                <div class="img-prf">
+                                    {{ expert.get_image_thumbnail_ed }}
+                                    <h3 class="name-mob">{{ expert.name }}</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-3  col-6 exd-profile-con">
+                                <div class="exd-profile">
+                                    <div class="meta-prf">
+                                        <h3 class="name">{{ expert.name }}</h3>
+                                        <p class="loc">{{ expert.location }}</p>
+                                        <div class="follow-message">
+                                            <button type="button"
+                                                    data-href="{% url 'expert_follow' slug=expert.slug %}"
+                                                    class="btn follow expert-follow">
+                                                {% if logged_user in expert.follower_list.all %}
+                                                    Unfollow
+                                                {% else %}
+                                                    Follow
+                                                {% endif %}
+                                            </button>
+                                        </div>
+                                        <div class="social">
+                                            <div class="web">
+                                                <a class="message" href="#">
+                                                    <i style="color:#fff"
+                                                       class="fa fa-globe"></i>
+                                                </a>
+                                            </div>
+                                            <div class="twitter">
+                                                <a class="message" href="#">
+
+                                                    <i style="color:#fff"
+                                                       class="fa fa-twitter"></i>
+
+                                                </a>
+                                            </div>
+                                            <div class="fb">
+                                                <a class="message" href="#">
+
+                                                    <i style="color:#fff"
+                                                       class="fa fa-facebook"></i>
+
+                                                </a>
+                                            </div>
+                                            <div class="linkedin">
+                                                <a class="message" href="#">
+                                                    <i style="color:#fff"
+                                                       class="fa fa-linkedin"></i>
+                                                </a>
+                                            </div>
+                                            <div class="mail">
+                                                <a class="message" href="#">
+                                                    <i style="color:#fff"
+                                                       class="fa fa-envelope"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 exd-profile-subinfo-con">
+                                <div class="exd-profile-subinfo">
+                                    {% if expert.age %}
+                                        <p class="exd-ps-age">Age: <span>{{ expert.age }}</span></p>
+                                    {% endif %}
+                                    {% if expert.language.all %}
+                                        <div class="exd-ps-lang-con">
+
+                                            <p>I Speak </p>
+                                            <ul>
+                                                {% for lang in expert.language.all %}
+                                                    <li>{{ lang }}</li>
+                                                {% endfor %}
+                                            </ul>
+
+                                        </div>
+                                    {% endif %}
+                                    {% for company in expert.company.all %}
+                                        <div class="exd-ps-company-con">
+                                            <a href="{% url 'company_detail' slug=company.slug %}">
+                                                {% if company.company_logo %}
+                                                    <img class="exd-ps-company-logo"
+                                                         style="width: 36px; height: auto"
+                                                         src="{{ company.company_logo.url }}" alt="{{ company.name }}">
+                                                {% else %}
+                                                    <img class="exd-ps-company-logo"
+                                                         style="width: 36px; height: auto"
+                                                         src="{% static 'assets/images/no_photo.png' %}"
+                                                         alt="{{ company.name }}">
+                                                {% endif %}
+                                            </a>
+                                            <a href="{% url 'company_detail' slug=company.slug %}"
+                                               class="exd-ps-company-name">{{ company.name }}</a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-5 exd-profile-bro-score-con">
+                                <div class="exd-profile-bro-score">
+                                    <p class="exd-pbs-title">BroScore</p>
+                                    <span class="exd-pbs-score">{{ expert.avg_rating }}</span>
+                                    <div class="expert-rating">
+                                        <button type="button"
+                                                class="btn btn-star-gray btn-xs {% if expert.avg_rating < 20 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                aria-label="Left Align">
+                                            <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-star-gray btn-xs {% if expert.avg_rating < 40 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                aria-label="Left Align">
+                                            <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-star-gray btn-xs {% if expert.avg_rating < 60 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                aria-label="Left Align">
+                                            <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-star-gray btn-xs {% if expert.avg_rating < 80 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                aria-label="Left Align">
+                                            <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button"
+                                                class="btn btn-star-gray btn-xs {% if expert.avg_rating < 100 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                aria-label="Left Align">
+                                            <span class="fa fa-star btn-star" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row exd-sc-com-ex-con">
+                            {% for company in expert.company.all %}
+                                <div class="col-md-6 col-12 exd-sc-com">
+                                    <h5 class="exd-panel-title">Company</h5>
+                                    <div class="exd-sc-com-logo-info-con">
+                                        {% if company.company_logo %}
+                                            <a href="{% url 'company_detail' slug=company.slug %}">
+                                                <img class="exd-sc-com-logo" src="{{ company.company_logo.url }}"
+                                                     alt="{{ company.name }}">
+                                            </a>
+                                        {% else %}
+                                            <img class="exd-sc-com-logo" src="{% static 'assets/images/no_photo.png' %}"
+                                                 alt="{{ company.name }}">
+                                        {% endif %}
+                                        <div class="exd-sc-com-info-con">
+                                            <a href="{% url 'company_detail' slug=company.slug %}"
+                                               class="exd-sc-com-name">{{ company.name }}</a>
+                                            <p class="exd-sc-com-info">{{ company.info|safe|slice:":220" }}</p>
+                                            <a href="{% url 'company_detail' slug=company.slug %}"
+                                               class="exd-sc-com-link">read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            {% if expert.company.count > 0 %}
+                                <div class="col-md-6 col-12 exd-sc-ex">
+                            {% else %}
+                                <div class="col-12 exd-sc-ex">
+                            {% endif %}
+                            <h5 class="exd-panel-title">Who is <span>{{ expert.name }}</span></h5>
+                            <div class="exd-sc-ex-info-con">
+                                <ul class="exd-sc-ex-foe">
+                                    {% for industry in expert.industry.all %}
+                                        <li>{{ industry.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <br>
+                                <div class="exd-sc-ex-bio">
+                                    {{ expert.bio|safe|striptags|slice:":440" }}
+                                    <span id="dots">...</span><span
+                                        id="more">{{ expert.bio|safe|striptags|slice:"440:" }}</span>
+                                </div>
+                                <a href="#" class="exd-sc-ex-link" id="btnExreadmore">read more</a>
+
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if expert.fields_of_experties.count > 0 %}
+                        <div class="row skill-mob">
+                            <div class="exd-sr-skills">
+                                <h5 class="exd-sr-skill-title">Skills</h5>
+                                <ul class="skills">
+                                    {% for skills in expert.fields_of_experties.all|slice:":3" %}
+                                        <li class="skill">
+                                            <a href="">{{ skills }}</a>
+                                        </li>
+                                    {% endfor %}
+                                    {% for skills in expert.fields_of_experties.all|slice:"3:" %}
+                                        <li class="skill skill-ghost" style="display: none">
+                                            <a href="">{{ skills }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <button class="exd-sr-skill-rm">see all Skills</button>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if events_f.count > 0 %}
+                        <div class="row exd-events-con">
+                            <div class="col-12">
+                                <div class="row exd-e-header">
+                                    <h5 class="exd-panel-title">Upcoming Events</h5>
+                                </div>
+                                <div class="events-container" id="events-container">
+                                    {% for event in events_f %}
+                                        <div class="row exd-e-upcoming py-3">
+
+                                            <div class="col-md-4">
+                                                <div class="img-con">
+                                                    <a href="{% url "event_detail_url" slug=event.event.slug %}">
+                                                        <img src="{{ event.event.event_img.url }}"
+                                                             alt="{{ event.event.name }}"
+                                                             class="exd-e-up-event-image">
+                                                    </a>
+                                                    <div class="event-label-speaker">
+                                                        <p>Speaker</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="exd-e-event-meta">
+                                                    <a href="{% url "event_detail_url" slug=event.event.slug %}"
+                                                       class="title">{{ event.event.name }}</a>
+                                                    <a href="{% url "event_detail_url" slug=event.event.slug %}"
+                                                       class="see-detail">see event
+                                                        details</a>
+                                                </div>
+                                                <div>
+                                                    {{ event.event.info|striptags|safe|slice:":320" }}...
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    {% endfor %}
+                                    <paginated-list :list-data="events"/>
+                                </div>
+                                <div class="row exd-e-footer">
+                                    <div class="exd-ef-contact-con">
+                                        <p>Interested in hiring this expert</p>
+                                    </div>
+                                    <p>
+                                        Contact <a href="#">{{ expert.name }}</a> directly to discuss project details.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="row exd-review">
+                        <div class="col-12">
+                            <div class="exd-r-form">
+                                <form method="POST" id="r-post-form">
+                                    {% csrf_token %}
+                                    <h5 class="exd-panel-title">Add a Review</h5>
+                                    <div class="form-row align-items-center">
+                                        <input type="hidden" class="form-control" id="r-id" name="r-id"
+                                               value="{{ expert.pk }}">
+                                        <div class="form-group col-md-4">
+                                            <input type="text" class="form-control" id="r-title" name="r-title"
+                                                   placeholder="Review Title">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <input type="text" class="form-control" id="r-company-position"
+                                                   name="r-company-position"
+                                                   placeholder="Company/Position">
+                                        </div>
+                                        <div class="form-group col-md-4 d-flex flex-column">
+                                            <label style="display: none;" for="inputAddress">Add Stars</label>
+                                            <div id="rater{{ company.id }}">
+                                                <input class="stars"
+                                                       name="stars" id="stars"
+                                                       type="hidden">
+                                            </div>
+                                            <script>
+                                                var starRating{{ product.id }} = raterJs({
+                                                    starSize: 28,
+                                                    element: document.querySelector("#rater{{ company.id }}"),
+                                                    rateCallback: function rateCallback(rating, done) {
+                                                        this.setRating(rating);
+                                                        done();
+                                                    }
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-8">
+                                            <textarea class="form-control" id="r-review" name="r-review"
+                                                      rows="5" placeholder="Write your review here"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <select id="r-tag" name="r-tag" class="form-control">
+                                                {% for tag in reviewer_tags %}
+                                                    <option>{{ tag }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group form-submit-sec">
+                                        <button type="submit" class="btn">Add a review</button>
+                                        <div>
+                                            <input type="checkbox" class="form-check-input" id="anon" name="anon"
+                                                   value="2">
+                                            <label class="form-check-label" for="anon">Write review
+                                                anonymously</label></div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                            <div class="row exd-r-reviews-header">
+                                <h5 class="exd-panel-title">Reviews</h5>
+                                <form class="exd-review-form-filter">
+                                    <select class="form-control" id="exdeviewsort">
+                                        <option value="latest">Newest First</option>
+                                        <option value="sortby-r-asc">Low to high</option>
+                                        <option value="sortby-r-desc">High to low</option>
+                                        <option value="withoutr">Without Rating</option>
+                                    </select>
+                                </form>
+                            </div>
+                            <div id="reviews-list">
+
+                                {% for review in reviews %}
+                                    <div class="row exd-r-review" id="rev{{ review.id }}"
+                                         data-cdate="{{ review.creation_date|date:"Y-m-d H:i" }}"
+                                            {% if not review.rating_flag %}
+                                         data-rating="0"
+                                            {% else %}
+                                         data-rating="{{ review.score }}"
+                                            {% endif %}>
+                                        <div class="col-md-2 col-12">
+                                            {% if review.anon or not review.user.img %}
+                                                <img class="exd-rr-profile-pic"
+                                                     src="http://via.placeholder.com/106x106" alt="Revealin User">
+                                            {% else %}
+                                                <a href="{% url "user_public_profile" slug=review.user.slug %}">
+                                                    <img class="exd-rr-profile-pic" src="{{ review.user.img.url }}">
+                                                </a>
+                                            {% endif %}
+                                            <div class="exd-rr-info2">
+                                                <div>
+                                                    <h5 class="exd-rr-title">{{ review.content_title }}</h5>
+                                                    <p class="exd-rr-name-btitle">
+                                                    <span>
+                                                        {% if review.anon %}
+                                                            Anonymous User from {{ review.user.country }}
+                                                        {% else %}
+                                                            <a href="{% url "user_public_profile" slug=review.user.slug %}">
+                                                        {{ review.user.user.username }}
+                                                    </a>
+                                                        {% endif %}
+                                                    </span>- {{ review.position }}
+                                                    </p>
+                                                    {#<p class="exd-rr-address">Brooklyn, NY, USA</p>#}
+                                                </div>
+                                                <div><p>{{ review.creation_date|date:"d M Y" }}</p></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-12">
+                                            <div class="exd-rr-info">
+                                                <h5 class="exd-rr-title">{{ review.content_title }}</h5>
+                                                <p class="exd-rr-name-btitle">
+                                                <span>  {% if review.anon %}
+                                                    Anonymous User from {{ review.user.country }}
+                                                {% else %}
+                                                    <a href="{% url "user_public_profile" slug=review.user.slug %}">
+                                                        {{ review.user.user.username }}
+                                                    </a>
+                                                {% endif %}</span> - {{ review.position }}</p>
+                                                {#                                            <p class="exd-rr-address">Brooklyn, NY, USA</p>#}
+                                            </div>
+                                            <div class="exd-rr-content">
+                                                <p>
+                                                    {{ review.content }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-12">
+                                            <div class="exd-rr-date">
+                                                <p>{{ review.creation_date|date:"d M Y" }}</p>
+                                                {#                                            <p>-</p>#}
+                                                {#                                            <p>Aug 2019</p>#}
+                                            </div>
+                                            <div class="exd-rr-ss">
+                                                {% if review.rating_flag %}
+                                                    <div class="expert-rating">
+                                                        <button type="button"
+                                                                class="btn btn-star-gray btn-xs {% if review.score < 1 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-star-gray btn-xs {% if review.score < 2 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-star-gray btn-xs {% if review.score < 3 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-star-gray btn-xs {% if review.score < 4 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-star-gray btn-xs {% if review.score < 5 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="review-label-speaker">
+                                                    <p>{{ review.tags }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-12 sidebar-right">
+                    <div class="exd-sr-contact">
+                        <button type="button" data-href="{% url 'expert_follow' slug=expert.slug %}"
+                                class="btn contact">
+                            Contact Bro <span class="fa-stack">
+                                                             <i class="fa fa-circle fa-stack-2x"
+                                                                style="color:transparent"></i>
+                                                             <i style="display: inline-block; border-radius: 50%; box-shadow: 0 0 0 1px #fff;"
+                                                                class="fa fa-envelope fa-stack-1x"></i>
+                                                        </span>
+                        </button>
+                        <button type="button" data-href="{% url 'expert_follow' slug=expert.slug %}"
+                                class="btn save">
+                            Save Bro Profile <span class="fa-stack">
+                                                             <i class="fa fa-circle fa-stack-2x"
+                                                                style="color:transparent"></i>
+                                                             <i style="display: inline-block; border-radius: 50%; box-shadow: 0 0 0 1px #fff;"
+                                                                class="fa fa-arrow-down fa-stack-1x"></i>
+                                                        </span>
+                        </button>
+                        <hr>
+                        {% if expert.availability.all %}
+                            <h5 class="exd-sr-title">Availability</h5>
+                            {% for avail in expert.availability.all %}
+                                <p class="exd-sr-avail">{{ avail }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="exd-sr-link">
+                        <h5 class="exd-sr-link-title">Profile Link</h5>
+                        <input type="text" class="form-control" id="exd-sr-input-url"
+                               value="revealin.com{{ request.get_full_path }}">
+                        <button onclick="copyURL()" class="exd-sr-link-cp">Copy Link</button>
+                    </div>
+                    {% if expert.fields_of_experties.count > 0 %}
+                        <div class="exd-sr-skills">
+                            <h5 class="exd-sr-skill-title">Skills</h5>
+                            <ul class="skills">
+                                {% for skills in expert.fields_of_experties.all|slice:":3" %}
+                                    <li class="skill">
+                                        <a href="/experts/{{ skills.expertise_fields }}">
+                                            {{ skills }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                                {% for skills in expert.fields_of_experties.all|slice:"3:" %}
+                                    <li class="skill skill-ghost" style="display: none">
+                                        <a href="">{{ skills }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <button class="exd-sr-skill-rm">see all Skills</button>
+                        </div>
+                    {% endif %}
+                    {% if partner_experts.count > 0 %}
+                        <div class="exd-sr-colleagues">
+                            <h5 class="exd-sr-col-title">Colleagues</h5>
+                            <div class="container">
+                                {% for coll in partner_experts %}
+                                    <div class="row">
+                                        <div class="col-6 exd-src-profile-pic">
+                                            <img src="{{ coll.expert_img.url }}" alt="{{ coll.name }}">
+                                        </div>
+                                        <div class="col-6 exd-sr-col-meta">
+                                            <h6 class="exd-srcm-name">{{ coll.name }}</h6>
+                                            <p class="exd-srcm-tag">
+                                                {% for industry in coll.fields_of_experties.all %}
+                                                    {{ industry }}
+                                                {% endfor %}
+                                            </p>
+                                            <p class="exd-srcm-loc">{{ cool.location }}</p>
+                                            <a class="exd-srcm-viewp"
+                                               href="{% url 'expert_detail' slug=coll.slug %}">View
+                                                Profile</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <a href="#" class="exd-sr-col-rm">See all Colleagues</a>
+                        </div>
+                    {% endif %}
+                    {% if similar_experts.count > 0 %}
+                        <div class="exd-sr-colleagues">
+                            <h5 class="exd-sr-col-title">Similar Profiles</h5>
+                            <div class="container">
+                                {% for coll in similar_experts %}
+                                    <div class="row">
+                                        <div class="col-6 exd-src-profile-pic">
+                                            <a href="{% url 'expert_detail' slug=coll.slug %}">
+                                                <img src="{{ coll.expert_img.url }}" alt="{{ coll.name }}">
+                                            </a>
+                                        </div>
+                                        <div class="col-6 exd-sr-col-meta">
+                                            <a href="{% url 'expert_detail' slug=coll.slug %}"
+                                               class="exd-srcm-name">{{ coll.name }}</a>
+                                            <p class="exd-srcm-tag">
+                                                {% for industry in coll.fields_of_experties.all %}
+                                                    {{ industry }}
+                                                {% endfor %}
+                                            </p>
+                                            <p class="exd-srcm-loc">{{ coll.location }}</p>
+                                            <a class="exd-srcm-viewp"
+                                               href="{% url 'expert_detail' slug=coll.slug %}">View
+                                                Profile</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <a href="#" class="exd-sr-col-rm">See all Colleagues</a>
+                        </div>
+                    {% endif %}
+                    <div class="exd-sr-ads">
+                        <a href="{% url 'user_registration_url' %}">
+                            <img class="img-fluid" src="{% static 'assets/images/ex/startup-ad.png' %}"
+                                 alt="Revealin Startups">
+                        </a>
+                        <a href="{% url 'user_registration_url' %}">
+                            <img class="img-fluid" src="{% static 'assets/images/ex/company-ad.png' %}"
+                                 alt="Revealin Companies">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

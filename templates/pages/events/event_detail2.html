@@ -1,0 +1,731 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Reveal - {{ event.name|striptags }} {% endblock %}
+{% block title1 %} Reveal - {{ event.name|striptags }} {% endblock %}
+{% block title2 %} Reveal - {{ event.name|striptags }} {% endblock %}
+{% block title3ed-event-reg %} Reveal - {{ event.name|striptags }} {% endblock %}
+{% block main %}
+    <div class="container">
+        <div class="row evd-header">
+            <div class="col-12 mb-4">
+                <a href="{% url 'expert' %}" class="back-to-sr">&lt; Back to Search Result</a>
+            </div>
+        </div>
+        <div class="row evd-content pb-4">
+            <div class="col-lg-8 col-md-8 col-12 evd-content-col pb-4">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="evdc-hi-name">{{ event.name|striptags }}</h3>
+                    </div>
+                </div>
+                <div class="row evdc-header">
+                    <div class="col-12 col-lg-5 col-md-5 evdc-h-img">
+                       {{event.get_image_thumbnail}}
+                    </div>
+                    <div class="col-12 col-lg-7 col-md-7 evdc-h-meta-con">
+                        <div class="d-flex flex-column justify-content-center evdc-h-info">
+                            <p class="evdc-hm-date">{{ event.start_event_dt|date:'l, M d, Y' }}</p>
+                            <p class="evdc-hm-price">{% if event.price == None %}
+                            {% else %}{{ event.price }}{% endif %}</p>
+                            <p class="evdc-hi-org"> {% if not event.organizer.all %}
+                            {% else %}By
+                                {% for org in event.organizer.all %}{% if forloop.last %}
+                                    {{ org }}{% else %}{{ org }},{% endif %}{% endfor %}{% endif %}</p>
+                            <button data-href="{% url 'event_follow' slug=event.slug %}"
+                                    class="evdc-hi-follow ed-event-follow">
+                                {% if logged_user != 'anonymous' and logged_user in event.follower_list.all %}
+                                    unfollow
+                                {% else %}
+                                    follow
+                                {% endif %}</button>
+                            <a class="evdc-hi-follow" href="{{ event.source_website }}" target="_blank">Attend</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="evdc-show-mobile-sidebar">
+                    <div class="evd-sr-contact">
+                        <button type="button" data-href="{% url 'event_follow' slug=event.slug %}"
+                                class="btn contact ed-event-follow">
+                            <i class="pull-left fa fa-heart"></i>
+                            {% if logged_user != 'anonymous' and logged_user in event.follower_list.all %}
+                                <span>Unfollow</span>
+                            {% else %}
+                                <span>Follow</span>
+                            {% endif %}
+                            <i class="pull-right fa fa-chevron-down"></i>
+
+                        </button>
+                        <button type="button"
+                                class="btn save">
+                               <i class="pull-left fa fa-plus"></i>
+                            <span>Interested</span>
+                            <i class="pull-right fa fa-chevron-down"></i>
+                        </button>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="soc-share-title">Share: </p>
+                            <div>
+                                <a href="https://twitter.com/share?url={{ request.build_absolute_uri }}" class="c-icon">
+                                    <i style="color:#fff"
+                                       class="fa fa-twitter"></i>
+                                </a>
+                                <a href="https://www.facebook.com/sharer.php?u={{ request.build_absolute_uri }}" class="c-icon">
+                                    <i style="color:#fff"
+                                       class="fa fa-facebook"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ request.build_absolute_uri }}" class="c-icon">
+                                    <i style="color:#fff"
+                                       class="fa fa-linkedin"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="evd-sr-meta mt-4">
+                        <h5 class="evd-sr-title">Event Detail</h5>
+                        <div class="d-flex flex-column evd-sr-meta-info">
+                            <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                        src="{% static 'assets/images/ed/icons/e_start.png' %}"
+                                                                        alt="{{ event.start_event_dt }}">
+                                <p>{{ event.start_event_dt }}</p></div>
+                            <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                        src="{% static 'assets/images/ed/icons/e_finish.png' %}"
+                                                                        alt="{{ event.finish_event_dt }}">
+                                <p>{{ event.finish_event_dt }}</p></div>
+                            <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                        src="{% static 'assets/images/ed/icons/e_loc.png' %}"
+                                                                        alt="{{ event.location }}">
+                                <p>{{ event.location }}</p></div>
+                            <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                        src="{% static 'assets/images/ed/icons/e_organizer.png' %}"
+                                                                        alt="{{ event.organizer }}">
+                                <p>{% if not event.organizer.all %}-
+                            {% else %}By
+                                {% for org in event.organizer.all %}{% if forloop.last %}
+                                    {{ org }}{% else %}{{ org }},{% endif %}{% endfor %}{% endif %}</p></div>
+                            {% if event.refund_days == 0 %}
+                                <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                            src="{% static 'assets/images/ed/icons/e_no_refund.png' %}"
+                                                                            alt="no refunds">
+                                    <p>no refunds</p></div>
+                            {% endif %}
+                            {% if event.refund_days > 0 %}
+                                <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                            src="{% static 'assets/images/ed/icons/e_start.png' %}"
+                                                                            alt="refunds">
+                                    <p>{{ event.percentage }} % refunds up to <b>{{ event.refund_days }}</b> days before
+                                        event.
+                                    </p></div>
+                            {% endif %}
+                        </div>
+                        <div class="cimi">
+                            <div id='map'></div>
+                        </div>
+                      <script src='https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js'></script>
+        <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+                        <script type="text/javascript">
+                            // Get Location for Event detail
+                            mapboxgl.accessToken = 'pk.eyJ1IjoiZmV0ZWxpIiwiYSI6ImNrMWV5NWZuZDBtN3Izbm85MWVwMDQwbjEifQ.5wmg9WGnIFOxvTcfduz1Og';
+                            var mapboxClient = mapboxSdk({accessToken: mapboxgl.accessToken});
+                            mapboxClient.geocoding.forwardGeocode({
+                                query: '{{event.location}}, {{ event.city }}, {{ event.country }}',
+                                autocomplete: false,
+                                limit: 1
+                            })
+                                .send()
+                                .then(function (response) {
+                                    if (response && response.body && response.body.features && response.body.features.length) {
+                                        var feature = response.body.features[0];
+                                        console.log(feature);
+
+                                        var map = new mapboxgl.Map({
+                                            container: 'map',
+                                            style: 'mapbox://styles/mapbox/streets-v11',
+                                            center: feature.center,
+                                            zoom: 11
+                                        });
+
+                                        new mapboxgl.Marker()
+                                            .setLngLat(feature.center)
+                                            .addTo(map);
+                                        map.scrollZoom.disable();
+                                    }
+                                });
+                        </script>
+                    </div>
+                </div>
+                <div class="row evdc-desc mt-4">
+                    <div class="col-12 px-5">
+                        <p class="title py-4">Description</p>
+                        {{ event.info|safe }}
+                    </div>
+                </div>
+                <div class="row evdc-speakers">
+                    <div class="col-12 px-5">
+                        <div style="border-top:2px solid #193e4710"></div>
+                        <p class="title py-4">Speakers</p>
+                        <div class="row">
+
+                            {% for speaker in speakers|slice:3 %}
+                                <div class="col-lg-4 col-12  evd-speaker">
+                                    <div class="card-h-evd">
+                                        <img class="evd-s-img-top"
+                                                {% if speaker.expert.expert_img %}
+                                             src="{{ speaker.expert.expert_img.url }}" alt="{{ speaker.expert.name }}">
+                                                {% endif %}
+                                        <div class="card-block evd-s-cb">
+                                            <a href="{% url "expert_detail" speaker.expert.slug %}"
+                                               class="card-title mt-3 h5 v-link">{{ speaker.expert.name }}</a>
+                                            <div class="meta">
+                                                <p>{{ speaker.expert.business_title }}</p>
+                                            </div>
+                                            <div class="evd-speaker-social-mobile">
+                                                 <a href="{{ speaker.expert.twitter_url }}" class="c-icon">
+                                                <i style="color:#fff"
+                                                   class="fa fa-twitter"></i>
+                                            </a>
+                                            <a href="{{ speaker.expert.linkedin_url }}" class="c-icon">
+                                                <i style="color:#fff"
+                                                   class="fa fa-linkedin"></i>
+                                            </a>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer evd-s-cf">
+                                            <a href="{{ speaker.expert.twitter_url }}" class="c-icon">
+                                                <i style="color:#fff"
+                                                   class="fa fa-twitter"></i>
+                                            </a>
+                                            <a href="{{ speaker.expert.linkedin_url }}" class="c-icon">
+                                                <i style="color:#fff"
+                                                   class="fa fa-linkedin"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row evdc-tag-sp pt-5">
+                    <div class="col-12 px-5 mb-4">
+                        <div style="border-top:2px solid #193e4710"></div>
+                    </div>
+                    <div class="col-lg-6 col-12 pl-5  evdc-tag">
+                        <p class="title pb-3">Tags</p>
+                        <div class="row">
+                            <div class="evd-tags">
+                                <ul class="tags">
+                                    {% for tag in event.tag.all %}
+                                        <li class="tag">
+                                        <a href="#">
+                                            {{ tag.tag_name }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 pl-5  evdc-sp">
+                        <p class="title pb-3">Sponsors</p>
+                        <div class="row">
+                            <div class="evd-sps">
+                                <ul class="sponsors">
+                                    {% for sponsor in event.sponsor.all %}
+                                        <li class="sponsor">
+                                            <a href="{{ sponsor.url }}">
+                                                <img class="sponsor-img img-fluid" src="{{ sponsor.img.url }}"
+                                                     alt="{{ sponsor.name }}">
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row evdc-venue-detail mt-5">
+                    <div class="col-12 p-0">
+                        <p class="title py-4 pl-5">Venue Details</p>
+                        <div class="venue-map">
+                            <div id='map-2'></div>
+                        </div>
+                        <script type="text/javascript">
+                            // Get Location for Event detail
+                            mapboxgl.accessToken = 'pk.eyJ1IjoiZmV0ZWxpIiwiYSI6ImNrMWV5NWZuZDBtN3Izbm85MWVwMDQwbjEifQ.5wmg9WGnIFOxvTcfduz1Og';
+                            var mapboxClient = mapboxSdk({accessToken: mapboxgl.accessToken});
+                            mapboxClient.geocoding.forwardGeocode({
+                                query: '{{event.location}}, {{ event.city }}, {{ event.country }}',
+                                autocomplete: false,
+                                limit: 1
+                            })
+                                .send()
+                                .then(function (response) {
+                                    if (response && response.body && response.body.features && response.body.features.length) {
+                                        var feature = response.body.features[0];
+                                        console.log(feature);
+
+                                        var map = new mapboxgl.Map({
+                                            container: 'map-2',
+                                            style: 'mapbox://styles/mapbox/streets-v11',
+                                            center: feature.center,
+                                            zoom: 11
+                                        });
+
+                                        new mapboxgl.Marker()
+                                            .setLngLat(feature.center)
+                                            .addTo(map);
+                                        map.scrollZoom.disable();
+                                    }
+                                });
+                        </script>
+                    </div>
+                </div>
+                <div class="row ed-review">
+                    <div class="col-12">
+                        <div class="ed-r-form">
+                            <form method="POST" id="r-event-form">
+                                {% csrf_token %}
+                                <h5 class="exd-panel-title py-3">Add a Comment</h5>
+                                <div class="form-row align-items-center">
+                                    <input type="hidden" class="form-control" id="r-id" name="r-id"
+                                           value="{{ event.pk }}">
+                                    <div class="form-group col-6">
+                                        <input type="text" class="form-control" id="r-title" name="r-title"
+                                               placeholder="Review Title">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <input type="text" class="form-control" id="r-company-position"
+                                               name="r-company-position"
+                                               placeholder="Company/Position">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                            <textarea class="form-control" id="r-review" name="r-review"
+                                                      rows="5" placeholder="Write your review here"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group form-submit-sec">
+                                    <button type="submit" class="btn">Add Comment</button>
+                                    <div>
+                                        <input type="checkbox" class="form-check-input" id="anon" name="anon"
+                                               value="2">
+                                        <label class="form-check-label" for="anon">Write review
+                                            anonymously</label></div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                        {% if reviews.count > 0 %}
+                            <div class="row ed-r-reviews-header">
+                                <h5 class="exd-panel-title">Comments</h5>
+                                <p>{{ reviews.count }}</p>
+                            </div>
+                            <div id="reviews-list">
+
+                                {% for review in reviews %}
+                                    <div class="row ed-r-review" id="rev{{ review.id }}"
+                                         data-cdate="{{ review.creation_date|date:"Y-m-d H:i" }}"
+                                            {% if not review.rating_flag %}
+                                         data-rating="0"
+                                            {% else %}
+                                         data-rating="{{ review.score }}"
+                                            {% endif %}>
+                                        <div class="col-md-2 col-12">
+                                            {% if review.anon %}
+                                                <img class="exd-rr-profile-pic"
+                                                     src="http://via.placeholder.com/106x106" alt="Revealin User">
+                                            {% else %}
+                                                <a href="{% url "user_public_profile" slug=review.user.slug %}">
+                                                    <img class="exd-rr-profile-pic" src="{{ review.user.img.url }}" alt="{{ review.user.user.fullname }}">
+                                                </a>
+                                            {% endif %}
+                                            <div class="exd-rr-info2">
+                                                <div>
+                                                    <h5 class="exd-rr-title">{{ review.content_title }}</h5>
+                                                    <p class="exd-rr-name-btitle">
+                                                    <span>
+                                                        {% if review.anon %}
+                                                            Anonymous User from {{ review.user.country }}
+                                                        {% else %}
+                                                            <a href="{% url "user_public_profile" slug=review.user.slug %}">
+                                                        {{ review.user.user.username }}
+                                                    </a>
+                                                        {% endif %}
+                                                    </span>- {{ review.position }}
+                                                    </p>
+                                                    {#<p class="exd-rr-address">Brooklyn, NY, USA</p>#}
+                                                </div>
+                                                <div><p>{{ review.creation_date|date:"d M Y" }}</p></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-12">
+                                            <div class="exd-rr-info">
+                                                <h5 class="exd-rr-title">{{ review.content_title }}</h5>
+                                                <p class="exd-rr-name-btitle">
+                                                <span>  {% if review.anon %}
+                                                    Anonymous User from {{ review.user.country }}
+                                                {% else %}
+                                                    <a href="{% url "user_public_profile" slug=review.user.slug %}">
+                                                        {{ review.user.user.username }}
+                                                    </a>
+                                                {% endif %}</span> - {{ review.position }}</p>
+                                                {#                                            <p class="exd-rr-address">Brooklyn, NY, USA</p>#}
+                                            </div>
+                                            <div class="exd-rr-content">
+                                                <p>
+                                                    {{ review.content }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-12">
+                                            <div class="exd-rr-date">
+                                                <p>{{ review.creation_date|date:"d M Y" }}</p>
+                                                {#                                            <p>-</p>#}
+                                                {#                                            <p>Aug 2019</p>#}
+                                            </div>
+                                            <div class="exd-rr-ss">
+                                                {% if review.rating_flag %}
+                                                    <div class="expert-rating">
+                                                        <button type="button"
+                                                                class="btn btn-star-gray btn-xs {% if review.score < 1 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-star-gray btn-xs {% if review.score < 2 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-star-gray btn-xs {% if review.score < 3 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-star-gray btn-xs {% if review.score < 4 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-star-gray btn-xs {% if review.score < 5 %} icon-unc-bg {% else %} icon-c-bg {% endif %}"
+                                                                aria-label="Left Align">
+                                                                <span class="fa fa-star btn-star"
+                                                                      aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12 evd-content-sidebar-col">
+                <div class="evd-sr-contact">
+                    <button type="button" data-href="{% url 'event_follow' slug=event.slug %}" data-source="rpart"
+                            class="btn contact ed-event-follow">
+                        <i class="pull-left fa fa-heart"  class="fa fa-plus"></i>
+                        {% if logged_user != 'anonymous' and logged_user in event.follower_list.all %}
+                            <span>Unfollow</span>
+                        {% else %}
+                            <span>
+                            Follow
+                            </span>
+                        {% endif %}
+                        <i class="pull-right fa fa-chevron-down"></i>
+                    </button>
+                    <button type="button"
+                            class="btn save">
+                        <i class="pull-left fa fa-plus"></i>
+                        <span>Interested</span>
+                        <i class="pull-right fa fa-chevron-down"></i>
+                    </button>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="soc-share-title">Share: </p>
+                        <div>
+                            <a href="https://twitter.com/share?url={{ request.build_absolute_uri }}" class="c-icon" target="_blank">
+                                <i style="color:#fff"
+                                   class="fa fa-twitter"></i>
+                            </a>
+                            <a target="_blank" href="https://www.facebook.com/sharer.php?u={{ request.build_absolute_uri }}" class="c-icon">
+                                <i style="color:#fff"
+                                   class="fa fa-facebook"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ request.build_absolute_uri }}" class="c-icon" target="_blank">
+                                <i style="color:#fff"
+                                   class="fa fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="evd-sr-meta mt-4">
+                    <h5 class="evd-sr-title">Event Detail</h5>
+                    <div class="d-flex flex-column evd-sr-meta-info">
+                        <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                    src="{% static 'assets/images/ed/icons/e_start.png' %}"
+                                                                    alt="{{ event.start_event_dt }}">
+                            <p>{{ event.start_event_dt }}</p></div>
+                        <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                    src="{% static 'assets/images/ed/icons/e_finish.png' %}"
+                                                                    alt="{{ event.finish_event_dt }}">
+                            <p>{{ event.finish_event_dt }}</p></div>
+                        <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                    src="{% static 'assets/images/ed/icons/e_loc.png' %}"
+                                                                    alt="{{ event.location }}">
+                            <p>{{ event.location }}</p></div>
+                        <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                    src="{% static 'assets/images/ed/icons/e_organizer.png' %}"
+                                                                    alt="{{ event.organizer }}">
+                            <p>{% if not event.organizer.all %}
+                                -
+                            {% else %}By
+                                {% for org in event.organizer.all %}{% if forloop.last %}
+                                    {{ org }}{% else %}{{ org }},{% endif %}{% endfor %}{% endif %}</p></div>
+                        {% if event.refund_days == 0 %}
+                            <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                        src="{% static 'assets/images/ed/icons/e_no_refund.png' %}"
+                                                                        alt="no refunds">
+                                <p>no refunds</p></div>
+                        {% endif %}
+                        {% if event.refund_days > 0 %}
+                            <div class="d-flex align-items-center"><img style="width: 18px;"
+                                                                        src="{% static 'assets/images/ed/icons/e_start.png' %}"
+                                                                        alt="refunds">
+                                <p>{{ event.percentage }} % refunds up to <b>{{ event.refund_days }}</b> days before
+                                    event.
+                                </p></div>
+                        {% endif %}
+                    </div>
+                    <div class="cimi">
+                        <div id='map'></div>
+                    </div>
+                    <script type="text/javascript">
+                        // Get Location for Event detail
+                        mapboxgl.accessToken = 'pk.eyJ1IjoiZmV0ZWxpIiwiYSI6ImNrMWV5NWZuZDBtN3Izbm85MWVwMDQwbjEifQ.5wmg9WGnIFOxvTcfduz1Og';
+                        var mapboxClient = mapboxSdk({accessToken: mapboxgl.accessToken});
+                        mapboxClient.geocoding.forwardGeocode({
+                            query: '{{event.location}}, {{ event.city }}, {{ event.country }}',
+                            autocomplete: false,
+                            limit: 1
+                        })
+                            .send()
+                            .then(function (response) {
+                                if (response && response.body && response.body.features && response.body.features.length) {
+                                    var feature = response.body.features[0];
+                                    console.log(feature);
+
+                                    var map = new mapboxgl.Map({
+                                        container: 'map',
+                                        style: 'mapbox://styles/mapbox/streets-v11',
+                                        center: feature.center,
+                                        zoom: 11
+                                    });
+
+                                    new mapboxgl.Marker()
+                                        .setLngLat(feature.center)
+                                        .addTo(map);
+                                    map.scrollZoom.disable();
+                                }
+                            });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if events_photos_row1.all.count > 0 %}
+    <div class="ed-past-photos">
+        <h4 class="content-title text-center py-4">Photos From Past Events</h4>
+        {{ events_photos }}
+        <div class="col-12">
+            <div class="row">
+                {% for photos in events_photos_row1 %}
+                    <a href="{{ photos.image.url }}" data-toggle="lightbox"
+                   data-gallery="example-gallery" class="col-sm-3 col-6">
+                    <img src="{{ photos.image.url }}" class="img-fluid" alt="{{ event.name }}">
+                </a>
+                {% endfor %}
+            </div>
+            <div class="row">
+                {% for photos in events_photos_row2 %}
+                    <a href="{{ photos.image.url }}" data-toggle="lightbox"
+                   data-gallery="example-gallery" class="col-sm-3 col-6">
+                    <img src="{{ photos.image.url }}" class="img-fluid" alt="{{ event.name }}">
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if events_live.all.count > 0 or events_past.all.count > 0 %}
+    <div class="ed-events1 container mt-4" style="padding-bottom: 150px">
+        <h4 class="content-title text-center">events from this organizer</h4>
+        <ul class="nav nav-tabs" id="edfe-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="liveevents-tab" data-toggle="tab" href="#liveevents" role="tab"
+                   aria-controls="home" aria-selected="true">live</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pastevents-tab" data-toggle="tab" href="#pastevents" role="tab"
+                   aria-controls="profile" aria-selected="false">past</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="edfe-content">
+            <div class="tab-pane fade show active" id="liveevents" role="tabpanel"
+                 aria-labelledby="home-tab">
+                <div class="ed-slider1">
+                    {% for event in events_live %}
+                        <div class="card-h-e card mx-3"
+                             style="position: relative; padding-bottom: 70px; height: 100%">
+                            <div>
+                                <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                    <img class="card-img-top" src="{{ event.event_img.url }}" alt="{{ event.name }}">
+                                </a>
+                            </div>
+                            <div class="card-block">
+                                <figure class="profile shadow">
+                                    <span class="profile-avatar">{{ event.start_event_dt|date:"M d" }}</span>
+                                </figure>
+                                <div class="card-text text-right">
+                                    <a>
+                                        {% for cat in event.category.all %}
+                                            {{ cat.name }}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+                                <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                   class="card-title mt-3 h5 v-link">{{ event.name }}</a>
+                                <div class="meta">
+                                    <p>{% if event.city %}{{ event.city }}{% endif %},
+                                        {% if event.location %}{{ event.location }}{% endif %}</p>
+                                </div>
+                            </div>
+                            <div class="card-footer" style="position: absolute;">
+                                <a href="{% url 'event_detail_url' slug=event.slug %}" class="card-att-event">Attend
+                                    this event</a>
+                                <button class="c-icon" data-href="event_follow_url">
+                                    <i class="fa  fa-heart event-follow "
+                                       data-href="{% url 'event_follow' slug=event.slug %}"
+                                            {% if logged_user != 'anonymous' and logged_user in event.follower_list.all %}
+                                       style="color: #fff; background-color: #09c75b"
+                                            {% else %}
+                                       style="color: #fff; background-color: #c2c2c2"
+                                            {% endif %}></i>
+                                </button>
+                                <button class="c-icon btn-share" id="1{{ event.id }}" onclick="share(this.id)">
+                                    <i style="color:#fff"
+                                       class="fa fa-share"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div id="sh1{{ event.id }}" class="shadow soc-share-con"
+                             style="display: none"> {% include '_partials/soc.html' %}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pastevents" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="ed-slider1">
+                    {% for event in events_past %}
+                        <div class="card-h-e card mx-3"
+                             style="position: relative; padding-bottom: 70px; height: 100%">
+                            <div>
+                                <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                    <img class="card-img-top" src="{{ event.event_img.url }}" alt="{{ event.name }}">
+                                </a>
+                            </div>
+                            <div class="card-block">
+                                <figure class="profile shadow">
+                                    <span class="profile-avatar">{{ event.start_event_dt|date:"M d" }}</span>
+                                </figure>
+                                <div class="card-text text-right">
+                                    <a>
+                                        {% for cat in event.category.all %}
+                                            {{ cat.name }}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+                                <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                   class="card-title mt-3 h5 v-link">{{ event.name }}</a>
+                                <div class="meta">
+                                    <p>{% if event.city %}{{ event.city }}{% endif %},
+                                        {% if event.location %}{{ event.location }}{% endif %}</p>
+                                </div>
+                            </div>
+                            <div class="card-footer" style="position: absolute;">
+                                <a href="{% url 'event_detail_url' slug=event.slug %}" class="card-att-event">Attend
+                                    this event</a>
+                                <button class="c-icon" data-href="event_follow_url">
+                                    <i class="fa  fa-heart event-follow "
+                                       data-href="{% url 'event_follow' slug=event.slug %}"
+                                            {% if logged_user != 'anonymous' and logged_user in event.follower_list.all %}
+                                       style="color: #fff; background-color: #09c75b"
+                                            {% else %}
+                                       style="color: #fff; background-color: #c2c2c2"
+                                            {% endif %}></i>
+                                </button>
+                                <button class="c-icon btn-share" id="1{{ event.id }}" onclick="share(this.id)">
+                                    <i style="color:#fff"
+                                       class="fa fa-share"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div id="sh1{{ event.id }}" class="shadow soc-share-con"
+                             style="display: none"> {% include '_partials/soc.html' %}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+ {% for s_event in similar_event %}
+    <div class="ed-event-reg py-5">
+        <div class="container">
+            <div class="row info-row align-items-center">
+                <div class="col-md-8 col-12">
+                    <div class="ed-ev-reg-meta">
+
+                            <p class="reg-meta">{{ s_event.start_event_dt|date:'l, M d, Y' }}</p>
+                            <h4 class="reg-text">{{ s_event.name }}- {{ s_event.info | slice:40 | striptags }}</h4>
+
+                    </div>
+                </div>
+                <div class="col-md-4 col-12 mt-4">
+                    <a href="{% url 'event_detail_url' slug=s_event.slug %}" class="info-lm">Learn More</a>
+                    <button class="c-icon" data-href="event_follow_url">
+                        <i class="fa  fa-plus" style="color: #fff; background-color: #c2c2c2"
+                        ></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="ed-subcribe">
+        <div class="ce-diagonal"></div>
+        <div class="a d-flex flex-column align-items-center justify-content-center">
+            <h2 class="sub-title">Subscribe to stay updated about upcoming events</h2>
+            <div>
+                <form method="POST" action="{% url "add_organizer_subscriber" event.slug %}"  class="form-inline d-flex justify-content-center align-items-center">
+                    {% csrf_token %}
+                    <div class="form-group mx-sm-3 mb-2">
+                        <input type="email" class="form-control sub-email" id="sub-email" name="sub-email"
+                               placeholder="Email Address" required>
+                    </div>
+                    <button type="submit" class="btn sub-submit mb-2">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

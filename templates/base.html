@@ -1,0 +1,397 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163841624-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163841624-1');
+    </script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/fav.png' %}"/>
+    <title>{% block title %}{% endblock %}</title>
+    {% block django_meta %}
+    <meta name="title" content="Revealin - Global community of events, companies and experts">
+    <meta name="description" content="Join Revealin to discover events, connect with industry experts and companies. Get listed for more visibility of your brand, organise and promote your next event!">
+    <meta property="og:image" content="https://revealin.com/static/assets/images/joinbro_1200_630.png">
+    {% endblock %}
+    <meta name="keywords" content="Revealin, experts, event, company, startup, speaker">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+
+    <meta property="og:title" content="Revealin - Global community of events, companies and experts">
+    <meta property="og:site_name" content="{% block title3 %}{% endblock %}">
+    <meta property="og:url" content="www.revealin.com">
+    <meta property="og:description" content="Join Revealin to discover events, connect with industry experts and companies. Get listed for more visibility of your brand, organise and promote your next event!">
+    <meta property="og:type" content="website">
+    {#    <link rel="shortcut icon" href="{% static "assets/images/favicon.png" %}">#}
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MVKNLD3');</script>
+    <!-- End Google Tag Manager -->
+    {% include "_partials/links.html" %}
+</head>
+<body>
+<div id="preloader" style="position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 999999;">
+    <div class="canvas" style=" position: absolute;
+      margin: auto;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);">
+            <img src="{% static 'assets/images/getet_logo_dark_small.png' %}" alt="logo" class="loader-logo">
+        <div class="spinner"></div>
+    </div>
+</div>
+<section class="home">
+    {% block slider_section %}
+        {% block menu %}
+            {% include "_partials/menu2.html" %}
+        {% endblock %}
+    {% endblock %}
+
+    {% block main %}
+
+    {% endblock %}
+    {% block footer %}
+
+        {% include "_partials/footer.html" %}
+
+    {% endblock %}
+</section>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MVKNLD3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+{#create event modal started#}
+<div class="modal fade" id="ce-modal" tabindex="-1" role="dialog" aria-labelledby="ce-modal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between">
+                <button type="button" class="previous-btn">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+                <h5 class="modal-title font-weight-bold" id="exampleModalLabel">CREATE EVENT</h5>
+                <button type="button" class="close m-0 p-0" data-dismiss="modal" aria-label="Close"
+                        data-step="1">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body px-4">
+                <form action="" class="event-form" method="Post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row step step-1 active-step" data-step="1">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="eventName">Event name</label>
+                                {% comment %} <input type="text" class="form-control" id="eventName"
+                                               aria-describedby="emailHelp"
+                                               placeholder="Name your event"> {% endcomment %}
+                                {{ form.name }}
+                                <div class="invalid-tooltip">
+                                    Please choose a unique and valid username.
+                                </div>
+                            </div>
+                            {% comment %}
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Place</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div> {% endcomment %}
+
+                            <div class="form-group">
+                                <label for="eventName">Organizer</label>
+                                {% comment %} <input type="text" class="form-control" id="eventName"
+                                               aria-describedby="emailHelp"
+                                               placeholder="Organizer Name"> {% endcomment %}
+                                {{ form.organizer }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="eventName">Start Date</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group date" data-provide="datepicker"
+                                             data-date-format="yyyy-mm-dd">
+                                            <input type="text" id="start_dt" class="form-control"
+                                                   placeholder="Start Date">
+                                            {#                                                    {{ form.start_event_dt}}#}
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-th"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group date" data-provide="datepicker"
+                                             data-date-format="yyyy-mm-dd">
+                                            <input type="text" id="end_dt" class="form-control"
+                                                   placeholder="End Date">
+                                            {#                                                    {{ form.finish_event_dt }}#}
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-th"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Category</label>
+                                {% comment %} <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select> {% endcomment %}
+                                {{ form.category }}
+                            </div>
+
+                            {% comment %} <div class="form-group">
+                                        <label for="eventName">Search</label>
+                                        <input type="text" class="form-control" id="eventName"
+                                               aria-describedby="emailHelp"
+                                               placeholder="Search for a venue or address">
+                                    </div> {% endcomment %}
+
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Select Speaker</label>
+                                {% comment %} <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select> {% endcomment %}
+                                {{ form.speaker }}
+                            </div>
+                            <div class="form-group">
+                                <label for="eventName">Location</label>
+                                {% comment %} <input type="text" class="form-control" id="eventName"
+                                               aria-describedby="emailHelp"
+                                               placeholder="Name your event"> {% endcomment %}
+                                {{ form.location }}
+                            </div>
+                            {##}
+                            {#                                    <div class="form-group">#}
+                            {#                                        <label for="eventName">Time</label>#}
+                            {#                                        <div class="row">#}
+                            {#                                            <div class="col-md-6">#}
+                            {#                                                <div class="input-group date" data-provide="datepicker">#}
+                            {#                                                    <input type="text" class="form-control" placeholder="Start Time">#}
+                            {#                                                    <div class="input-group-addon">#}
+                            {#                                                        <span class="glyphicon glyphicon-th"></span>#}
+                            {#                                                    </div>#}
+                            {#                                                </div>#}
+                            {#                                            </div>#}
+                            {#                                            <div class="col-md-6">#}
+                            {#                                                <div class="input-group date" data-provide="datepicker">#}
+                            {#                                                    <input type="text" class="form-control" placeholder="End Time">#}
+                            {#                                                    <div class="input-group-addon">#}
+                            {#                                                        <span class="glyphicon glyphicon-th"></span>#}
+                            {#                                                    </div>#}
+                            {#                                                </div>#}
+                            {#                                            </div>#}
+                            {#                                        </div>#}
+                            {#                                    </div>#}
+                        </div>
+                        <div class="w-100 d-flex flex-row justify-content-end">
+                            <button type="button" class="btn form-btn next-btn px-4" data-step="1">NEXT</button>
+                        </div>
+                    </div>
+                    <div class="row step step-2" data-step="2">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="event_img">Select Image</label>
+                                <div class="row">
+                                    <div class="col-md-8" style="padding-right: 0px">
+                                        <p class="ce-file-upload text-justify">This is the first image atendees
+                                            will see at the top of your listing. Use the high
+                                            quality image 2160x1080 (2:1 ratio)</p>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        {% comment %} <input type="file" class="form-control-file form-control"
+                                                       id="exampleFormControlFile1"> {% endcomment %}
+                                        {#                                        {{ form.event_img }}#}
+                                        <div class="input-container">
+                                            <input type="file" id="id_event_img">
+                                            <button class="browse-btn form-control" name="event_img">
+                                                Image
+                                            </button>
+                                            <span class="file-info"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Event Language</label>
+                                {% comment %} <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select> {% endcomment %}
+                                {#                                {{ form.language }}   for easy debugging commented this line SI#}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            {#                                    <div class="btn-group" data-toggle="buttons">#}
+                            {#                                     {% for choice in form.ticket_type.field.choices %}#}
+                            {#                                        <label class="btn fee-btn mr-2">#}
+                            {#                                            <input type="radio" name="options" id='{{ form.ticket_type.auto_id }}_{{ forloop.counter0 }}'#}
+                            {#                                            value='{{ choice.0 }}' {% if not form.is_bound %}{% ifequal form.ticket_type.field.initial choice.0 %} checked='checked' {% endifequal %}#}
+                            {#                                            {% else %}{% ifequal form.ticket_type.data choice.0 %} checked='checked' {% endifequal %}{% endif %} >#}
+                            {#                                            <label for='{{ form.ticket_type.auto_id }}_{{ forloop.counter0 }}'>{{ choice.1 }}</label>#}
+                            {#                                        </label>#}
+                            {#                                     {% endfor %}#}
+                            {#                                    </div>#}
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn fee-btn mr-2">
+                                    <input type="radio" name="options" id="option" value="Paid"> Paid
+                                </label>
+                                <label class="btn fee-btn mx-2">
+                                    <input type="radio" name="options" id="option" value="Donation"> Donation
+                                </label>
+                                <label class="btn fee-btn mx-2">
+                                    <input type="radio" name="options" id="option" value="Free"> Free
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventName">Price</label>
+                                {% comment %} <input type="number" class="form-control" id="eventName"
+                                               aria-describedby="emailHelp"
+                                               placeholder="$ 0.00"> {% endcomment %}
+                                {{ form.price }}
+                            </div>
+                            <div class="form-group">
+                                <label for="eventName">Quantity</label>
+                                {% comment %} <input type="number" class="form-control" id="eventName"
+                                               aria-describedby="emailHelp"
+                                               placeholder="Quantity"> {% endcomment %}
+                                {{ form.quantity }}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="eventName">Description</label>
+                                {% comment %} <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                  rows="3"></textarea> {% endcomment %}
+                                {{ form.info }}
+                            </div>
+                        </div>
+                        <div class="w-100 d-flex flex-row justify-content-end">
+                            <button type="button" class=" form-btn next-btn px-4" data-step="2">NEXT</button>
+                        </div>
+                    </div>
+                    <div class="row step step-3" data-step="3">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8 text-center">
+                            <h3>Successfully Created </h3>
+                            <img style="max-width: 150px; border-radius: 50%" class="shadow"
+                                 src="{% static 'assets/images/chec_wsk.png' %}" alt="">
+                        </div>
+
+                        <div class="col-md-2"></div>
+
+
+                        <div class="w-100 d-flex flex-row justify-content-end">
+                            <button type="button" class="btn form-btn next-btn px-4" data-step="3">NEXT</button>
+                        </div>
+                    </div>
+                    {#                            <button type="Submit" class="create-btn form-btn px-4 d-none">CREATE</button>#}
+                </form>
+            </div>
+            <div class="modal-footer d-flex flex-column px-0 position-relative">
+                <div class="progress w-100 mb-2">
+                    <div class="green-line green-line-1"></div>
+                </div>
+
+                <button type="Submit" class="btn form-btn create-btn px-4 d-none">CREATE</button>
+
+                {#                        <span class="position-absolute step-text">1/3</span>#}
+            </div>
+        </div>
+    </div>
+</div>
+{#create event modal finished#}
+<!-- Modal -->
+<div class="modal fade" id="modalLogin" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form" action="{% url 'user_registration_url' %}" method="post" role="form">
+                    <div class="form-group mx-5">
+                        {% csrf_token %}
+                                              <p><label for="id_username">Email:</label> <input type="text" name="username" required id="id_username"></p>
+<p><label for="id_password">Password:</label> <input type="password" name="password" required="" id="id_password"></p>
+                    </div>
+                    </div>
+                    <div class="form-group mx-5">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <button type="Submit" name="login-submit" id="login-submit" value="Log In"
+                                        class="form-control btn-login font-weight-bold">Log In!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "_partials/scripts.html" %}
+<button class="open-button" onclick="openForm()"><span>Tell us more about yourself</span> <i style="font-size: 20px;"
+                                                                                             class="fa fa-chevron-circle-up pull-right"></i>
+</button>
+<div class="h-tum-popup" id="myForm">
+    <div class="pop-header">
+        <button class="close-button" onclick="closeForm()"><span>Tell us more about yourself</span><i
+                style="font-size: 20px;" class="fa fa-chevron-circle-down pull-right"></i></button>
+    </div>
+    <div class="here-for"><h5>Are you here to ...</h5></div>
+    <div class="h-tum-container container">
+        <div class="pop-body">
+            <div class="link"><a href="{% url 'AllEvents' %}" class="pop-link pop-event">JOIN AN EVENT</a></div>
+            <div class="link"><a href="{% url 'new_expert' %}" class="pop-link pop-speaker">BECOME A SPEAKER</a></div>
+            <div class="link"><a data-toggle="modal" data-target="#ce-modal" class="pop-link pop-seminar">HOST A
+                SEMINAR</a></div>
+            <div class="link"><a href="{% url 'expert' %}" class="pop-link pop-expert">FIND AN EXPERT</a></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

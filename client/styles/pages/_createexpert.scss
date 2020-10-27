@@ -1,0 +1,16 @@
+@import "../_utils/variables";
+@import "../_utils/colors";
+@import "../_utils/_mixins/button";
+// Styling for the masthead
+#add-expert{
+ .btn-submit{
+   @include green-button;
+ }
+}
+
+#add-company{
+ .btn-submit{
+   @include green-button;
+ }
+  font-family: "Lato";
+}

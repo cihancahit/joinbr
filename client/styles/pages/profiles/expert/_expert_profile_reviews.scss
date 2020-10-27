@@ -1,0 +1,251 @@
+@import "../../../_utils/colors";
+@import "../../../_utils/_mixins/button";
+@import "../../../_utils/variables";
+@import "../../../_utils/_mixins/tools";
+@import "../../../_utils/_mixins/transition";
+
+#content {
+  padding: 1.5rem;
+  @media screen and (max-width: $tablet-l) {
+    padding-top: 0px;
+  }
+}
+
+.mob-view {
+  display: none;
+  background-color: #232323;
+  margin-left: -40px;
+  margin-right: -40px;
+  padding-bottom: 80px;
+  @include border-radii(0px, 0px, 30px, 30px);
+  @media screen and (max-width: $tablet-l) {
+    display: flex;
+  }
+
+  .expert-profile-pic {
+    width: 50px;
+    height: 50px;
+    @include border-radius(50%)
+  }
+
+  h1 {
+    font-family: "Lato Black";
+    color: #08c65b;
+    font-size: 16px;
+  }
+
+  p {
+    font-family: "Lato";
+    color: #fefefe;
+    margin: 0px;
+  }
+
+  .icon-wrapper {
+    position: relative;
+    float: left;
+  }
+
+  i {
+    width: 40px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 25px;
+  }
+
+  .badge {
+    background: #fc7d27;
+    width: auto;
+    height: auto;
+    margin: 0;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px;
+  }
+}
+
+.content-c {
+ .exd-r-review {
+      padding: 20px;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #d1d1d1;
+      }
+
+      .exd-rr-profile-pic {
+        border-radius: 50%;
+        border: 1px solid #d1d1d1;
+        width: 106px;
+        height: 106px;
+        @include transition(all ease-in-out 300ms);
+
+        &:hover {
+          border-color: $button-color;
+        }
+      }
+
+      .exd-rr-info2 {
+        display: none;
+        @media screen and (max-width: $tablet-l) {
+          display: block;
+        }
+
+        a {
+          font-family: "Lato Black";
+          color: #787878;
+          text-decoration: none;
+          @include transition(all ease-in-out 300ms);
+
+          &:hover {
+            color: $button-color;
+          }
+        }
+      }
+
+      .exd-rr-info {
+        display: block;
+
+        .exd-rr-title {
+          font-family: "Lato Heavy";
+          color: #787878;
+        }
+
+        .exd-rr-name-btitle {
+          font-family: "Lato Black";
+          color: #787878;
+          margin: 0;
+
+          span {
+
+            font-family: "Lato Black";
+            color: #787878;
+
+            a {
+              font-family: "Lato Black";
+              color: #193e47;
+              text-decoration: none;
+              @include transition(all ease-in-out 300ms);
+
+              &:hover {
+                color: $button-color;
+              }
+            }
+          }
+        }
+
+        .exd-rr-address {
+          font-family: Lato;
+          font-weight: bold;
+          color: #787878;
+          margin: 0;
+          font-size: 14px;
+        }
+
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+      }
+
+      .exd-rr-content {
+        p {
+          font-family: "Lato Medium";
+          font-style: italic;
+          color: #787878;
+        }
+      }
+
+      .exd-rr-date {
+        display: flex;
+        justify-content: space-between;
+
+        p {
+          font-family: "Lato Black";
+          color: $button-color;
+        }
+
+        @media screen and (max-width: $tablet-l) {
+          display: none;
+        }
+      }
+
+      .exd-rr-ss {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .expert-rating {
+          display: flex;
+          justify-content: space-between;
+
+          .btn-star-gray {
+            background-color: #ebebeb;
+            border-radius: 50%;
+          }
+
+          .icon-c-bg {
+            background-color: $button-color;
+            color: #fff;
+            font-size: 14px;
+            @media screen and (max-width: $tablet-l) {
+              font-size: 14px;
+            }
+          }
+
+          .icon-unc-bg {
+            background-color: #bebebe;
+            color: #fff;
+            font-size: 14px;
+            @media screen and (max-width: $tablet-l) {
+              font-size: 14px;
+            }
+          }
+        }
+        .ep-review-link{
+          font-family: "Lato Bold";
+          color: #787878;
+          text-decoration: none;
+          @include transition(all ease-in-out 300ms);
+          &:hover{
+          color: $button-color;
+        }
+        }
+
+        .review-label-speaker {
+          text-align: center;
+          color: #fff;
+          background-color: #6a08c6;
+          padding: 5px 25px !important;
+          margin-top: 20px;
+
+          p {
+            margin: 0;
+          }
+        }
+
+        .review-label-organizer {
+          text-align: center;
+          color: #fff;
+          background-color: #ec9000;
+          padding: 5px 25px !important;
+          margin-top: 20px;
+
+          p {
+            margin: 0;
+          }
+        }
+
+        .review-label-exhibitor {
+          text-align: center;
+          color: #fff;
+          background-color: #08c4c6;
+          padding: 5px 25px !important;
+          margin-top: 20px;
+
+          p {
+            margin: 0;
+          }
+        }
+      }
+    }
+}

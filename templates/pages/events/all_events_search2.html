@@ -1,0 +1,473 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} {{ page_title|striptags }} {% endblock %}
+{% block main %}
+    <div class="exd-slider-container">
+        <div class="exd-slider owl-carousel">
+
+            <a href="{% url 'AllEvents' %}" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/events.png' %}" alt="Revealin Events">
+                    <div id="ovrl" class="overlay-active"></div>
+                    <h3 class="text">Events</h3>
+                </div>
+            </a>
+            <a href="{% url 'expert' %}" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/experts.png' %}" alt="Revealin Experts">
+                    <div class="overlay"></div>
+                    <h3 class="text">Experts</h3>
+                </div>
+            </a>
+            <a href="#" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/speakers.png' %}" alt="Revealin Speakers">
+                    <div class="overlay"></div>
+                    <h3 class="text">Speakers</h3>
+                </div>
+            </a>
+            <a href="{% url 'companies' %}" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/companies.png' %}" alt="Revealin Companies">
+                    <div class="overlay"></div>
+                    <h3 class="text">Companies</h3>
+                </div>
+            </a>
+            <a href="#" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/startup.png' %}" alt="Revealin Startups">
+                    <div class="overlay"></div>
+                    <h3 class="text">Start-up</h3>
+                </div>
+            </a>
+            <a href="#" style=" width: 275px" class="nav-slider-con">
+                <div class="nav-slider-item">
+                    <img src="{% static 'assets/images/ex/organizers.png' %}" alt="Revealin Organizers">
+                    <div class="overlay"></div>
+                    <h3 class="text">Organizers</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+    <form id="event-search-form" name="event_search" method="POST" onsubmit="return EventOnSubmitForm();">
+        {% csrf_token %}
+        <div class="event-search p-5">
+            <div class="main-part">
+
+                <div class="form-row esf-form1">
+                    <div class="form-group col-md-6 col-sm-12 offset-md-4 offset-sm-0 ">
+                        <div class="input-group esf-form-ing">
+                            <div class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <input type="text" class="form-control" name="main-search" id="main-search"
+                                   placeholder="search Events...">
+                        </div>
+                        <label for="main-search" id="main-search-label">{{ page_title|safe }}</label>
+                    </div>
+                </div>
+                <div class="form-row esf-form2">
+                    <div class="col-6 col-md-2 col-sm-4 mt-1 offset-md-2">
+                        <input type="text"
+                               class="form-control"
+                               placeholder="When" autocomplete="off"
+                               data-provide="datepicker"
+                               data-date-format="yyyy-mm-dd"
+                               name="date" id="date">
+                    </div>
+                    <div class="col-6  col-md-2 col-sm- mt-1">
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Country"
+                               name="country" id="country">
+                    </div>
+                    {#                    <div class="col-6  col-md-2 col-sm- mt-1">#}
+                    {#                         <input type="text"#}
+                    {#                                               class="form-control"#}
+                    {#                                               placeholder="City"#}
+                    {#                                               name="city" id="city">#}
+                    {#                    </div>#}
+                    <div class="col-6  col-md-2 col-sm- mt-1">
+                        <select class="form-control" id="event_category">
+                            <option disabled selected>Industry</option>
+                            {% for cat in categories %}
+                                <option>{{ cat.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-1 col-sm-4 mt-1">
+                        <input type="submit" class="form-control" name="event-submit" id="event-submit"
+                               value="GO!">
+                    </div>
+                    <div class="col-6 col-md-2 col-sm-4 mt-1">
+                        <button type="button" class="form-control esf-filter">Filter <i class="fa fa-sliders"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="container esf-form3-cont mt-4">
+            <div class="row esf-form3-first-part">
+                <div class="col-md-3 col-12 my-2">
+                    <input type="text" class="form-control" name="country" id="country"
+                           placeholder="Country">
+                </div>
+                <div class="col-md-3 col-12 my-2">
+                    <input type="text" class="form-control" name="language" id="language"
+                           placeholder="Language">
+                </div>
+                <div class="col-md-3 col-12 my-2">
+                    <input type="text" class="form-control" name="speaker" id="speaker"
+                           placeholder="Speaker">
+                </div>
+                <div class="col-md-3 col-12 my-2">
+                    <input type="text" class="form-control" name="organizer" id="organizer"
+                           placeholder="Organizer">
+                </div>
+            </div>
+            <div class="row esf-form3">
+
+                <div class="col-md-3 col-6 col-fil">
+                    <input type="text" class="form-control sponsors" name="sponsors" id="sponsors"
+                           placeholder="Sponsors">
+                </div>
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Time</p>
+                    <label class="container">This Weekend
+                        <input type="checkbox" name="ind1" value="this_week">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Next Week
+                        <input type="checkbox" name="ind1" value="next_week">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Next Month
+                        <input type="checkbox" name="ind1" value="next_month">
+                        <span class="checkmark"></span>
+                    </label>
+                    {#                    <label class="container">From - To#}
+                    {#                        <input type="text"#}
+                    {#                               class="form-control"#}
+                    {#                               placeholder="When" autocomplete="off"#}
+                    {#                               data-provide="datepicker"#}
+                    {#                               data-date-format="yyyy-mm-dd"#}
+                    {#                               name="date" id="date">#}
+                    {#                        <span class="checkmark"></span>#}
+                    {#                    </label>#}
+                </div>
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Price</p>
+                    <label class="container">$1-$50
+                        <input type="checkbox" name="ind1" value="1-50">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">$50-$100
+                        <input type="checkbox" name="ind1" value="50-100">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">$100-$500
+                        <input type="checkbox" name="ind1" value="100-500">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">$500-$1000
+                        <input type="checkbox" name="ind1" value="500-1000">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">$1000+
+                        <input type="checkbox" name="ind1" value="1000+">
+                        <span class="checkmark"></span>
+                    </label>
+
+                </div>
+                <div class="col-md-3 col-sm-6 col-fil col-6">
+                    <p class="filter-title">Duration</p>
+                    <label class="container">1 Hour
+                        <input type="checkbox" name="ind1" value="one_hour">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Half Day
+                        <input type="checkbox" name="ind1" value="half_day">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Whole Day
+                        <input type="checkbox" name="ind1" value="whole_day">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Multiple Days
+                        <input type="checkbox" name="ind1" value="design">
+                        <span class="checkmark"></span>
+                    </label>
+                    <a href="#">see all</a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="search-result-cont" id="search-result-cont">
+        <div class="container search-result">
+            <div class="sr-filter">
+                <ul class="sr-filters">
+                    <li class="active"><a href="#" data-filter="*" class="efl-active h-ex-filter-btn">All</a></li>
+                    <li><a href="#" data-filter="{% if logged_user == 'anonymous' %}anon{% else %}for-you{% endif %}"
+                           class="filter-current h-ex-filter-btn">For You</a></li>
+                    <li><a href="#" data-filter="free" class="filter-current h-ex-filter-btn">Free</a></li>
+                    <li><a href="#" data-filter="this_week" class="filter-current h-ex-filter-btn">This Week</a></li>
+                    <li><a href="#" data-filter="next_week" class="filter-current h-ex-filter-btn">Next Week</a></li>
+                </ul>
+            </div>
+            <div class="sr-sort">
+                <div class="sort">
+                    <p>{{ expert_count }} Bros</p>
+                    |
+                    <div class="sortby">Sort by
+                        <select name="ex-sortby" id="ex-sortby">
+                            <option {% if sort_type == 'relevancy' %} selected {% endif %} value="relevancy">Relevancy
+                            </option>
+                            <option {% if sort_type == 'alphabetic-asc' %} selected {% endif %} value="alphabetic-asc">
+                                A-Z
+                            </option>
+                            <option {% if sort_type == 'alphabetic-desc' %} selected {% endif %}value="alphabetic-desc">
+                                Z-A
+                            </option>
+                            <option {% if sort_type == 'popularity' %} selected {% endif %} value="popularity">
+                                Popularity
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="paginate-by">
+
+                    {% if page_obj.has_other_pages %}
+                        Show
+                        <select id="expert-paginate-by">
+                            <option {% if pagee == '10' %} selected {% endif %}>10</option>
+                            <option {% if pagee == '20' %} selected {% endif %}>20</option>
+                            <option {% if pagee == '30' %} selected {% endif %}>30</option>
+                            <option {% if pagee == '40' %} selected {% endif %}>40</option>
+                            <option {% if pagee == '50' %} selected {% endif %}>50</option>
+                        </select>
+                        per page
+
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="row" id="event-container">
+                        {% for event in events %}
+                            <div class="col-12 col-md-6 col-lg-6 mt-4">
+                                <div class="card-h-e card"
+                                     style="position: relative; padding-bottom: 70px; height: 100%">
+                                    <div>
+                                        <a href="{% url 'event_detail_url' slug=event.slug %}">
+                                            <img class="card-img-top" src="{{ event.event_img.url }}" alt="{{ event.name }}">
+                                        </a>
+                                    </div>
+                                    <div class="card-block">
+                                        <figure class="profile shadow">
+                                            <span class="profile-avatar">{{ event.start_event_dt|date:"M d" }}</span>
+                                        </figure>
+                                        <div class="card-text text-right">
+                                            <a>
+                                                {% for cat in event.category.all %}
+                                                    {{ cat.name }}
+                                                {% endfor %}
+                                            </a>
+                                        </div>
+                                        <a href="{% url 'event_detail_url' slug=event.slug %}"
+                                           class="card-title mt-3 h5 v-link">{{ event.name }}</a>
+                                        <div class="meta">
+                                            <p>{% if event.city %}{{ event.city }}{% endif %},
+                                                {% if event.location %}{{ event.location }}{% endif %}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer" style="position: absolute;">
+                                        <a href="{% url 'event_detail_url' slug=event.slug %}" class="card-att-event">Attend
+                                            this event</a>
+                                        <button class="c-icon" data-href="event_follow_url">
+                                            <i class="fa  fa-heart event-follow "
+                                               data-href="{% url 'event_follow' slug=event.slug %}"
+                                                    {% if logged_user != 'anonymous' and logged_user in event.follower_list.all %}
+                                               style="color: #fff; background-color: #09c75b"
+                                                    {% else %}
+                                               style="color: #fff; background-color: #c2c2c2"
+                                                    {% endif %}></i>
+                                        </button>
+                                        <button class="c-icon btn-share" id="1{{ event.id }}" onclick="share(this.id)">
+                                            <i style="color:#fff"
+                                               class="fa fa-share"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div id="sh1{{ event.id }}" class="shadow soc-share-con"
+                                     style="display: none"> {% include '_partials/soc.html' %}</div>
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if page_obj.has_other_pages %}
+                        <script type="text/javascript">
+                            let url_string = window.location.href
+                            let url = new URL(url_string);
+                            let paginate_by1 = url.searchParams.get("paginate_by");
+                            if (!paginate_by1) {
+                                paginate_by = 15
+                            } else {
+                                paginate_by = paginate_by1
+                            }
+                        </script>
+                        <div class="row pagination-bottom" id="aaa">
+                            <div class="pag-info">
+                                <p>Displaying <span>{{ pageev }}</span> - {{ expert_count }} results </p>
+                            </div>
+                            <div class="pag-paginate">
+                                {% if page_obj.has_previous %}
+                                    <a
+                                            href="{{ request.path }}?page={{ page_obj.previous_page_number }}&paginate_by={{ pagee }}&sort={{ sort_type }}"
+                                            class="">Previous</a>
+                                {% else %}
+                                    <p>Previous</p>
+                                {% endif %}
+                                {% ifequal 1 page_obj.number %}
+                                    <a
+                                            href="{{ request.path }}?page=1&paginate_by={{ pageev }}&sort={{ sort_type }}"
+                                            class="page-active">1 </a>
+                                {% else %}
+                                    <a
+                                            href="{{ request.path }}?page=1&paginate_by={{ pageev }}&sort={{ sort_type }}"
+                                            class="">1</a>
+                                {% endifequal %}
+                                {% ifequal 2 page_obj.number %}
+                                    <a
+                                            href="{{ request.path }}?page=2&paginate_by={{ pageev }}&sort={{ sort_type }}"
+                                            class="page-active">2</a>
+                                {% else %}
+                                    <a
+                                            href="{{ request.path }}?page=2&paginate_by={{ pageev }}&sort={{ sort_type }}"
+                                            class="">2</a>
+                                {% endifequal %}
+                                {% for linkpage  in paginator.page_range %}
+
+                                    {% if forloop.counter == page_obj.number|add:"-3" and  page_obj.number > 5 %}
+                                        ...
+                                    {% endif %}
+                                    {% if forloop.counter > page_obj.number|add:"-3" and forloop.counter < page_obj.number|add:"3" and forloop.counter != 2 and forloop.counter != 1 and forloop.counter != paginator.num_pages|add:"-1" and forloop.counter != paginator.num_pages %}
+                                        {% ifequal linkpage page_obj.number %}
+                                            <a
+                                                    href="{{ request.path }}?page={{ page_obj.number }}&paginate_by={{ pageev }}&sort={{ sort_type }}"
+                                                    class="page-active">{{ page_obj.number }}</a>
+                                        {% else %}
+                                            <a
+                                                    href="{{ request.path }}?page={{ linkpage }}&paginate_by={{ pageev }}&sort={{ sort_type }}"
+                                                    class="">{{ linkpage }}</a>
+                                        {% endifequal %}
+                                        {#                                    normal goster end#}
+                                    {% endif %}
+                                    {% if forloop.counter == page_obj.number|add:"3" and page_obj.number < paginator.num_pages|add:"-3" %}
+                                        ...
+                                    {% endif %}
+
+                                {% endfor %}
+                                {% ifequal paginator.num_pages|add:"-1" page_obj.number %}
+                                    <a
+                                            href="{{ request.path }}?page={{ paginator.num_pages|add:"-1" }}&paginate_by={{ pageev }}&sort={{ sort_type }}"
+                                            class="page-active">{{ paginator.num_pages|add:"-1" }}</a>
+                                {% else %}
+                                    <a
+                                            href="{{ request.path }}?page={{ paginator.num_pages|add:"-1" }}&paginate_by={{ pageev }}&sort={{ sort_type }}"
+                                            class="page">{{ paginator.num_pages|add:"-1" }}</a>
+                                {% endifequal %}
+                                {% if  page_obj.number != 2 or page_obj.number != 1 %}
+                                    {% ifequal paginator.num_pages page_obj.number %}
+                                        <a
+                                                href="{{ request.path }}?page={{ paginator.num_pages }}&paginate_by={{ pageev }}&sort={{ sort_type }}"
+                                                class="page-active">{{ paginator.num_pages }}</a>
+                                    {% else %}
+                                        <a
+                                                href="{{ request.path }}?page={{ paginator.num_pages }}&paginate_by={{ pageev }}&sort={{ sort_type }}"
+                                                class="page">{{ paginator.num_pages }}</a>
+                                    {% endifequal %}
+                                {% endif %}
+
+                                {% if page_obj.has_next %}
+
+                                    <a
+                                            href="
+                                            {{ get_full_path }}?page={{ page_obj.next_page_number }}&paginate_by={{ pageev }}&sort={{ sort_type }}">Next</a>
+                                {% else %}
+                                    <p>Next</p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    {% endif %}
+                </div>
+                <div class="col-4 ">
+                    <div class="mt-4">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317715.71193692513!2d-0.38178583985785625!3d51.528735196048615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C%20UK!5e0!3m2!1sen!2s!4v1576951850293!5m2!1sen!2s"
+                                width="100%" height="350" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                    </div>
+                    <div class="ev-ads-fixed">
+                        <a href="{% url 'user_registration_url' %}"><img class="img-fluid my-3 " src="{% static 'assets/images/ex/startup-ad.png' %}"
+                                         alt="Revealin Startups"></a>
+                        <a href="{% url 'user_registration_url' %}"><img class="img-fluid " src="{% static 'assets/images/ex/company-ad.png' %}" alt="Revealin Companies"></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <section class="h-cats pb-5">
+        <div class="container">
+            <div class="h-v-title-link pt-5 pb-4">
+                <div class="h-v-title">
+                    <h5>BROWSE CATEGORIES</h5>
+                    <p>Browse groups by topics you're interested in</p>
+                </div>
+                <div class="h-v-link">
+                    <a href="#">View All</a>
+                </div>
+            </div>
+            <div class="row d-flex flex-row justify-content-between flex-wrap h-c-cont" id="event-container">
+                {% for cat in categories %}
+                    <div class="col-md-3 col-6 my-2">
+                        <a href="{% url "event_search_ind" cat.slug %}" class="h-c-item-link">
+                            <div class="h-cat-item">
+                                {% if cat.img %}
+                                    <img src="{{ cat.thumbnail255x140.url }}" alt="{{ cat.name }}">
+                                {% endif %}
+                                <div id="ovrl" class="overlay"></div>
+                                <p class="text">{{ cat.name }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+    <section class="h-create-event">
+        <div class="ce-diagonal"></div>
+        <div class="a">
+            <div class="container">
+                <div class="row info-row">
+                    <div class="col-md-8 col-12">
+                        <div class="info-text">
+                            <h3>Want to Create an Event?</h3>
+                            <p><span>Revealin.com</span> enables startups and enterprises host events easily with verified
+                                venues,
+                                speakers, and experts while receiving real-time customer feedback.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12 mt-4">
+                        <a href="#" class="info-lm">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+    <div class="body-wrapper">
+    <div class="d-flex flex-column align-items-center purchased justify-content-center">
+        <div class="rounded-circle">
+            <img style="max-width: 150px; border-radius: 50%" class="shadow"
+                 src="{% static 'assets/images/chec_wsk.png' %}" alt="Revealin.com">
+        </div>
+
+        <h6 class="text-muted mt-3">Total Quantity: {{ requested_ticket_count }} </h6>
+        <h6 class="text-muted mt-1">Total Price: {{ total_price }} </h6>
+        <h6 class="text-muted mt-1">Total Points: {{ bro_pints }} </h6>
+
+    </div>
+<h3 class="mt-2 text-muted">You may also like</h3>
+ <div class="your-class d-flex justify-content-between">
+                {% for event in related_events %}
+                    <div class="col-md-4 col-sm-12 mt-5 event-card">
+                        <div class="card mx-sm-1 shadow">
+                        <a href="/events/{{ event.slug }}">
+                            <img class="card-img-top event-card-img" src="{{ event.event_img.url }}"
+                                 alt="{{ event.name }}">
+                                 </a>
+                            <div class="card-body" style="position: relative">
+                                <div class="shadow text-white event-date text-center font-weight-bold">
+                                    {{ event.start_event_dt|date:"M Y" }}
+                                </div>
+                                <h5 class="card-title text-center pt-3">{{ event.name }}</h5>
+                                <p class="card-text text-center">{{ event.info| slice:75}}</p>
+                                <div class="card-event-icons d-flex flex-grow-1 justify-content-between">
+                                            <span style="color: #0097fe;" class="fa fa-share-alt"
+                                                  aria-hidden="true"></span>
+                                    <span style="color: #e85858;" class="fa fa-heart"
+                                          aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <a href="google.com"
+                               class="shadow text-white pl-3 pr-3 pt-1 pb-1 buy-ticket font-weight-bold">Buy
+                                Ticket
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+
+@media (max-width: 767px) {
+	.as-cta-boxed-white {
+		text-align: center;
+	}
+	.as-cta-boxed-white .as-cta-btn {
+		margin-top: 20px;
+	}
+}
+
+.as-cta-boxed-white{
+	.container{
+		.row{
+			div{
+				.s-cta-desc{
+					h2{
+						text-align: justify;
+					}
+				}
+			}
+		}
+	}
+}
